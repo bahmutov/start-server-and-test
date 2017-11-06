@@ -4,6 +4,9 @@
   "version": "0.0.0-development",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": "https://github.com/bahmutov/start-server-and-test/issues",
+  "bin": {
+    "start-server-and-test": "bin/start.js"
+  },
   "config": {
     "pre-git": {
       "commit-msg": "simple",
@@ -11,7 +14,7 @@
         "npm prune",
         "npm run deps",
         "npm test",
-        "git add src/*.js",
+        "git add src/*.js bin/*.js",
         "npm run ban"
       ],
       "pre-push": [
@@ -29,6 +32,7 @@
     "node": ">=6"
   },
   "files": [
+    "bin/*.js",
     "src/*.js",
     "!src/*-spec.js"
   ],
@@ -57,10 +61,10 @@
     "deps": "deps-ok && dependency-check --no-dev .",
     "issues": "git-issues",
     "license": "license-checker --production --onlyunknown --csv",
-    "lint": "standard --verbose --fix src/*.js",
+    "lint": "standard --verbose --fix src/*.js bin/*.js",
     "prelint": "npm run pretty",
     "pretest": "npm run lint",
-    "pretty": "prettier-standard 'src/*.js'",
+    "pretty": "prettier-standard 'src/*.js' 'bin/*.js'",
     "secure": "nsp check",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
@@ -91,5 +95,9 @@
     "semantic-release": "8.2.0",
     "simple-commit-message": "3.3.2",
     "standard": "10.0.3"
+  },
+  "dependencies": {
+    "check-more-types": "2.24.0",
+    "lazy-ass": "1.6.0"
   }
 }
