@@ -13,10 +13,40 @@
 Requires [Node](https://nodejs.org/en/) version 6 or above.
 
 ```sh
-npm install --save start-server-and-test
+npm install --save-dev start-server-and-test
 ```
 
 ## Use
+
+This command is meant to be used with NPM script commands. If you have a "start server",
+and "test" script names for example, you can start the server, wait for a url to respond,
+then run tests. When the test process exits, the server is shut down.
+
+```json
+{
+    "scripts": {
+        "start-server": "npm start",
+        "test": "mocha e2e-spec.js",
+        "ci": "start-server-and-test start-server http://localhost:8080 test"
+    }
+}
+```
+
+To execute all tests simply run `npm run ci`
+
+### Options
+
+If you use convention and name your scripts "start" and "test" you can simply provide URL
+
+```json
+{
+    "scripts": {
+        "start": "npm start",
+        "test": "mocha e2e-spec.js",
+        "ci": "start-server-and-test http://localhost:8080"
+    }
+}
+```
 
 ### Small print
 
