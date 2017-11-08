@@ -27,7 +27,10 @@ function startAndTest ({ start, url, test }) {
   const waited = new Promise((resolve, reject) => {
     waitOn(
       {
-        resources: [url]
+        resources: [url],
+        interval: 1000,
+        window: 100,
+        verbose: false
       },
       err => {
         if (err) {

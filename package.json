@@ -71,9 +71,10 @@
     "unit": "mocha src/*-spec.js",
     "unused-deps": "dependency-check --unused --no-dev .",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "prestart": "sleep 5",
-    "start": "http-server -c-1 -p 8090 --quiet test",
-    "demo": "node bin/start.js http://127.0.0.1:8090"
+    "start": "node test/server.js",
+    "test2": "curl http://127.0.0.1:9000",
+    "demo": "node bin/start.js http://127.0.0.1:9000",
+    "demo2": "node bin/start.js start http://127.0.0.1:9000 test2"
   },
   "release": {
     "analyzeCommits": "simple-commit-message",
@@ -97,8 +98,7 @@
     "prettier-standard": "7.0.3",
     "semantic-release": "8.2.0",
     "simple-commit-message": "3.3.2",
-    "standard": "10.0.3",
-    "http-server": "0.10.0"
+    "standard": "10.0.3"
   },
   "dependencies": {
     "check-more-types": "2.24.0",
