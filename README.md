@@ -48,6 +48,10 @@ If you use convention and name your scripts "start" and "test" you can simply pr
 }
 ```
 
+### Debugging
+
+To see diagnostic messages, run with environment variable `DEBUG=start-server-and-test`
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
