@@ -10,7 +10,7 @@ const debug = require('debug')('start-server-and-test')
 function startAndTest ({ start, url, test }) {
   la(is.unemptyString(start), 'missing start script name', start)
   la(is.unemptyString(test), 'missing test script name', test)
-  la(is.url(url), 'missing url to wait on', url)
+  la(is.unemptyString(url), 'missing url to wait on', url)
 
   debug('starting server')
   const server = execa('npm', ['run', start], { stdio: 'inherit' })
