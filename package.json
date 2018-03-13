@@ -106,8 +106,6 @@
     "bluebird": "3.5.1",
     "check-more-types": "2.24.0",
     "debug": "3.1.0",
-    "eslint-plugin-import": "2.9.0",
-    "eslint-plugin-react": "7.7.0",
     "execa": "0.8.0",
     "lazy-ass": "1.6.0",
     "ps-tree": "1.1.0",
