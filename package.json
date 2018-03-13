@@ -72,9 +72,11 @@
     "unused-deps": "dependency-check --unused --no-dev .",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "start": "node test/server.js",
+    "start-with-child": "node test/server-as-child.js",
     "test2": "curl http://127.0.0.1:9000",
     "demo": "node bin/start.js http://127.0.0.1:9000",
-    "demo2": "node bin/start.js start http://127.0.0.1:9000 test2"
+    "demo2": "node bin/start.js start http://127.0.0.1:9000 test2",
+    "demo3": "node bin/start.js start-with-child http://127.0.0.1:9000 test"
   },
   "release": {
     "analyzeCommits": "simple-commit-message",
@@ -85,7 +87,7 @@
     }
   },
   "devDependencies": {
-    "ban-sensitive-files": "1.9.0",
+    "ban-sensitive-files": "1.9.2",
     "dependency-check": "2.9.1",
     "deps-ok": "1.2.1",
     "dont-crack": "1.2.1",
@@ -101,12 +103,13 @@
     "standard": "10.0.3"
   },
   "dependencies": {
-    "check-more-types": "2.24.0",
-    "lazy-ass": "1.6.0",
-    "execa": "0.8.0",
-    "wait-on": "2.0.2",
     "bluebird": "3.5.1",
-    "debug": "3.1.0"
+    "check-more-types": "2.24.0",
+    "debug": "3.1.0",
+    "eslint-plugin-import": "2.9.0",
+    "eslint-plugin-react": "7.7.0",
+    "execa": "0.8.0",
+    "lazy-ass": "1.6.0",
+    "wait-on": "2.0.2"
   }
 }
-
