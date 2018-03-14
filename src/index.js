@@ -5,6 +5,7 @@ const is = require('check-more-types')
 const execa = require('execa')
 const waitOn = require('wait-on')
 const Promise = require('bluebird')
+const psTree = require('ps-tree')
 const debug = require('debug')('start-server-and-test')
 
 function startAndTest ({ start, url, test }) {
@@ -17,10 +18,20 @@ function startAndTest ({ start, url, test }) {
   let serverStopped
 
   function stopServer () {
+    debug('getting child processes')
     if (!serverStopped) {
-      debug('stopping server')
-      server.kill()
       serverStopped = true
+      return Promise.fromNode(cb => psTree(server.pid, cb))
+        .then(children => {
+          debug('stopping child processes')
+          children.forEach(child => {
+            process.kill(child.PID)
+          })
+        })
+        .then(() => {
+          debug('stopping server')
+          server.kill()
+        })
     }
   }
 
