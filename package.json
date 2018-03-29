@@ -70,7 +70,7 @@
     "test": "npm run unit",
     "unit": "mocha src/*-spec.js",
     "unused-deps": "dependency-check --unused --no-dev .",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release",
     "start": "node test/server.js",
     "start-with-child": "node test/server-as-child.js",
     "test2": "curl http://127.0.0.1:9000",
@@ -98,7 +98,7 @@
     "nsp": "2.8.1",
     "pre-git": "3.16.0",
     "prettier-standard": "7.0.3",
-    "semantic-release": "8.2.0",
+    "semantic-release": "15.1.4",
     "simple-commit-message": "3.3.2",
     "standard": "10.0.3"
   },
@@ -110,5 +110,16 @@
     "lazy-ass": "1.6.0",
     "ps-tree": "1.1.0",
     "wait-on": "2.0.2"
+  },
+  "release": {
+    "analyzeCommits": {
+      "preset": "angular",
+      "releaseRules": [
+        {
+          "type": "break",
+          "release": "major"
+        }
+      ]
+    }
   }
 }
