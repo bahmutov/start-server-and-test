@@ -8,12 +8,16 @@ const Promise = require('bluebird')
 const psTree = require('ps-tree')
 const debug = require('debug')('start-server-and-test')
 
+const isDebug = () =>
+  process.env.DEBUG && process.env.DEBUG.indexOf('start-server-and-test') !== -1
+
 function startAndTest ({ start, url, test }) {
   la(is.unemptyString(start), 'missing start script name', start)
   la(is.unemptyString(test), 'missing test script name', test)
   la(is.unemptyString(url), 'missing url to wait on', url)
 
-  debug('starting server')
+  debug('starting server, verbose mode?', isDebug())
+
   const server = execa('npm', ['run', start], { stdio: 'inherit' })
   let serverStopped
 
@@ -36,12 +40,13 @@ function startAndTest ({ start, url, test }) {
   }
 
   const waited = new Promise((resolve, reject) => {
+    debug('starting waitOn %s', url)
     waitOn(
       {
         resources: [url],
         interval: 1000,
         window: 100,
-        verbose: false
+        verbose: isDebug()
       },
       err => {
         if (err) {
@@ -49,6 +54,7 @@ function startAndTest ({ start, url, test }) {
           debug(err.message)
           return reject(err)
         }
+        debug('waitOn finished successfully')
         resolve()
       }
     )
