@@ -95,7 +95,7 @@
     "github-post-release": "1.13.1",
     "license-checker": "15.0.0",
     "mocha": "4.1.0",
-    "nsp": "2.8.1",
+    "nsp": "3.2.1",
     "pre-git": "3.17.1",
     "prettier-standard": "7.0.3",
     "semantic-release": "15.1.4",
