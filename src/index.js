@@ -44,9 +44,10 @@ function startAndTest ({ start, url, test }) {
     waitOn(
       {
         resources: [url],
-        interval: 1000,
-        window: 100,
-        verbose: isDebug()
+        interval: 2000,
+        window: 1000,
+        verbose: isDebug(),
+        log: isDebug()
       },
       err => {
         if (err) {

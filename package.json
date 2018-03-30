@@ -78,14 +78,6 @@
     "demo2": "node bin/start.js start http://127.0.0.1:9000 test2",
     "demo3": "node bin/start.js start-with-child http://127.0.0.1:9000 test"
   },
-  "release": {
-    "analyzeCommits": "simple-commit-message",
-    "generateNotes": "github-post-release",
-    "verifyRelease": {
-      "path": "dont-crack",
-      "test-against": []
-    }
-  },
   "devDependencies": {
     "ban-sensitive-files": "1.9.2",
     "dependency-check": "2.9.1",

@@ -49,6 +49,16 @@ If you use convention and name your scripts "start" and "test" you can simply pr
 }
 ```
 
+## Note for webpack-dev-server users
+
+If you are using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) (directly or via `angular/cli` or other boilerplates) then please use the following URL form to check
+
+```
+start-server-and-test http-get://localhost:8080
+```
+
+This is because under the hood this module uses [wait-on](https://github.com/jeffbski/wait-on) to ping the server. Wait-on uses `HEAD` by default, but `webpack-dev-server` does not respond to `HEAD` only to `GET` requests. Thus you need to use `http-get://` URL format to force `wait-on` to use `GET` probe.
+
 ### Debugging
 
 To see diagnostic messages, run with environment variable `DEBUG=start-server-and-test`
