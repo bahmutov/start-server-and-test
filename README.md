@@ -59,6 +59,8 @@ start-server-and-test http-get://localhost:8080
 
 This is because under the hood this module uses [wait-on](https://github.com/jeffbski/wait-on) to ping the server. Wait-on uses `HEAD` by default, but `webpack-dev-server` does not respond to `HEAD` only to `GET` requests. Thus you need to use `http-get://` URL format to force `wait-on` to use `GET` probe.
 
+You can even wait on the bundle JavaScript url instead of the page url, see discussion in this [issue #4](https://github.com/bahmutov/start-server-and-test/issues/4)
+
 ### Debugging
 
 To see diagnostic messages, run with environment variable `DEBUG=start-server-and-test`
