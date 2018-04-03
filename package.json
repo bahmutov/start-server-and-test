@@ -91,7 +91,7 @@
     "pre-git": "3.17.1",
     "prettier-standard": "7.0.3",
     "semantic-release": "15.1.5",
-    "simple-commit-message": "3.3.2",
+    "simple-commit-message": "4.0.3",
     "standard": "10.0.3"
   },
   "dependencies": {
