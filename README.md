@@ -51,7 +51,7 @@ If you use convention and name your scripts "start" and "test" you can simply pr
 }
 ```
 
-You can also shorten local url to just port
+You can also shorten local url to just port, the code below is equivalent to checking `http://localhost:8080`.
 
 ```json
 {
