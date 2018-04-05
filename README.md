@@ -37,6 +37,8 @@ To execute all tests simply run `npm run ci`
 
 You can use either `start-server-and-test` or `server-test` commands in your scripts.
 
+You can use `:` in front of port number like `server-test :8080`.
+
 ### Options
 
 If you use convention and name your scripts "start" and "test" you can simply provide URL
@@ -71,6 +73,18 @@ You can provide first start command, port (or url) and implicit `test` command
         "start-it": "npm start",
         "test": "mocha e2e-spec.js",
         "ci": "server-test start-it 8080"
+    }
+}
+```
+
+You can provide port number and custom test command, in that case `npm start` is assumed to start the server.
+
+```json
+{
+    "scripts": {
+        "start": "npm start",
+        "test-it": "mocha e2e-spec.js",
+        "ci": "server-test :9000 test-it"
     }
 }
 ```

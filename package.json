@@ -81,6 +81,7 @@
     "demo4": "node bin/start.js 9000",
     "demo5": "node bin/start.js start-with-child 9000",
     "demo6": "node bin/start.js :9000",
+    "demo7": "node bin/start.js :9000 test2",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
