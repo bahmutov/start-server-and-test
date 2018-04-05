@@ -27,6 +27,10 @@ describe('utils', () => {
       la(isUrlOrPort('6006'))
       la(isUrlOrPort(8080))
     })
+
+    it('allows :port string', () => {
+      la(isUrlOrPort(':6006'))
+    })
   })
 
   context('normalizeUrl', () => {
@@ -42,9 +46,13 @@ describe('utils', () => {
       la(normalizeUrl(8080) === 'http://localhost:8080')
     })
 
+    it('changes :port to localhost', () => {
+      la(normalizeUrl(':6006') === 'http://localhost:6006')
+    })
+
     it('returns original argument if does not know what to do', () => {
-      la(normalizeUrl('foo') === 'foo')
-      la(normalizeUrl(808000) === 808000)
+      la(normalizeUrl('foo') === 'foo', normalizeUrl('foo'))
+      la(normalizeUrl(808000) === 808000, normalizeUrl(808000))
     })
   })
 })
