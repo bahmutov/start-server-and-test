@@ -51,6 +51,18 @@ If you use convention and name your scripts "start" and "test" you can simply pr
 }
 ```
 
+You can also shorten local url to just port
+
+```json
+{
+    "scripts": {
+        "start": "npm start",
+        "test": "mocha e2e-spec.js",
+        "ci": "server-test 8080"
+    }
+}
+```
+
 ## Note for webpack-dev-server users
 
 If you are using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) (directly or via `angular/cli` or other boilerplates) then please use the following URL form to check

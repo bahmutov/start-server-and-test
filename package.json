@@ -77,7 +77,8 @@
     "test2": "curl http://127.0.0.1:9000",
     "demo": "node bin/start.js http://127.0.0.1:9000",
     "demo2": "node bin/start.js start http://127.0.0.1:9000 test2",
-    "demo3": "node bin/start.js start-with-child http://127.0.0.1:9000 test"
+    "demo3": "node bin/start.js start-with-child http://127.0.0.1:9000 test",
+    "demo4": "node bin/start.js 9000"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.2",
