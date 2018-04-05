@@ -89,7 +89,7 @@
     "mocha": "4.1.0",
     "nsp": "3.2.1",
     "pre-git": "3.17.1",
-    "prettier-standard": "7.0.3",
+    "prettier-standard": "8.0.1",
     "semantic-release": "15.1.5",
     "simple-commit-message": "3.3.2",
     "standard": "10.0.3"
