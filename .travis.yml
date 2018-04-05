@@ -15,6 +15,7 @@ script:
   - npm run demo2
   - npm run demo3
   - npm run demo4
+  - npm run demo5
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
 branches:

@@ -79,6 +79,7 @@
     "demo2": "node bin/start.js start http://127.0.0.1:9000 test2",
     "demo3": "node bin/start.js start-with-child http://127.0.0.1:9000 test",
     "demo4": "node bin/start.js 9000",
+    "demo5": "node bin/start.js start-with-child 9000",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {

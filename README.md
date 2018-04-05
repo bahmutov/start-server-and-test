@@ -63,6 +63,18 @@ You can also shorten local url to just port
 }
 ```
 
+You can provide first start command, port (or url) and implicit `test` command
+
+```json
+{
+    "scripts": {
+        "start-it": "npm start",
+        "test": "mocha e2e-spec.js",
+        "ci": "server-test start-it 8080"
+    }
+}
+```
+
 ## Note for webpack-dev-server users
 
 If you are using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) (directly or via `angular/cli` or other boilerplates) then please use the following URL form to check
