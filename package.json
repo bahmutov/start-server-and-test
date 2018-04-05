@@ -78,7 +78,8 @@
     "demo": "node bin/start.js http://127.0.0.1:9000",
     "demo2": "node bin/start.js start http://127.0.0.1:9000 test2",
     "demo3": "node bin/start.js start-with-child http://127.0.0.1:9000 test",
-    "demo4": "node bin/start.js 9000"
+    "demo4": "node bin/start.js 9000",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.2",
@@ -93,7 +94,8 @@
     "prettier-standard": "8.0.1",
     "semantic-release": "15.1.5",
     "simple-commit-message": "3.3.2",
-    "standard": "11.0.1"
+    "standard": "11.0.1",
+    "travis-deploy-once": "4.4.1"
   },
   "dependencies": {
     "bluebird": "3.5.1",
