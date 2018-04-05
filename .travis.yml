@@ -9,8 +9,15 @@ node_js:
   - '8'
 before_script:
   - npm prune
+script:
+  - npm test
+  - npm run demo
+  - npm run demo2
+  - npm run demo3
+  - npm run demo4
+  - npm run demo5
 after_success:
-  - npm run semantic-release
+  - npm run travis-deploy-once "npm run semantic-release"
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/

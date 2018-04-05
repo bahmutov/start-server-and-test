@@ -19,9 +19,7 @@ npm install --save-dev start-server-and-test
 
 ## Use
 
-This command is meant to be used with NPM script commands. If you have a "start server",
-and "test" script names for example, you can start the server, wait for a url to respond,
-then run tests. When the test process exits, the server is shut down.
+This command is meant to be used with NPM script commands. If you have a "start server", and "test" script names for example, you can start the server, wait for a url to respond, then run tests. When the test process exits, the server is shut down.
 
 ```json
 {
@@ -35,6 +33,10 @@ then run tests. When the test process exits, the server is shut down.
 
 To execute all tests simply run `npm run ci`
 
+### Alias
+
+You can use either `start-server-and-test` or `server-test` commands in your scripts.
+
 ### Options
 
 If you use convention and name your scripts "start" and "test" you can simply provide URL
@@ -45,6 +47,30 @@ If you use convention and name your scripts "start" and "test" you can simply pr
         "start": "npm start",
         "test": "mocha e2e-spec.js",
         "ci": "start-server-and-test http://localhost:8080"
+    }
+}
+```
+
+You can also shorten local url to just port, the code below is equivalent to checking `http://localhost:8080`.
+
+```json
+{
+    "scripts": {
+        "start": "npm start",
+        "test": "mocha e2e-spec.js",
+        "ci": "server-test 8080"
+    }
+}
+```
+
+You can provide first start command, port (or url) and implicit `test` command
+
+```json
+{
+    "scripts": {
+        "start-it": "npm start",
+        "test": "mocha e2e-spec.js",
+        "ci": "server-test start-it 8080"
     }
 }
 ```
