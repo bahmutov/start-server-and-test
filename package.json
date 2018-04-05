@@ -5,7 +5,8 @@
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": "https://github.com/bahmutov/start-server-and-test/issues",
   "bin": {
-    "start-server-and-test": "bin/start.js"
+    "start-server-and-test": "bin/start.js",
+    "server-test": "bin/start.js"
   },
   "config": {
     "pre-git": {

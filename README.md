@@ -19,9 +19,7 @@ npm install --save-dev start-server-and-test
 
 ## Use
 
-This command is meant to be used with NPM script commands. If you have a "start server",
-and "test" script names for example, you can start the server, wait for a url to respond,
-then run tests. When the test process exits, the server is shut down.
+This command is meant to be used with NPM script commands. If you have a "start server", and "test" script names for example, you can start the server, wait for a url to respond, then run tests. When the test process exits, the server is shut down.
 
 ```json
 {
@@ -34,6 +32,10 @@ then run tests. When the test process exits, the server is shut down.
 ```
 
 To execute all tests simply run `npm run ci`
+
+### Alias
+
+You can use either `start-server-and-test` or `server-test` commands in your scripts.
 
 ### Options
 
