@@ -47,7 +47,8 @@ function startAndTest ({ start, url, test }) {
         interval: 2000,
         window: 1000,
         verbose: isDebug(),
-        log: isDebug()
+        log: isDebug(),
+        reverse: true
       },
       err => {
         if (err) {
