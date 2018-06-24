@@ -14,7 +14,11 @@ const isDebug = () =>
 function startAndTest ({ start, url, test }) {
   la(is.unemptyString(start), 'missing start script name', start)
   la(is.unemptyString(test), 'missing test script name', test)
-  la(is.unemptyString(url), 'missing url to wait on', url)
+  la(
+    is.unemptyString(url) || is.unemptyArray(url),
+    'missing url to wait on',
+    url
+  )
 
   debug('starting server, verbose mode?', isDebug())
 
@@ -43,7 +47,7 @@ function startAndTest ({ start, url, test }) {
     debug('starting waitOn %s', url)
     waitOn(
       {
-        resources: [url],
+        resources: Array.isArray(url) ? url : [url],
         interval: 2000,
         window: 1000,
         verbose: isDebug(),

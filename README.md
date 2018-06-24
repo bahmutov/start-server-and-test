@@ -98,6 +98,18 @@ You can provide port number and custom test command, in that case `npm start` is
 }
 ```
 
+You can provide multiple resources to wait on, separated by a pipe `|`. _(be sure to wrap in quotes)_
+
+```json
+{
+    "scripts": {
+        "start": "npm start",
+        "test-it": "mocha e2e-spec.js",
+        "ci": "server-test \"8080|http://foo.com\""
+    }
+}
+```
+
 ## Note for webpack-dev-server users
 
 If you are using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) (directly or via `angular/cli` or other boilerplates) then please use the following URL form to check
