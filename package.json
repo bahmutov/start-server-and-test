@@ -76,8 +76,10 @@
     "start": "node test/server.js",
     "start-with-child": "node test/server-as-child.js",
     "start-multiple": "node test/multiple-servers.js",
+    "start-https": "node test/https-server.js",
     "test2": "curl http://127.0.0.1:9000",
     "test3": "curl http://127.0.0.1:9000 && curl http://127.0.0.1:9001",
+    "test4": "curl --insecure https://127.0.0.1:9000",
     "demo": "node bin/start.js http://127.0.0.1:9000",
     "demo2": "node bin/start.js start http://127.0.0.1:9000 test2",
     "demo3": "node bin/start.js start-with-child http://127.0.0.1:9000 test",
@@ -86,6 +88,7 @@
     "demo6": "node bin/start.js :9000",
     "demo7": "node bin/start.js :9000 test2",
     "demo8": "node bin/start.js start-multiple \":9000|:9001\" test3",
+    "demo9": "node bin/start.js start-https \"https://127.0.0.1:9000\" test4",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
