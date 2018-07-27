@@ -11,6 +11,8 @@ const debug = require('debug')('start-server-and-test')
 const isDebug = () =>
   process.env.DEBUG && process.env.DEBUG.indexOf('start-server-and-test') !== -1
 
+const isInsecure = () => process.env.START_SERVER_AND_TEST_INSECURE
+
 function startAndTest ({ start, url, test }) {
   la(is.unemptyString(start), 'missing start script name', start)
   la(is.unemptyString(test), 'missing test script name', test)
@@ -51,6 +53,7 @@ function startAndTest ({ start, url, test }) {
         interval: 2000,
         window: 1000,
         verbose: isDebug(),
+        strictSSL: !isInsecure(),
         log: isDebug()
       },
       err => {

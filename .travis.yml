@@ -18,6 +18,7 @@ script:
   - npm run demo5
   - npm run demo6
   - npm run demo7
+  - START_SERVER_AND_TEST_INSECURE=1 npm run demo9
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
 branches:
