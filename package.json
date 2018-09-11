@@ -110,7 +110,7 @@
   "dependencies": {
     "bluebird": "3.5.2",
     "check-more-types": "2.24.0",
-    "debug": "3.1.0",
+    "debug": "3.2.3",
     "execa": "0.10.0",
     "lazy-ass": "1.6.0",
     "ps-tree": "1.1.0",
