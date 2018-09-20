@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const args = process.argv.slice(2)
-const la = require('lazy-ass')
 const startAndTest = require('..')
 const utils = require('../src/utils')
 
@@ -27,15 +26,14 @@ if (args.length === 1 && utils.isUrlOrPort(args[0])) {
     url = utils.normalizeUrl(args[1])
   }
 } else {
-  la(args.length === 3, 'expect: <start script name> <url> <test script name>')
   start = args[0]
   url = utils.normalizeUrl(args[1])
-  test = args[2]
+  test = args[3] ? [args[2]].concat(['--']).concat(args.slice(3)) : [args[2]]
 }
 
 console.log(`starting server using command "npm run ${start}"`)
 console.log(`and when url "${url}" is responding`)
-console.log(`running tests using command "${test}"`)
+console.log(`running tests using command "${test.join(' ')}"`)
 
 startAndTest({ start, url, test }).catch(e => {
   console.error(e)
