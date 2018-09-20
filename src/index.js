@@ -15,7 +15,7 @@ const isInsecure = () => process.env.START_SERVER_AND_TEST_INSECURE
 
 function startAndTest ({ start, url, test }) {
   la(is.unemptyString(start), 'missing start script name', start)
-  la(is.unemptyString(test), 'missing test script name', test)
+  la(is.arrayOfStrings(test), 'missing test script name and arguments', test)
   la(
     is.unemptyString(url) || is.unemptyArray(url),
     'missing url to wait on',
@@ -87,7 +87,7 @@ function startAndTest ({ start, url, test }) {
 
   function runTests () {
     debug('running test script command', test)
-    return execa('npm', ['run', test], { stdio: 'inherit' })
+    return execa('npm', ['run'].concat(test), { stdio: 'inherit' })
   }
 
   return waited
