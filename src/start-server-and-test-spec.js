@@ -80,4 +80,51 @@ describe('utils', () => {
       )
     })
   })
+
+  context('parseExtraArgs', () => {
+    const parseExtraArgs = utils.parseExtraArgs
+    const baseArgs = ['arg1', 'arg2', 'arg3']
+
+    it('does not require arguments', () => {
+      la(arrayEq(parseExtraArgs(baseArgs), ['arg3']))
+    })
+
+    it('passes double "--" on to test script', () => {
+      la(
+        arrayEq(parseExtraArgs(baseArgs.concat(['--', 'something'])), [
+          'arg3',
+          '--',
+          '--',
+          'something'
+        ])
+      )
+    })
+
+    it('can pass multiple arguments', () => {
+      la(
+        arrayEq(
+          parseExtraArgs(
+            baseArgs.concat([
+              '--',
+              '--tag',
+              '-d',
+              '--format',
+              '"something"',
+              'file.txt'
+            ])
+          ),
+          [
+            'arg3',
+            '--',
+            '--',
+            '--tag',
+            '-d',
+            '--format',
+            '"something"',
+            'file.txt'
+          ]
+        )
+      )
+    })
+  })
 })
