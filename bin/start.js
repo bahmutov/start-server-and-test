@@ -28,7 +28,7 @@ if (args.length === 1 && utils.isUrlOrPort(args[0])) {
 } else {
   start = args[0]
   url = utils.normalizeUrl(args[1])
-  test = args[3] ? [args[2]].concat(['--']).concat(args.slice(3)) : [args[2]]
+  test = utils.parseExtraArgs(args)
 }
 
 console.log(`starting server using command "npm run ${start}"`)

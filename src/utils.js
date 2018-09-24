@@ -49,7 +49,16 @@ const normalizeUrl = input => {
   })
 }
 
+const parseExtraArgs = args => {
+  if (args[3]) {
+    return [args[2]].concat(['--']).concat(args.slice(3))
+  } else {
+    return [args[2]]
+  }
+}
+
 module.exports = {
   isUrlOrPort: isUrlOrPort,
-  normalizeUrl: normalizeUrl
+  normalizeUrl: normalizeUrl,
+  parseExtraArgs: parseExtraArgs
 }
