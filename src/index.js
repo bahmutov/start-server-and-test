@@ -46,6 +46,12 @@ function startAndTest ({ start, url, test }) {
   }
 
   const waited = new Promise((resolve, reject) => {
+    const onClose = () => {
+      reject(new Error('server closed unexpectedly'))
+    }
+
+    server.on('close', onClose)
+
     debug('starting waitOn %s', url)
     waitOn(
       {
@@ -63,6 +69,7 @@ function startAndTest ({ start, url, test }) {
           return reject(err)
         }
         debug('waitOn finished successfully')
+        server.removeListener('close', onClose)
         resolve()
       }
     )
