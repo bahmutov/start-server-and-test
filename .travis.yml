@@ -2,13 +2,10 @@ language: node_js
 cache:
   directories:
     - ~/.npm
-    - node_modules
 notifications:
   email: true
 node_js:
-  - '8'
-before_script:
-  - npm prune
+  - '10'
 script:
   - npm test
   - npm run demo

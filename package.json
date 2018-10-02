@@ -13,10 +13,8 @@
     "pre-git": {
       "commit-msg": "simple",
       "pre-commit": [
-        "npm prune",
         "npm run deps",
         "npm test",
-        "git add src/*.js bin/*.js",
         "npm run ban"
       ],
       "pre-push": [
