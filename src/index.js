@@ -35,7 +35,11 @@ function startAndTest ({ start, url, test }) {
         .then(children => {
           debug('stopping child processes')
           children.forEach(child => {
-            process.kill(child.PID)
+            try {
+              process.kill(child.PID)
+            } catch (e) {
+              // The process may already stop
+            }
           })
         })
         .then(() => {
