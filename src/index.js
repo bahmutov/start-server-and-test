@@ -35,7 +35,15 @@ function startAndTest ({ start, url, test }) {
         .then(children => {
           debug('stopping child processes')
           children.forEach(child => {
-            process.kill(child.PID)
+            try {
+              process.kill(child.PID)
+            } catch (e) {
+              if (e.code === 'ESRCH') {
+                console.log(`Child process ${child.PID} exited before trying to stop it`)
+              } else {
+                throw e
+              }
+            }
           })
         })
         .then(() => {
