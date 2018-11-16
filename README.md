@@ -11,7 +11,7 @@
 
 ## Install
 
-Requires [Node](https://nodejs.org/en/) version 6 or above.
+Requires [Node](https://nodejs.org/en/) version 8.9 or above.
 
 ```sh
 npm install --save-dev start-server-and-test
