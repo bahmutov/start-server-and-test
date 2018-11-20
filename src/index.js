@@ -36,7 +36,7 @@ function startAndTest ({ start, url, test }) {
           debug('stopping child processes')
           children.forEach(child => {
             try {
-              process.kill(child.PID)
+              process.kill(child.PID, 'SIGINT')
             } catch (e) {
               if (e.code === 'ESRCH') {
                 console.log(`Child process ${child.PID} exited before trying to stop it`)
