@@ -76,6 +76,7 @@
     "start-multiple": "node test/multiple-servers.js",
     "start-https": "node test/https-server.js",
     "start-fail": "node test/server-fail.js",
+    "start-cross-env": "cross-env FOO=bar node test/server.js",
     "test2": "curl http://127.0.0.1:9000",
     "test3": "curl http://127.0.0.1:9000 && curl http://127.0.0.1:9001",
     "test4": "curl --insecure https://127.0.0.1:9000",
@@ -89,10 +90,12 @@
     "demo8": "node bin/start.js start-multiple \":9000|:9001\" test3",
     "demo9": "node bin/start.js start-https \"https://127.0.0.1:9000\" test4",
     "demo10": "node bin/start.js start-fail http://127.0.0.1:9000 test",
+    "demo-cross-env": "node bin/start.js start-cross-env 9000",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.2",
+    "cross-env": "5.2.0",
     "dependency-check": "3.2.1",
     "deps-ok": "1.4.1",
     "dont-crack": "1.2.1",

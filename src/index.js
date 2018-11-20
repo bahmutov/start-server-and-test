@@ -39,7 +39,9 @@ function startAndTest ({ start, url, test }) {
               process.kill(child.PID, 'SIGINT')
             } catch (e) {
               if (e.code === 'ESRCH') {
-                console.log(`Child process ${child.PID} exited before trying to stop it`)
+                console.log(
+                  `Child process ${child.PID} exited before trying to stop it`
+                )
               } else {
                 throw e
               }
