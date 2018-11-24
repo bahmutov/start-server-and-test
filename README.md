@@ -130,6 +130,24 @@ To see diagnostic messages, run with environment variable `DEBUG=start-server-an
 
 To see disable HTTPS checks for `wait-on`, run with environment variable `START_SERVER_AND_TEST_INSECURE=1`.
 
+### Starting two servers
+
+Sometimes you need to start one API server and one webserver in order to test the application. Just have two commands cascade. First command should wait on the webserver script, which in turn uses `start-server-and-test` to start the API server before running the webserver. Something like this
+
+```json
+{
+  "scripts": {
+    "test": "node src/test",
+    "start:api": "node src/api",
+    "start:server": "node src/server",
+    "start:server-and-api": "start-test start:api 7600 start:server",
+    "test:all": "start-test start:server-and-api 5000 test"
+  }
+}
+```
+
+In the above example you would run `npm run test:all` to start both servers and run the test. See repo [start-two-servers-example](https://github.com/bahmutov/start-two-servers-example) for full example
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
