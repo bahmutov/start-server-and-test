@@ -116,7 +116,7 @@
     "debug": "3.2.6",
     "execa": "0.11.0",
     "lazy-ass": "1.6.0",
-    "ps-tree": "1.1.0",
+    "ps-tree": "1.2.0",
     "wait-on": "3.2.0"
   },
   "release": {
