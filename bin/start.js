@@ -8,6 +8,7 @@ const utils = require('../src/utils')
 let start = 'start'
 let test = 'test'
 let url
+let interval = 2000
 
 if (args.length === 1 && utils.isUrlOrPort(args[0])) {
   // passed just single url or port number, for example
@@ -26,18 +27,26 @@ if (args.length === 1 && utils.isUrlOrPort(args[0])) {
     start = args[0]
     url = utils.normalizeUrl(args[1])
   }
-} else {
-  la(args.length === 3, 'expect: <start script name> <url> <test script name>')
+} else if (args.length <= 4) {
   start = args[0]
   url = utils.normalizeUrl(args[1])
   test = args[2]
+
+  if (args.length === 4) {
+    interval = args[3]
+  }
+} else {
+  la(
+    false,
+    'expect: <start script name> <url> <test script name> <interval optional number>'
+  )
 }
 
 console.log(`starting server using command "npm run ${start}"`)
 console.log(`and when url "${url}" is responding`)
 console.log(`running tests using command "${test}"`)
 
-startAndTest({ start, url, test }).catch(e => {
+startAndTest({ start, url, test, interval }).catch(e => {
   console.error(e)
   process.exit(1)
 })
