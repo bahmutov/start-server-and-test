@@ -31,6 +31,8 @@ if (args.length === 1 && utils.isUrlOrPort(args[0])) {
   test = utils.parseExtraArgs(args)
 }
 
+test = [].concat(test)
+
 console.log(`starting server using command "npm run ${start}"`)
 console.log(`and when url "${url}" is responding`)
 console.log(`running tests using command "${test.join(' ')}"`)
