@@ -110,6 +110,25 @@ You can provide multiple resources to wait on, separated by a pipe `|`. _(be sur
 }
 ```
 
+You can provide additional arguments, which will be passed through to the test script.
+
+```json
+{
+    "scripts": {
+        "start": "npm start",
+        "test-it": "mocha e2e-spec.js",
+        "ci": "server-test :8000 test-it --verbose"
+    }
+}
+```
+
+Additional arguments can also be provided on the command line:
+
+```shell
+npm run ci -- --verbose
+yarn ci --verbose
+```
+
 ## Note for webpack-dev-server users
 
 If you are using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) (directly or via `angular/cli` or other boilerplates) then please use the following URL form to check
