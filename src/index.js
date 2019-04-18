@@ -13,7 +13,7 @@ const isDebug = () =>
 
 const isInsecure = () => process.env.START_SERVER_AND_TEST_INSECURE
 
-function startAndTest ({ start, url, test }) {
+function startAndTest ({ start, url, test, interval }) {
   la(is.unemptyString(start), 'missing start script name', start)
   la(is.unemptyString(test), 'missing test script name', test)
   la(
@@ -66,7 +66,7 @@ function startAndTest ({ start, url, test }) {
     waitOn(
       {
         resources: Array.isArray(url) ? url : [url],
-        interval: 2000,
+        interval: interval,
         window: 1000,
         verbose: isDebug(),
         strictSSL: !isInsecure(),
