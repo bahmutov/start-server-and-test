@@ -1,14 +1,20 @@
-const http = require('http');
+const argv = require('minimist')(process.argv.slice(2), {
+  alias: {
+    port: 'p'
+  }
+})
+const http = require('http')
 const server = http.createServer((req, res) => {
   console.log(req.method)
   if (req.method === 'GET') {
     res.end('All good\n\n')
   } else {
-    res.end();
+    res.end()
   }
-});
+})
+const port = argv.port || 9000
 setTimeout(() => {
-  server.listen(9000)
-  console.log('listening at port 9000')
+  server.listen(port)
+  console.log('listening at port %d', port)
 }, 5000)
 console.log('sleeping for 5 seconds before starting')
