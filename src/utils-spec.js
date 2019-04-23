@@ -45,6 +45,8 @@ describe('utils', () => {
     })
 
     it('understands start plus url', () => {
+      // note that this script "start-server" does not exist
+      // thus it is left as is - without "npm run" part
       snapshot(getArguments(['start-server', '6000']))
     })
 
@@ -58,6 +60,18 @@ describe('utils', () => {
 
     it('understands several ports', () => {
       snapshot(getArguments(['3000|4000|5000']))
+    })
+
+    it('understands custom commands', () => {
+      // these commands are NOT script names in the package.json
+      // thus they will be run as is
+      snapshot(
+        getArguments([
+          'custom-command --with argument',
+          '3000',
+          'test-command --x=1'
+        ])
+      )
     })
   })
 

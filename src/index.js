@@ -22,10 +22,9 @@ function startAndTest ({ start, url, test }) {
     url
   )
 
-  debug('starting server, verbose mode?', isDebug())
+  debug('starting server with command "%s", verbose mode?', start, isDebug())
 
-  const startCommand = 'npm run start'
-  const server = execa.shell(startCommand, { stdio: 'inherit' })
+  const server = execa.shell(start, { stdio: 'inherit' })
   let serverStopped
 
   function stopServer () {
@@ -87,9 +86,8 @@ function startAndTest ({ start, url, test }) {
   })
 
   function runTests () {
-    const testCommand = `npm run ${test}`
-    debug('running test script command: %s', testCommand)
-    return execa.shell(testCommand, { stdio: 'inherit' })
+    debug('running test script command: %s', test)
+    return execa.shell(test, { stdio: 'inherit' })
   }
 
   return waited

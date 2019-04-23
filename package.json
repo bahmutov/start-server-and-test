@@ -88,6 +88,7 @@
     "demo9": "node src/bin/start.js start-https \"https://127.0.0.1:9000\" test4",
     "demo10": "node src/bin/start.js start-fail http://127.0.0.1:9000 test",
     "demo-cross-env": "node src/bin/start.js start-cross-env 9000",
+    "demo-commands": "node src/bin/start.js 'node test/server.js' 9000 'npm run unit'",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
