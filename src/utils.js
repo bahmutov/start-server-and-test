@@ -43,6 +43,14 @@ const getArguments = cliArgs => {
     test = cliArgs[2]
   }
 
+  if (isPackageScriptName(start)) {
+    start = `npm run ${start}`
+  }
+
+  if (isPackageScriptName(test)) {
+    test = `npm run ${test}`
+  }
+
   return {
     start,
     url,

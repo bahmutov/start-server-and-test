@@ -33,6 +33,14 @@ This command is meant to be used with NPM script commands. If you have a "start 
 
 To execute all tests simply run `npm run ci`
 
+### Commands
+
+In addition to using NPM script names, you can pass entire commands (surround them with quotes so it is still a single string) that will be executed "as is". For example, to start globally installed `http-server` before running and recording [Cypress.io](https://www.cypress.io) tests you can use
+
+```
+start-server-and-test 'http-server -c-1 --silent' 8000 './node_modules/.bin/cypress run --record'
+```
+
 ### Alias
 
 You can use either `start-server-and-test`, `server-test` or `start-test` commands in your scripts.
@@ -109,6 +117,8 @@ You can provide multiple resources to wait on, separated by a pipe `|`. _(be sur
     }
 }
 ```
+
+or for multiple ports simply: `server-test '8000|9000' test`.
 
 ## Note for webpack-dev-server users
 
