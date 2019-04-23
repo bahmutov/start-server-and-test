@@ -2,6 +2,7 @@
 
 /* eslint-env mocha */
 const la = require('lazy-ass')
+const snapshot = require('snap-shot-it')
 
 function arrayEq (a, b) {
   return a.length === b.length && a.every((el, index) => el === b[index])
@@ -11,9 +12,39 @@ describe('utils', () => {
   const utils = require('./utils')
 
   context('getArguments', () => {
-    // const getArguments = utils.getArguments
+    const getArguments = utils.getArguments
 
-    it('returns 3 arguments', () => {})
+    it('returns 3 arguments', () => {
+      snapshot(getArguments(['start', '8080', 'test']))
+    })
+
+    it('returns 3 arguments with url', () => {
+      snapshot(getArguments(['start', 'http://localhost:8080', 'test']))
+    })
+
+    it('handles 3 arguments with http-get url', () => {
+      snapshot(getArguments(['start', 'http-get://localhost:8080', 'test']))
+    })
+
+    it('understands url plus test', () => {
+      snapshot(getArguments(['6000', 'test']))
+    })
+
+    it('understands start plus url', () => {
+      snapshot(getArguments(['start-server', '6000']))
+    })
+
+    it('understands single :port', () => {
+      snapshot(getArguments([':3000']))
+    })
+
+    it('understands single port', () => {
+      snapshot(getArguments(['3000']))
+    })
+
+    it('understands several ports', () => {
+      snapshot(getArguments(['3000|4000|5000']))
+    })
   })
 
   context('isUrlOrPort', () => {
