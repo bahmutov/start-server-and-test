@@ -41,6 +41,16 @@ In addition to using NPM script names, you can pass entire commands (surround th
 start-server-and-test 'http-server -c-1 --silent' 8000 './node_modules/.bin/cypress run --record'
 ```
 
+or because `npm` scripts execute with `./node_modules/.bin` in the `$PATH`, you can mix global and locally installed tools:
+
+```json
+{
+    "scripts": {
+        "ci": "start-server-and-test 'http-server -c-1 --silent' 8080 'mocha e2e-spec.js'"
+    }
+}
+```
+
 ### Alias
 
 You can use either `start-server-and-test`, `server-test` or `start-test` commands in your scripts.
@@ -110,15 +120,53 @@ You can provide multiple resources to wait on, separated by a pipe `|`. _(be sur
 
 ```json
 {
-    "scripts": {
-        "start": "npm start",
-        "test-it": "mocha e2e-spec.js",
-        "ci": "server-test \"8080|http://foo.com\""
-    }
+  "scripts": {
+    "start": "npm start",
+    "test-it": "mocha e2e-spec.js",
+    "ci": "server-test \"8080|http://foo.com\""
+  }
 }
 ```
 
 or for multiple ports simply: `server-test '8000|9000' test`.
+
+## `npx` and `yarn`
+
+If you have [npx](https://www.npmjs.com/package/npx) available, you can execute locally installed tools from the shell. For example, if the `package.json` has the following local tools:
+
+```json
+{
+  "devDependencies": {
+    "cypress": "3.2.0",
+    "http-server": "0.11.1",
+    "start-server-and-test": "1.9.0"
+  }
+}
+```
+
+Then you can execute tests simply:
+
+```text
+$ npx start-test 'http-server -c-1 .' 8080 'cypress run'
+starting server using command "http-server -c-1 ."
+and when url "http://localhost:8080" is responding
+running tests using command "cypress run"
+Starting up http-server, serving .
+...
+```
+
+Similarly, you can use [yarn](https://yarnpkg.com/en/) to call locally installed tools
+
+```text
+$ yarn start-test 'http-server -c-1 .' 8080 'cypress run'
+yarn run v1.13.0
+$ /private/tmp/test-t/node_modules/.bin/start-test 'http-server -c-1 .' 8080 'cypress run'
+starting server using command "http-server -c-1 ."
+and when url "http://localhost:8080" is responding
+running tests using command "cypress run"
+Starting up http-server, serving .
+...
+```
 
 ## Note for webpack-dev-server users
 
