@@ -1,8 +1,11 @@
 const la = require('lazy-ass')
 const is = require('check-more-types')
+const { join } = require('path')
 
 /**
  * Returns parsed command line arguments.
+ * If start command is NPM script name defined in the package.json
+ * file in the current working directory, returns 'npm run start' command.
  */
 const getArguments = cliArgs => {
   la(is.strings(cliArgs), 'expected list of strings', cliArgs)
@@ -45,6 +48,21 @@ const getArguments = cliArgs => {
     url,
     test
   }
+}
+
+/**
+ * Returns true if the given string is a name of a script in the package.json file
+ * in the current working directory
+ */
+const isPackageScriptName = command => {
+  la(is.unemptyString(command), 'expected command name string', command)
+
+  const packageFilename = join(process.cwd(), 'package.json')
+  const packageJson = require(packageFilename)
+  if (!packageJson.scripts) {
+    return false
+  }
+  return Boolean(packageJson.scripts[command])
 }
 
 const isUrlOrPort = input => {
@@ -98,6 +116,7 @@ const normalizeUrl = input => {
 
 module.exports = {
   getArguments,
-  isUrlOrPort: isUrlOrPort,
-  normalizeUrl: normalizeUrl
+  isPackageScriptName,
+  isUrlOrPort,
+  normalizeUrl
 }

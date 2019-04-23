@@ -11,6 +11,20 @@ function arrayEq (a, b) {
 describe('utils', () => {
   const utils = require('./utils')
 
+  context('isPackageScriptName', () => {
+    const isPackageScriptName = utils.isPackageScriptName
+
+    it('returns true for script names', () => {
+      la(isPackageScriptName('start'))
+      la(isPackageScriptName('test'))
+      la(isPackageScriptName('unit'))
+    })
+
+    it('returns false for non scripts', () => {
+      la(!isPackageScriptName('does-not-exist'))
+    })
+  })
+
   context('getArguments', () => {
     const getArguments = utils.getArguments
 
