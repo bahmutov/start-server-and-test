@@ -10,6 +10,12 @@ function arrayEq (a, b) {
 describe('utils', () => {
   const utils = require('./utils')
 
+  context('getArguments', () => {
+    // const getArguments = utils.getArguments
+
+    it('returns 3 arguments', () => {})
+  })
+
   context('isUrlOrPort', () => {
     const isUrlOrPort = utils.isUrlOrPort
 
