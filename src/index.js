@@ -8,6 +8,11 @@ const Promise = require('bluebird')
 const psTree = require('ps-tree')
 const debug = require('debug')('start-server-and-test')
 
+/**
+ * Used for timeout (ms)
+ */
+const fiveMinutes = 5 * 60 * 1000
+
 const isDebug = () =>
   process.env.DEBUG && process.env.DEBUG.indexOf('start-server-and-test') !== -1
 
@@ -63,26 +68,27 @@ function startAndTest ({ start, url, test }) {
     server.on('close', onClose)
 
     debug('starting waitOn %s', url)
-    waitOn(
-      {
-        resources: Array.isArray(url) ? url : [url],
-        interval: 2000,
-        window: 1000,
-        verbose: isDebug(),
-        strictSSL: !isInsecure(),
-        log: isDebug()
-      },
-      err => {
-        if (err) {
-          debug('error waiting for url', url)
-          debug(err.message)
-          return reject(err)
-        }
-        debug('waitOn finished successfully')
-        server.removeListener('close', onClose)
-        resolve()
+    const options = {
+      resources: Array.isArray(url) ? url : [url],
+      interval: 2000,
+      window: 1000,
+      timeout: fiveMinutes,
+      verbose: isDebug(),
+      strictSSL: !isInsecure(),
+      log: isDebug()
+    }
+    debug('wait-on options %o', options)
+
+    waitOn(options, err => {
+      if (err) {
+        debug('error waiting for url', url)
+        debug(err.message)
+        return reject(err)
       }
-    )
+      debug('waitOn finished successfully')
+      server.removeListener('close', onClose)
+      resolve()
+    })
   })
 
   function runTests () {

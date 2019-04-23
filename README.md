@@ -140,6 +140,10 @@ To see diagnostic messages, run with environment variable `DEBUG=start-server-an
 
 To see disable HTTPS checks for `wait-on`, run with environment variable `START_SERVER_AND_TEST_INSECURE=1`.
 
+### Timeout
+
+This utility will wait for maximum of 5 minutes while checking for the server to respond.
+
 ### Starting two servers
 
 Sometimes you need to start one API server and one webserver in order to test the application. Just have two commands cascade. First command should wait on the webserver script, which in turn uses `start-server-and-test` to start the API server before running the webserver. Something like this
