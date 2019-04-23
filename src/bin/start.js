@@ -3,7 +3,7 @@
 const args = process.argv.slice(2)
 const la = require('lazy-ass')
 const startAndTest = require('..')
-const utils = require('../src/utils')
+const utils = require('../utils')
 
 let start = 'start'
 let test = 'test'

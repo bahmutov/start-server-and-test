@@ -5,9 +5,9 @@
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": "https://github.com/bahmutov/start-server-and-test/issues",
   "bin": {
-    "start-server-and-test": "bin/start.js",
-    "server-test": "bin/start.js",
-    "start-test": "bin/start.js"
+    "start-server-and-test": "src/bin/start.js",
+    "server-test": "src/bin/start.js",
+    "start-test": "src/bin/start.js"
   },
   "config": {
     "pre-git": {
@@ -32,9 +32,8 @@
     "node": ">=6"
   },
   "files": [
-    "bin/*.js",
-    "src/*.js",
-    "!src/*-spec.js"
+    "src/**/*.js",
+    "!src/**/*-spec.js"
   ],
   "homepage": "https://github.com/bahmutov/start-server-and-test#readme",
   "keywords": [
@@ -61,10 +60,10 @@
     "deps": "deps-ok && dependency-check --no-dev .",
     "issues": "git-issues",
     "license": "license-checker --production --onlyunknown --csv",
-    "lint": "standard --verbose --fix src/*.js bin/*.js",
+    "lint": "standard --verbose --fix 'src/**/*.js'",
     "prelint": "npm run pretty",
     "pretest": "npm run lint",
-    "pretty": "prettier-standard 'src/*.js' 'bin/*.js'",
+    "pretty": "prettier-standard 'src/**/*.js'",
     "secure": "nsp check",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
@@ -80,17 +79,17 @@
     "test2": "curl http://127.0.0.1:9000",
     "test3": "curl http://127.0.0.1:9000 && curl http://127.0.0.1:9001",
     "test4": "curl --insecure https://127.0.0.1:9000",
-    "demo": "node bin/start.js http://127.0.0.1:9000",
-    "demo2": "node bin/start.js start http://127.0.0.1:9000 test2",
-    "demo3": "node bin/start.js start-with-child http://127.0.0.1:9000 test",
-    "demo4": "node bin/start.js 9000",
-    "demo5": "node bin/start.js start-with-child 9000",
-    "demo6": "node bin/start.js :9000",
-    "demo7": "node bin/start.js :9000 test2",
-    "demo8": "node bin/start.js start-multiple \":9000|:9001\" test3",
-    "demo9": "node bin/start.js start-https \"https://127.0.0.1:9000\" test4",
-    "demo10": "node bin/start.js start-fail http://127.0.0.1:9000 test",
-    "demo-cross-env": "node bin/start.js start-cross-env 9000",
+    "demo": "node src/bin/start.js http://127.0.0.1:9000",
+    "demo2": "node src/bin/start.js start http://127.0.0.1:9000 test2",
+    "demo3": "node src/bin/start.js start-with-child http://127.0.0.1:9000 test",
+    "demo4": "node src/bin/start.js 9000",
+    "demo5": "node src/bin/start.js start-with-child 9000",
+    "demo6": "node src/bin/start.js :9000",
+    "demo7": "node src/bin/start.js :9000 test2",
+    "demo8": "node src/bin/start.js start-multiple \":9000|:9001\" test3",
+    "demo9": "node src/bin/start.js start-https \"https://127.0.0.1:9000\" test4",
+    "demo10": "node src/bin/start.js start-fail http://127.0.0.1:9000 test",
+    "demo-cross-env": "node src/bin/start.js start-cross-env 9000",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
