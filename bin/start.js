@@ -27,7 +27,12 @@ if (args.length === 1 && utils.isUrlOrPort(args[0])) {
     url = utils.normalizeUrl(args[1])
   }
 } else {
-  la(args.length === 3, 'expect: <start script name> <url> <test script name>')
+  la(
+    args.length === 3,
+    'expected <NPM script name that starts server> <url or port> <NPM script name that runs tests>\n',
+    'example: start-test start 8080 test\n',
+    'see https://github.com/bahmutov/start-server-and-test#use\n'
+  )
   start = args[0]
   url = utils.normalizeUrl(args[1])
   test = args[2]
