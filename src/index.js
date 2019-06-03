@@ -11,7 +11,7 @@ const debug = require('debug')('start-server-and-test')
 /**
  * Used for timeout (ms)
  */
-const fiveMinutes = 5 * 60 * 1000
+const waitOnTimeout = process.env.WAIT_ON_TIMEOUT 5 * 60 * 1000
 
 const isDebug = () =>
   process.env.DEBUG && process.env.DEBUG.indexOf('start-server-and-test') !== -1
@@ -72,7 +72,7 @@ function startAndTest ({ start, url, test }) {
       resources: Array.isArray(url) ? url : [url],
       interval: 2000,
       window: 1000,
-      timeout: fiveMinutes,
+      timeout: waitOnTimeout,
       verbose: isDebug(),
       strictSSL: !isInsecure(),
       log: isDebug()
