@@ -103,7 +103,7 @@
     "minimist": "1.2.0",
     "mocha": "6.1.4",
     "pre-git": "3.17.1",
-    "prettier-standard": "8.0.1",
+    "prettier-standard": "10.0.0",
     "semantic-release": "15.13.12",
     "simple-commit-message": "4.0.3",
     "snap-shot-it": "6.3.5",
