@@ -1,0 +1,8 @@
+{
+  "name": "test-node-env",
+  "scripts": {
+    "start": "node ../server",
+    "test": "echo server has NODE_ENV=$NODE_ENV",
+    "demo": "node ../../src/bin/start.js 9000"
+  }
+}
