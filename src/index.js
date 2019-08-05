@@ -11,7 +11,10 @@ const debug = require('debug')('start-server-and-test')
 /**
  * Used for timeout (ms)
  */
-const waitOnTimeout = process.env.WAIT_ON_TIMEOUT || 5 * 60 * 1000
+const fiveMinutes = 5 * 60 * 1000
+const waitOnTimeout = 
+  process.env.WAIT_ON_TIMEOUT ?
+  Number(process.env.WAIT_ON_TIMEOUT) : fiveMinutes
 
 const isDebug = () =>
   process.env.DEBUG && process.env.DEBUG.indexOf('start-server-and-test') !== -1
