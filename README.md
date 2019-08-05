@@ -190,7 +190,7 @@ To see disable HTTPS checks for `wait-on`, run with environment variable `START_
 
 ### Timeout
 
-This utility will wait for maximum of 5 minutes while checking for the server to respond.
+This utility will wait for maximum of 5 minutes while checking for the server to respond (default). Setting an environment variable `WAIT_ON_TIMEOUT=600000` (milliseconds) sets the timeout for example to 10 minutes.
 
 ### Starting two servers
 
