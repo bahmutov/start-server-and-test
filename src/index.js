@@ -12,9 +12,9 @@ const debug = require('debug')('start-server-and-test')
  * Used for timeout (ms)
  */
 const fiveMinutes = 5 * 60 * 1000
-const waitOnTimeout = 
-  process.env.WAIT_ON_TIMEOUT ?
-  Number(process.env.WAIT_ON_TIMEOUT) : fiveMinutes
+const waitOnTimeout = process.env.WAIT_ON_TIMEOUT
+  ? Number(process.env.WAIT_ON_TIMEOUT)
+  : fiveMinutes
 
 const isDebug = () =>
   process.env.DEBUG && process.env.DEBUG.indexOf('start-server-and-test') !== -1
@@ -32,7 +32,7 @@ function startAndTest ({ start, url, test }) {
 
   debug('starting server with command "%s", verbose mode?', start, isDebug())
 
-  const server = execa.shell(start, { stdio: 'inherit' })
+  const server = execa(start, { shell: true, stdio: 'inherit' })
   let serverStopped
 
   function stopServer () {
@@ -96,7 +96,7 @@ function startAndTest ({ start, url, test }) {
 
   function runTests () {
     debug('running test script command: %s', test)
-    return execa.shell(test, { stdio: 'inherit' })
+    return execa(test, { shell: true, stdio: 'inherit' })
   }
 
   return waited
