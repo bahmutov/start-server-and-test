@@ -73,6 +73,8 @@ const isPackageScriptName = command => {
   return Boolean(packageJson.scripts[command])
 }
 
+const isWaitOnUrl = s => /^https?-(?:get|head|options)/.test(s)
+
 const isUrlOrPort = input => {
   const str = is.string(input) ? input.split('|') : [input]
 
@@ -80,6 +82,12 @@ const isUrlOrPort = input => {
     if (is.url(s)) {
       return s
     }
+    // wait-on allows specifying HTTP verb to use instead of default HEAD
+    // and the format then is like "http-get://domain.com" to use GET
+    if (isWaitOnUrl(s)) {
+      return s
+    }
+
     if (is.number(s)) {
       return is.port(s)
     }

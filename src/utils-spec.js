@@ -83,6 +83,22 @@ describe('utils', () => {
       la(isUrlOrPort('http://foo.com'))
       la(isUrlOrPort('http://foo.com/bar/baz.html'))
       la(isUrlOrPort('http://localhost:6000'))
+      la(isUrlOrPort('https://google.com'))
+    })
+
+    it('allows url with http-get', () => {
+      la(isUrlOrPort('http-get://localhost'))
+      la(isUrlOrPort('http-get://foo.com'))
+      la(isUrlOrPort('http-get://foo.com/bar/baz.html'))
+      la(isUrlOrPort('http-get://localhost:6000'))
+    })
+
+    it('allows url with https-head', () => {
+      la(isUrlOrPort('https-head://localhost:6000'))
+    })
+
+    it('allows url with https-options', () => {
+      la(isUrlOrPort('https-head://foo'))
     })
 
     it('allows port number or string', () => {
