@@ -87,6 +87,7 @@
     "demo8": "node src/bin/start.js start-multiple \":9000|:9001\" test3",
     "demo9": "node src/bin/start.js start-https \"https://127.0.0.1:9000\" test4",
     "demo10": "node src/bin/start.js start-fail http://127.0.0.1:9000 test",
+    "demo11": "node src/bin/start.js http-get://127.0.0.1:9000",
     "demo-cross-env": "node src/bin/start.js start-cross-env 9000",
     "demo-commands": "node src/bin/start.js 'node test/server.js --port 8800' 8800 'node test/client --port 8800'",
     "travis-deploy-once": "travis-deploy-once"
