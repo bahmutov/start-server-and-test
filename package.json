@@ -112,7 +112,7 @@
     "travis-deploy-once": "5.0.11"
   },
   "dependencies": {
-    "bluebird": "3.7.0",
+    "bluebird": "3.7.1",
     "check-more-types": "2.24.0",
     "debug": "4.1.1",
     "execa": "2.1.0",
