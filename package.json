@@ -28,7 +28,7 @@
     }
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=10"
   },
   "files": [
     "src/**/*.js",
@@ -91,6 +91,7 @@
     "demo-cross-env": "node src/bin/start.js start-cross-env 9000",
     "demo-commands": "node src/bin/start.js 'node test/server.js --port 8800' 8800 'node test/client --port 8800'",
     "demo-ping": "node src/bin/start.js ping-http://localhost:9000",
+    "demo-local-ping": "node src/bin/start.js start ping-http://localhost:8888 'echo testing ...'",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
@@ -116,10 +117,10 @@
     "check-more-types": "2.24.0",
     "debug": "4.1.1",
     "execa": "2.1.0",
+    "got": "10.1.0",
     "lazy-ass": "1.6.0",
     "ps-tree": "1.2.0",
-    "wait-on": "3.3.0",
-    "got": "9.6.0"
+    "wait-on": "3.3.0"
   },
   "release": {
     "analyzeCommits": {

@@ -12,15 +12,18 @@ const debug = require('debug')('start-server-and-test')
 /**
  * A small utility for checking when an URL responds, kind of
  * a poor man's https://www.npmjs.com/package/wait-on
+ *
+ * @param {number} timeout - Timeout in milliseconds
  */
 const ping = (url, timeout) => {
   const start = +new Date()
   return got(url, {
     retry: {
-      retries (retry, error) {
+      calculateDelay ({ attemptCount, retryOptions, error }) {
         const now = +new Date()
-        console.error(now - start, 'ms', error.method, error.host, error.code)
-        if (now - start > timeout) {
+        const elapsed = now - start
+        console.error('%d %dms', attemptCount, elapsed, error.message)
+        if (elapsed > timeout) {
           console.error('%s timed out', url)
           return 0
         }
