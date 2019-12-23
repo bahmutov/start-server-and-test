@@ -128,6 +128,14 @@ You can provide multiple resources to wait on, separated by a pipe `|`. _(be sur
 }
 ```
 
+### ping
+
+If `wait-on` does not work for some reason, like [wait-on#30](https://github.com/jeffbski/wait-on/issues/30), try using built-in simple `ping` url where you prefix a single url with `ping-`
+
+```text
+start-test ping-http://localhost:9000
+```
+
 or for multiple ports simply: `server-test '8000|9000' test`.
 
 ## `npx` and `yarn`

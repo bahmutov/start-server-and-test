@@ -3,10 +3,32 @@
 const la = require('lazy-ass')
 const is = require('check-more-types')
 const execa = require('execa')
+const got = require('got')
 const waitOn = require('wait-on')
 const Promise = require('bluebird')
 const psTree = require('ps-tree')
 const debug = require('debug')('start-server-and-test')
+
+/**
+ * A small utility for checking when an URL responds, kind of
+ * a poor man's https://www.npmjs.com/package/wait-on
+ */
+const ping = (url, timeout) => {
+  const start = +new Date()
+  return got(url, {
+    retry: {
+      retries (retry, error) {
+        const now = +new Date()
+        console.error(now - start, 'ms', error.method, error.host, error.code)
+        if (now - start > timeout) {
+          console.error('%s timed out', url)
+          return 0
+        }
+        return 1000
+      }
+    }
+  })
+}
 
 /**
  * Used for timeout (ms)
@@ -63,36 +85,64 @@ function startAndTest ({ start, url, test }) {
     }
   }
 
-  const waited = new Promise((resolve, reject) => {
-    const onClose = () => {
-      reject(new Error('server closed unexpectedly'))
-    }
+  let waited
 
-    server.on('close', onClose)
+  const isSinglePingUrl = url =>
+    typeof url === 'string' && url.startsWith('ping-')
 
-    debug('starting waitOn %s', url)
-    const options = {
-      resources: Array.isArray(url) ? url : [url],
-      interval: 2000,
-      window: 1000,
-      timeout: waitOnTimeout,
-      verbose: isDebug(),
-      strictSSL: !isInsecure(),
-      log: isDebug()
-    }
-    debug('wait-on options %o', options)
+  const isSingleArrayPingUrl = url =>
+    Array.isArray(url) && url.length === 1 && isSinglePingUrl(url[0])
 
-    waitOn(options, err => {
-      if (err) {
-        debug('error waiting for url', url)
-        debug(err.message)
-        return reject(err)
+  if (isSingleArrayPingUrl(url)) {
+    debug('using own ping', url[0])
+    const pingUrl = url[0].replace(/^ping-/, '')
+    debug('pinging url "%s"', pingUrl)
+    waited = new Promise((resolve, reject) => {
+      const onClose = () => {
+        reject(new Error('server closed unexpectedly'))
       }
-      debug('waitOn finished successfully')
-      server.removeListener('close', onClose)
-      resolve()
+
+      server.on('close', onClose)
+
+      ping(pingUrl, waitOnTimeout).then(() => {
+        server.removeListener('close', onClose)
+        resolve()
+      })
     })
-  })
+  } else {
+    debug('using wait-on')
+
+    waited = new Promise((resolve, reject) => {
+      const onClose = () => {
+        reject(new Error('server closed unexpectedly'))
+      }
+
+      server.on('close', onClose)
+
+      debug('starting waitOn %s', url)
+      const options = {
+        resources: Array.isArray(url) ? url : [url],
+        interval: 2000,
+        window: 1000,
+        timeout: waitOnTimeout,
+        verbose: isDebug(),
+        strictSSL: !isInsecure(),
+        log: isDebug()
+      }
+      debug('wait-on options %o', options)
+
+      waitOn(options, err => {
+        if (err) {
+          debug('error waiting for url', url)
+          debug(err.message)
+          return reject(err)
+        }
+        debug('waitOn finished successfully')
+        server.removeListener('close', onClose)
+        resolve()
+      })
+    })
+  }
 
   function runTests () {
     debug('running test script command: %s', test)

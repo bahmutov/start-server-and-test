@@ -75,6 +75,8 @@ const isPackageScriptName = command => {
 
 const isWaitOnUrl = s => /^https?-(?:get|head|options)/.test(s)
 
+const isPingUrl = s => /^ping-https?/.test(s)
+
 const isUrlOrPort = input => {
   const str = is.string(input) ? input.split('|') : [input]
 
@@ -85,6 +87,12 @@ const isUrlOrPort = input => {
     // wait-on allows specifying HTTP verb to use instead of default HEAD
     // and the format then is like "http-get://domain.com" to use GET
     if (isWaitOnUrl(s)) {
+      return s
+    }
+
+    // we have our own format to use built-in ping utility
+    // ping-<address> like ping-http://localhost:9000
+    if (isPingUrl(s)) {
       return s
     }
 
