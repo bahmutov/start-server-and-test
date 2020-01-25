@@ -94,7 +94,7 @@
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.2",
-    "cross-env": "6.0.3",
+    "cross-env": "7.0.0",
     "dependency-check": "3.4.1",
     "deps-ok": "1.4.1",
     "dont-crack": "1.2.1",
