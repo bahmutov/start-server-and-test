@@ -105,7 +105,7 @@
     "mocha": "6.2.1",
     "pre-git": "3.17.1",
     "prettier-standard": "8.0.1",
-    "semantic-release": "15.13.24",
+    "semantic-release": "15.14.0",
     "simple-commit-message": "4.0.13",
     "snap-shot-it": "6.3.5",
     "standard": "13.1.0",
