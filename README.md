@@ -44,10 +44,21 @@ start-server-and-test 'http-server -c-1 --silent' 8000 './node_modules/.bin/cypr
 
 Because `npm` scripts execute with `./node_modules/.bin` in the `$PATH`, you can mix global and locally installed tools when using commands inside `package.json` file. For example, if you want to run a single spec file:
 
-```shell
+```json
 {
   "scripts": {
     "ci": "start-server-and-test 'http-server -c-1 --silent' 8080 'cypress run --spec cypress/integration/location.spec.js'"
+  }
+}
+```
+
+Or you can move `http-server` part into its own `start` script, which is used by default and have the equivalent JSON
+
+```json
+{
+  "scripts": {
+    "start": "http-server -c-1 --silent",
+    "ci": "start-server-and-test 8080 'cypress run --spec cypress/integration/location.spec.js'"
   }
 }
 ```
