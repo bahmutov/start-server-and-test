@@ -31,23 +31,34 @@ This command is meant to be used with NPM script commands. If you have a "start 
 }
 ```
 
-To execute all tests simply run `npm run ci`
+To execute all tests simply run `npm run ci`.
 
 ### Commands
 
 In addition to using NPM script names, you can pass entire commands (surround them with quotes so it is still a single string) that will be executed "as is". For example, to start globally installed `http-server` before running and recording [Cypress.io](https://www.cypress.io) tests you can use
 
-```
+```shell
+# run http-server, then when port 8000 responds run Cypress tests
 start-server-and-test 'http-server -c-1 --silent' 8000 './node_modules/.bin/cypress run --record'
 ```
 
-or because `npm` scripts execute with `./node_modules/.bin` in the `$PATH`, you can mix global and locally installed tools:
+Because `npm` scripts execute with `./node_modules/.bin` in the `$PATH`, you can mix global and locally installed tools when using commands inside `package.json` file. For example, if you want to run a single spec file:
+
+```shell
+{
+  "scripts": {
+    "ci": "start-server-and-test 'http-server -c-1 --silent' 8080 'cypress run --spec cypress/integration/location.spec.js'"
+  }
+}
+```
+
+Here is another example that uses Mocha
 
 ```json
 {
-    "scripts": {
-        "ci": "start-server-and-test 'http-server -c-1 --silent' 8080 'mocha e2e-spec.js'"
-    }
+  "scripts": {
+    "ci": "start-server-and-test 'http-server -c-1 --silent' 8080 'mocha e2e-spec.js'"
+  }
 }
 ```
 
