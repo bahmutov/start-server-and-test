@@ -5,7 +5,7 @@ cache:
 notifications:
   email: true
 node_js:
-  - '10'
+  - '8'
 script:
   - npm test
   - npm run demo
