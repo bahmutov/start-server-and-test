@@ -93,7 +93,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
-    "ban-sensitive-files": "1.9.5",
+    "ban-sensitive-files": "1.9.6",
     "cross-env": "7.0.2",
     "dependency-check": "3.4.1",
     "deps-ok": "1.4.1",
