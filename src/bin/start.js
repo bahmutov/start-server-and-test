@@ -12,7 +12,7 @@ debug('parsed args: %o', parsed)
 const { start, test, url } = parsed
 
 console.log('starting server using command "%s"', start)
-console.log('and when url "%s" is responding', url)
+console.log('and when url "%s" is responding with HTTP status code 200', url)
 console.log('running tests using command "%s"', test)
 
 startAndTest({ start, url, test }).catch(e => {
