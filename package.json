@@ -95,6 +95,7 @@
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.7",
+    "chai": "4.2.0",
     "cross-env": "7.0.2",
     "dependency-check": "3.4.1",
     "deps-ok": "1.4.1",
@@ -109,6 +110,7 @@
     "semantic-release": "15.13.24",
     "simple-commit-message": "4.0.13",
     "sinon": "9.0.2",
+    "sinon-chai": "3.5.0",
     "snap-shot-it": "6.3.5",
     "standard": "13.1.0",
     "travis-deploy-once": "5.0.11"
@@ -132,5 +134,8 @@
         }
       ]
     }
+  },
+  "standard": {
+    "globals": ["sandbox", "expect"]
   }
 }

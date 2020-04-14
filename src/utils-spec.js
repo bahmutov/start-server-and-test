@@ -73,6 +73,20 @@ describe('utils', () => {
       snapshot(getArguments(['3000|4000|5000']))
     })
 
+    it('asks if command is a script name', () => {
+      const args = ['custom-command-name', '3000', 'some-test-command']
+      const isPackageScriptName = sandbox
+        .stub(utils, 'isPackageScriptName')
+        .returns(false)
+      const parsed = getArguments(args)
+      debug('from %o', args)
+      debug('parsed %o', parsed)
+      /* eslint-disable-next-line no-unused-expressions */
+      expect(isPackageScriptName).to.have.been.calledTwice
+      expect(isPackageScriptName).to.have.been.calledWith('custom-command-name')
+      expect(isPackageScriptName).to.have.been.calledWith('some-test-command')
+    })
+
     it('understands custom commands', () => {
       // these commands are NOT script names in the package.json
       // thus they will be run as is
