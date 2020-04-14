@@ -65,7 +65,7 @@
     "pretty": "prettier-standard 'src/**/*.js'",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
-    "unit": "mocha src/*-spec.js",
+    "unit": "mocha test/helper src/*-spec.js",
     "unused-deps": "dependency-check --unused --no-dev .",
     "semantic-release": "semantic-release",
     "start": "node test/server.js",
@@ -108,6 +108,7 @@
     "prettier-standard": "8.0.1",
     "semantic-release": "15.13.24",
     "simple-commit-message": "4.0.13",
+    "sinon": "9.0.2",
     "snap-shot-it": "6.3.5",
     "standard": "13.1.0",
     "travis-deploy-once": "5.0.11"
