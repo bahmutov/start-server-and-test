@@ -3,6 +3,7 @@
 /* eslint-env mocha */
 const la = require('lazy-ass')
 const snapshot = require('snap-shot-it')
+const debug = require('debug')('test')
 
 function arrayEq (a, b) {
   return a.length === b.length && a.every((el, index) => el === b[index])
@@ -28,8 +29,29 @@ describe('utils', () => {
   context('getArguments', () => {
     const getArguments = utils.getArguments
 
+    it('allows 5 arguments', () => {
+      const args = ['start', '6000', 'start:web', '6010', 'test']
+      const parsed = getArguments(args)
+      debug('from %o', args)
+      debug('parsed %o', parsed)
+      debug('services %o', parsed.services)
+      snapshot({ args, parsed })
+    })
+
+    it('determines NPM script for each command', () => {
+      sandbox.stub(utils, 'isPackageScriptName').returns(true)
+      const args = ['startA', '6000', 'startB', '6010', 'testC']
+      const parsed = getArguments(args)
+      debug('from %o', args)
+      debug('parsed %o', parsed)
+      debug('services %o', parsed.services)
+      snapshot({ args, parsed })
+    })
+
     it('returns 3 arguments', () => {
-      snapshot(getArguments(['start', '8080', 'test']))
+      const args = ['start', '8080', 'test']
+      const parsed = getArguments(args)
+      snapshot({ args, parsed })
     })
 
     it('returns 3 arguments with url', () => {
@@ -60,6 +82,20 @@ describe('utils', () => {
 
     it('understands several ports', () => {
       snapshot(getArguments(['3000|4000|5000']))
+    })
+
+    it('asks if command is a script name', () => {
+      const args = ['custom-command-name', '3000', 'some-test-command']
+      const isPackageScriptName = sandbox
+        .stub(utils, 'isPackageScriptName')
+        .returns(false)
+      const parsed = getArguments(args)
+      debug('from %o', args)
+      debug('parsed %o', parsed)
+      /* eslint-disable-next-line no-unused-expressions */
+      expect(isPackageScriptName).to.have.been.calledTwice
+      expect(isPackageScriptName).to.have.been.calledWith('custom-command-name')
+      expect(isPackageScriptName).to.have.been.calledWith('some-test-command')
     })
 
     it('understands custom commands', () => {

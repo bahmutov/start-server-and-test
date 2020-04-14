@@ -65,7 +65,7 @@
     "pretty": "prettier-standard 'src/**/*.js'",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
-    "unit": "mocha src/*-spec.js",
+    "unit": "mocha test/helper src/*-spec.js",
     "unused-deps": "dependency-check --unused --no-dev .",
     "semantic-release": "semantic-release",
     "start": "node test/server.js",
@@ -77,7 +77,8 @@
     "test2": "curl http://127.0.0.1:9000",
     "test3": "curl http://127.0.0.1:9000 && curl http://127.0.0.1:9001",
     "test4": "curl --insecure https://127.0.0.1:9000",
-    "demo": "node src/bin/start.js http://127.0.0.1:9000",
+    "message": "echo Hi there 👋",
+    "demo": "node src/bin/start.js http://127.0.0.1:9000 message",
     "demo2": "node src/bin/start.js start http://127.0.0.1:9000 test2",
     "demo3": "node src/bin/start.js start-with-child http://127.0.0.1:9000 test",
     "demo4": "node src/bin/start.js 9000",
@@ -90,10 +91,12 @@
     "demo11": "node src/bin/start.js http-get://127.0.0.1:9000",
     "demo-cross-env": "node src/bin/start.js start-cross-env 9000",
     "demo-commands": "node src/bin/start.js 'node test/server.js --port 8800' 8800 'node test/client --port 8800'",
+    "demo-multiple": "node src/bin/start.js 'node test/server --port 6000' 6000 'node test/server --port 6010' 6010 'curl http://127.0.0.1:6000 && curl http://127.0.0.1:6010'",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.7",
+    "chai": "4.2.0",
     "cross-env": "7.0.2",
     "dependency-check": "3.4.1",
     "deps-ok": "1.4.1",
@@ -107,6 +110,8 @@
     "prettier-standard": "8.0.1",
     "semantic-release": "15.13.24",
     "simple-commit-message": "4.0.13",
+    "sinon": "9.0.2",
+    "sinon-chai": "3.5.0",
     "snap-shot-it": "6.3.5",
     "standard": "13.1.0",
     "travis-deploy-once": "5.0.11"
@@ -130,5 +135,8 @@
         }
       ]
     }
+  },
+  "standard": {
+    "globals": ["sandbox", "expect"]
   }
 }

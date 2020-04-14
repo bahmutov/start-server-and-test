@@ -3,19 +3,21 @@
 const debug = require('debug')('start-server-and-test')
 
 const args = process.argv.slice(2)
-const startAndTest = require('..')
+const startAndTest = require('..').startAndTest
 const utils = require('../utils')
 
 debug('parsing CLI arguments: %o', args)
 const parsed = utils.getArguments(args)
 debug('parsed args: %o', parsed)
-const { start, test, url } = parsed
 
-console.log('starting server using command "%s"', start)
-console.log('and when url "%s" is responding with HTTP status code 200', url)
-console.log('running tests using command "%s"', test)
+const { services, test } = parsed
+if (!Array.isArray(services)) {
+  throw new Error(`Could not parse arguments %o, got %o`, args, parsed)
+}
 
-startAndTest({ start, url, test }).catch(e => {
+utils.printArguments({ services, test })
+
+startAndTest({ services, test }).catch(e => {
   console.error(e)
   process.exit(1)
 })

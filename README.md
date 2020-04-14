@@ -216,7 +216,13 @@ This utility will wait for maximum of 5 minutes while checking for the server to
 
 ### Starting two servers
 
-Sometimes you need to start one API server and one webserver in order to test the application. Just have two commands cascade. First command should wait on the webserver script, which in turn uses `start-server-and-test` to start the API server before running the webserver. Something like this
+Sometimes you need to start one API server and one webserver in order to test the application. Use the syntax:
+
+```
+start-test <first command> <first resource> <second command> <second resource> <test command>
+```
+
+For example if API runs at port 3000 and server runs at port 8080:
 
 ```json
 {
@@ -224,13 +230,12 @@ Sometimes you need to start one API server and one webserver in order to test th
     "test": "node src/test",
     "start:api": "node src/api",
     "start:server": "node src/server",
-    "start:server-and-api": "start-test start:api 7600 start:server",
-    "test:all": "start-test start:server-and-api 5000 test"
+    "test:all": "start-test start:api 3000 start:server 8080 test"
   }
 }
 ```
 
-In the above example you would run `npm run test:all` to start both servers and run the test. See repo [start-two-servers-example](https://github.com/bahmutov/start-two-servers-example) for full example
+In the above example you would run `npm run test:all` to start the API first, then when it responds, start the server, and when the server is responding, it would run the tests. After the tests finish, it will shut down both servers. See the repo [start-two-servers-example](https://github.com/bahmutov/start-two-servers-example) for full example
 
 ### Small print
 

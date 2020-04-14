@@ -1,3 +1,4 @@
+// @ts-check
 'use strict'
 
 const la = require('lazy-ass')
@@ -21,9 +22,9 @@ const isDebug = () =>
 
 const isInsecure = () => process.env.START_SERVER_AND_TEST_INSECURE
 
-function startAndTest ({ start, url, test }) {
+function waitAndRun ({ start, url, runFn }) {
   la(is.unemptyString(start), 'missing start script name', start)
-  la(is.unemptyString(test), 'missing test script name', test)
+  la(is.fn(runFn), 'missing test script name', runFn)
   la(
     is.unemptyString(url) || is.unemptyArray(url),
     'missing url to wait on',
@@ -94,15 +95,46 @@ function startAndTest ({ start, url, test }) {
     })
   })
 
-  function runTests () {
-    debug('running test script command: %s', test)
-    return execa(test, { shell: true, stdio: 'inherit' })
-  }
-
   return waited
     .tapCatch(stopServer)
-    .then(runTests)
+    .then(runFn)
     .finally(stopServer)
 }
 
-module.exports = startAndTest
+const runTheTests = testCommand => () => {
+  debug('running test script command: %s', testCommand)
+  return execa(testCommand, { shell: true, stdio: 'inherit' })
+}
+
+/**
+ * Starts a single service and runs tests or recursively
+ * runs a service, then goes to the next list, until it reaches 1 service and runs test.
+ */
+function startAndTest ({ services, test }) {
+  if (services.length === 0) {
+    throw new Error('Got zero services to start ...')
+  }
+
+  if (services.length === 1) {
+    const runTests = runTheTests(test)
+    debug('single service "%s" to run and test', services[0].start)
+    return waitAndRun({
+      start: services[0].start,
+      url: services[0].url,
+      runFn: runTests
+    })
+  }
+
+  return waitAndRun({
+    start: services[0].start,
+    url: services[0].url,
+    runFn: () => {
+      debug('previous service started, now going to the next one')
+      return startAndTest({ services: services.slice(1), test })
+    }
+  })
+}
+
+module.exports = {
+  startAndTest
+}
