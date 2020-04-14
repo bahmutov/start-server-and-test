@@ -1,3 +1,4 @@
+// @ts-check
 'use strict'
 
 const la = require('lazy-ass')
@@ -21,9 +22,9 @@ const isDebug = () =>
 
 const isInsecure = () => process.env.START_SERVER_AND_TEST_INSECURE
 
-function startAndTest ({ start, url, test }) {
+function waitAndRun ({ start, url, runFn }) {
   la(is.unemptyString(start), 'missing start script name', start)
-  la(is.unemptyString(test), 'missing test script name', test)
+  la(is.fn(runFn), 'missing test script name', runFn)
   la(
     is.unemptyString(url) || is.unemptyArray(url),
     'missing url to wait on',
@@ -94,15 +95,27 @@ function startAndTest ({ start, url, test }) {
     })
   })
 
-  function runTests () {
-    debug('running test script command: %s', test)
-    return execa(test, { shell: true, stdio: 'inherit' })
-  }
-
   return waited
     .tapCatch(stopServer)
-    .then(runTests)
+    .then(runFn)
     .finally(stopServer)
 }
 
-module.exports = startAndTest
+const runTheTests = (testCommand) => () => {
+  debug('running test script command: %s', testCommand)
+  return execa(testCommand, { shell: true, stdio: 'inherit' })
+}
+
+function startAndTest ({ start, url, test }) {
+  const runTests = runTheTests(test)
+
+  return waitAndRun({
+    start,
+    url,
+    runFn: runTests
+  })
+}
+
+module.exports = {
+  startAndTest
+}
