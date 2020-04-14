@@ -149,7 +149,10 @@ const normalizeUrl = input => {
 function printArguments ({ services, test }) {
   services.forEach((service, k) => {
     console.log('%d: starting server using command "%s"', k + 1, service.start)
-    console.log('and when url "%s" is responding with HTTP status code 200', service.url)
+    console.log(
+      'and when url "%s" is responding with HTTP status code 200',
+      service.url
+    )
   })
 
   console.log('running tests using command "%s"', test)

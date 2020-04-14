@@ -101,18 +101,33 @@ function waitAndRun ({ start, url, runFn }) {
     .finally(stopServer)
 }
 
-const runTheTests = (testCommand) => () => {
+const runTheTests = testCommand => () => {
   debug('running test script command: %s', testCommand)
   return execa(testCommand, { shell: true, stdio: 'inherit' })
 }
 
-function startAndTest ({ start, url, test }) {
-  const runTests = runTheTests(test)
+function startAndTest ({ services, test }) {
+  if (services.length === 0) {
+    throw new Error('Got zero services to start ...')
+  }
+
+  if (services.length === 1) {
+    const runTests = runTheTests(test)
+    debug('single service "%s" to run and test', services[0].start)
+    return waitAndRun({
+      start: services[0].start,
+      url: services[0].url,
+      runFn: runTests
+    })
+  }
 
   return waitAndRun({
-    start,
-    url,
-    runFn: runTests
+    start: services[0].start,
+    url: services[0].url,
+    runFn: () => {
+      debug('previous service started, now going to the next one')
+      return startAndTest({ services: services.slice(1), test })
+    }
   })
 }
 

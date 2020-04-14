@@ -16,13 +16,8 @@ if (!Array.isArray(services)) {
 }
 
 utils.printArguments({ services, test })
-const { start, url } = services[0]
 
-// console.log('starting server using command "%s"', start)
-// console.log('and when url "%s" is responding with HTTP status code 200', url)
-// console.log('running tests using command "%s"', test)
-
-startAndTest({ start, url, test }).catch(e => {
+startAndTest({ services, test }).catch(e => {
   console.error(e)
   process.exit(1)
 })
