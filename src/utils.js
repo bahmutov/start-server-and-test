@@ -47,11 +47,11 @@ const getArguments = cliArgs => {
     test = cliArgs[2]
   }
 
-  if (isPackageScriptName(start)) {
+  if (UTILS.isPackageScriptName(start)) {
     start = `npm run ${start}`
   }
 
-  if (isPackageScriptName(test)) {
+  if (UTILS.isPackageScriptName(test)) {
     test = `npm run ${test}`
   }
 
@@ -140,9 +140,13 @@ const normalizeUrl = input => {
   })
 }
 
-module.exports = {
+// placing functions into a common object
+// makes them methods for easy stubbing
+const UTILS = {
   getArguments,
   isPackageScriptName,
   isUrlOrPort,
   normalizeUrl
 }
+
+module.exports = UTILS

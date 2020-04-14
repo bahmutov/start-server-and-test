@@ -1,3 +1,24 @@
+exports['utils getArguments allows 5 arguments 1'] = {
+  "args": [
+    "start",
+    "6000",
+    "start:web",
+    "6010",
+    "test"
+  ],
+  "parsed": {
+    "services": [
+      {
+        "start": "npm run start",
+        "url": [
+          "http://localhost:6000"
+        ]
+      }
+    ],
+    "test": "npm run test"
+  }
+}
+
 exports['utils getArguments handles 3 arguments with http-get url 1'] = {
   "services": [
     {
@@ -11,15 +32,22 @@ exports['utils getArguments handles 3 arguments with http-get url 1'] = {
 }
 
 exports['utils getArguments returns 3 arguments 1'] = {
-  "services": [
-    {
-      "start": "npm run start",
-      "url": [
-        "http://localhost:8080"
-      ]
-    }
+  "args": [
+    "start",
+    "8080",
+    "test"
   ],
-  "test": "npm run test"
+  "parsed": {
+    "services": [
+      {
+        "start": "npm run start",
+        "url": [
+          "http://localhost:8080"
+        ]
+      }
+    ],
+    "test": "npm run test"
+  }
 }
 
 exports['utils getArguments returns 3 arguments with url 1'] = {

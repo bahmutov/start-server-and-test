@@ -30,11 +30,17 @@ describe('utils', () => {
     const getArguments = utils.getArguments
 
     it('allows 5 arguments', () => {
-      debug(getArguments(['start', '6000', 'start:web', '6010', 'test']))
+      const args = ['start', '6000', 'start:web', '6010', 'test']
+      const parsed = getArguments(args)
+      debug('from %o', args)
+      debug('parsed %o', parsed)
+      snapshot({ args, parsed })
     })
 
     it('returns 3 arguments', () => {
-      snapshot(getArguments(['start', '8080', 'test']))
+      const args = ['start', '8080', 'test']
+      const parsed = getArguments(args)
+      snapshot({ args, parsed })
     })
 
     it('returns 3 arguments with url', () => {
