@@ -106,6 +106,10 @@ const runTheTests = testCommand => () => {
   return execa(testCommand, { shell: true, stdio: 'inherit' })
 }
 
+/**
+ * Starts a single service and runs tests or recursively
+ * runs a service, then goes to the next list, until it reaches 1 service and runs test.
+ */
 function startAndTest ({ services, test }) {
   if (services.length === 0) {
     throw new Error('Got zero services to start ...')
