@@ -90,6 +90,7 @@
     "demo11": "node src/bin/start.js http-get://127.0.0.1:9000",
     "demo-cross-env": "node src/bin/start.js start-cross-env 9000",
     "demo-commands": "node src/bin/start.js 'node test/server.js --port 8800' 8800 'node test/client --port 8800'",
+    "demo-multiple": "node src/bin/start.js 'node test/server --port 6000' 6000 'node test/server --port 6010' 6010 'curl http://127.0.0.1:6000 && curl http://127.0.0.1:6010'",
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {

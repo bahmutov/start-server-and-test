@@ -3,6 +3,7 @@
 /* eslint-env mocha */
 const la = require('lazy-ass')
 const snapshot = require('snap-shot-it')
+const debug = require('debug')('test')
 
 function arrayEq (a, b) {
   return a.length === b.length && a.every((el, index) => el === b[index])
@@ -27,6 +28,10 @@ describe('utils', () => {
 
   context('getArguments', () => {
     const getArguments = utils.getArguments
+
+    it('allows 5 arguments', () => {
+      debug(getArguments(['start', '6000', 'start:web', '6010', 'test']))
+    })
 
     it('returns 3 arguments', () => {
       snapshot(getArguments(['start', '8080', 'test']))

@@ -31,6 +31,10 @@ const getArguments = cliArgs => {
       start = cliArgs[0]
       url = normalizeUrl(cliArgs[1])
     }
+  } else if (cliArgs.length === 5) {
+    start = cliArgs[0]
+    url = normalizeUrl(cliArgs[1])
+    test = cliArgs[4]
   } else {
     la(
       cliArgs.length === 3,
@@ -51,9 +55,15 @@ const getArguments = cliArgs => {
     test = `npm run ${test}`
   }
 
-  return {
+  const service = {
     start,
-    url,
+    url
+  }
+
+  const services = [service]
+
+  return {
+    services,
     test
   }
 }

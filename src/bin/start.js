@@ -9,7 +9,12 @@ const utils = require('../utils')
 debug('parsing CLI arguments: %o', args)
 const parsed = utils.getArguments(args)
 debug('parsed args: %o', parsed)
-const { start, test, url } = parsed
+
+const { services, test } = parsed
+if (!Array.isArray(services)) {
+  throw new Error(`Could not parse arguments %o, got %o`, args, parsed)
+}
+const { start, url } = services[0]
 
 console.log('starting server using command "%s"', start)
 console.log('and when url "%s" is responding with HTTP status code 200', url)
