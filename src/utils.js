@@ -54,7 +54,7 @@ const getArguments = cliArgs => {
 
   const services = [service]
 
-  services.forEach((service) => {
+  services.forEach(service => {
     service.start = normalizeCommand(service.start)
   })
 
