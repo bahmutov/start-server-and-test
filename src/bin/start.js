@@ -14,11 +14,13 @@ const { services, test } = parsed
 if (!Array.isArray(services)) {
   throw new Error(`Could not parse arguments %o, got %o`, args, parsed)
 }
+
+utils.printArguments({ services, test })
 const { start, url } = services[0]
 
-console.log('starting server using command "%s"', start)
-console.log('and when url "%s" is responding with HTTP status code 200', url)
-console.log('running tests using command "%s"', test)
+// console.log('starting server using command "%s"', start)
+// console.log('and when url "%s" is responding with HTTP status code 200', url)
+// console.log('running tests using command "%s"', test)
 
 startAndTest({ start, url, test }).catch(e => {
   console.error(e)

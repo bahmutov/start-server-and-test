@@ -146,13 +146,22 @@ const normalizeUrl = input => {
   })
 }
 
+function printArguments ({ services, test }) {
+  const { start, url } = services[0]
+
+  console.log('starting server using command "%s"', start)
+  console.log('and when url "%s" is responding with HTTP status code 200', url)
+  console.log('running tests using command "%s"', test)
+}
+
 // placing functions into a common object
 // makes them methods for easy stubbing
 const UTILS = {
   getArguments,
   isPackageScriptName,
   isUrlOrPort,
-  normalizeUrl
+  normalizeUrl,
+  printArguments
 }
 
 module.exports = UTILS
