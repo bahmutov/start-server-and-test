@@ -10,30 +10,41 @@ const { join } = require('path')
 const getArguments = cliArgs => {
   la(is.strings(cliArgs), 'expected list of strings', cliArgs)
 
-  let start = 'start'
+  const service = {
+    start: 'start',
+    url: undefined
+  }
+  const services = [service]
+
   let test = 'test'
-  let url
 
   if (cliArgs.length === 1 && isUrlOrPort(cliArgs[0])) {
     // passed just single url or port number, for example
     // "start": "http://localhost:8080"
-    url = normalizeUrl(cliArgs[0])
+    service.url = normalizeUrl(cliArgs[0])
   } else if (cliArgs.length === 2) {
     if (isUrlOrPort(cliArgs[0])) {
       // passed port and custom test command
       // like ":8080 test-ci"
-      url = normalizeUrl(cliArgs[0])
+      service.url = normalizeUrl(cliArgs[0])
       test = cliArgs[1]
     }
     if (isUrlOrPort(cliArgs[1])) {
       // passed start command and url/port
       // like "start-server 8080"
-      start = cliArgs[0]
-      url = normalizeUrl(cliArgs[1])
+      service.start = cliArgs[0]
+      service.url = normalizeUrl(cliArgs[1])
     }
   } else if (cliArgs.length === 5) {
-    start = cliArgs[0]
-    url = normalizeUrl(cliArgs[1])
+    service.start = cliArgs[0]
+    service.url = normalizeUrl(cliArgs[1])
+
+    const secondService = {
+      start: cliArgs[2],
+      url: normalizeUrl(cliArgs[3])
+    }
+    services.push(secondService)
+
     test = cliArgs[4]
   } else {
     la(
@@ -42,17 +53,10 @@ const getArguments = cliArgs => {
       'example: start-test start 8080 test\n',
       'see https://github.com/bahmutov/start-server-and-test#use\n'
     )
-    start = cliArgs[0]
-    url = normalizeUrl(cliArgs[1])
+    service.start = cliArgs[0]
+    service.url = normalizeUrl(cliArgs[1])
     test = cliArgs[2]
   }
-
-  const service = {
-    start,
-    url
-  }
-
-  const services = [service]
 
   services.forEach(service => {
     service.start = normalizeCommand(service.start)

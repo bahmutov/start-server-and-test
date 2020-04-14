@@ -13,6 +13,12 @@ exports['utils getArguments allows 5 arguments 1'] = {
         "url": [
           "http://localhost:6000"
         ]
+      },
+      {
+        "start": "start:web",
+        "url": [
+          "http://localhost:6010"
+        ]
       }
     ],
     "test": "npm run test"

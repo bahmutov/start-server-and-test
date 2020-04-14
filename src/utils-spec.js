@@ -34,6 +34,7 @@ describe('utils', () => {
       const parsed = getArguments(args)
       debug('from %o', args)
       debug('parsed %o', parsed)
+      debug('services %o', parsed.services)
       snapshot({ args, parsed })
     })
 
