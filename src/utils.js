@@ -47,14 +47,6 @@ const getArguments = cliArgs => {
     test = cliArgs[2]
   }
 
-  if (UTILS.isPackageScriptName(start)) {
-    start = `npm run ${start}`
-  }
-
-  if (UTILS.isPackageScriptName(test)) {
-    test = `npm run ${test}`
-  }
-
   const service = {
     start,
     url
@@ -62,10 +54,20 @@ const getArguments = cliArgs => {
 
   const services = [service]
 
+  services.forEach((service) => {
+    service.start = normalizeCommand(service.start)
+  })
+
+  test = normalizeCommand(test)
+
   return {
     services,
     test
   }
+}
+
+function normalizeCommand (command) {
+  return UTILS.isPackageScriptName(command) ? `npm run ${command}` : command
 }
 
 /**
