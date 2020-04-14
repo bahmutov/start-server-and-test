@@ -25,6 +25,33 @@ exports['utils getArguments allows 5 arguments 1'] = {
   }
 }
 
+exports['utils getArguments determines NPM script for each command 1'] = {
+  "args": [
+    "startA",
+    "6000",
+    "startB",
+    "6010",
+    "testC"
+  ],
+  "parsed": {
+    "services": [
+      {
+        "start": "npm run startA",
+        "url": [
+          "http://localhost:6000"
+        ]
+      },
+      {
+        "start": "npm run startB",
+        "url": [
+          "http://localhost:6010"
+        ]
+      }
+    ],
+    "test": "npm run testC"
+  }
+}
+
 exports['utils getArguments handles 3 arguments with http-get url 1'] = {
   "services": [
     {
