@@ -190,6 +190,18 @@ Starting up http-server, serving .
 ...
 ```
 
+## Note for yarn users
+
+By default, npm is used to run scripts, however you can specify that yarn is used as follows:
+
+```json
+"scripts": {
+    "start-server": "yarn start",
+    "test": "mocha e2e-spec.js",
+    "ci": "start-server-and-test 'yarn start-server' http://localhost:8080 'yarn test'"
+}
+```
+
 ## Note for webpack-dev-server users
 
 If you are using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) (directly or via `angular/cli` or other boilerplates) then please use the following URL form to check
