@@ -104,7 +104,7 @@
     "got": "9.6.0",
     "license-checker": "24.1.0",
     "minimist": "1.2.5",
-    "mocha": "7.1.1",
+    "mocha": "7.2.0",
     "pre-git": "3.17.1",
     "prettier-standard": "8.0.1",
     "semantic-release": "^17.1.1",
