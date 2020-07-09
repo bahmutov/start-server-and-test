@@ -137,6 +137,9 @@
     }
   },
   "standard": {
-    "globals": ["sandbox", "expect"]
+    "globals": [
+      "sandbox",
+      "expect"
+    ]
   }
 }

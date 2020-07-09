@@ -1,0 +1,36 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v1
+
+      - name: NPM install
+        uses: bahmutov/npm-install@v1
+
+      - name: Run tests 🧪
+        run: npm test
+
+      - name: Run demos 📊
+        run: |
+          npm run demo
+          npm run demo2
+          npm run demo3
+          npm run demo4
+          npm run demo5
+          npm run demo6
+          npm run demo7
+          # hmm why are some demos skipped?
+          npm run demo11
+          START_SERVER_AND_TEST_INSECURE=1 npm run demo9
+          npm run demo-cross-env
+          npm run demo-commands
+          npm run demo-multiple
+
+      - name: Semantic Release 🚀
+        uses: cycjimmy/semantic-release-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
