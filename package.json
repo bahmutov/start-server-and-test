@@ -106,7 +106,7 @@
     "minimist": "1.2.5",
     "mocha": "7.1.1",
     "pre-git": "3.17.1",
-    "prettier-standard": "8.0.1",
+    "prettier-standard": "16.4.1",
     "semantic-release": "^17.1.1",
     "simple-commit-message": "4.0.13",
     "sinon": "9.0.2",
