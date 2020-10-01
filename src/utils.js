@@ -1,6 +1,7 @@
 const la = require('lazy-ass')
 const is = require('check-more-types')
 const { join } = require('path')
+const { existsSync } = require('fs')
 
 /**
  * Returns parsed command line arguments.
@@ -82,6 +83,9 @@ const isPackageScriptName = command => {
   la(is.unemptyString(command), 'expected command name string', command)
 
   const packageFilename = join(process.cwd(), 'package.json')
+  if (!existsSync(packageFilename)) {
+    return false
+  }
   const packageJson = require(packageFilename)
   if (!packageJson.scripts) {
     return false
