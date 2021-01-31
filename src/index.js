@@ -79,7 +79,10 @@ function waitAndRun ({ start, url, runFn }) {
       timeout: waitOnTimeout,
       verbose: isDebug(),
       strictSSL: !isInsecure(),
-      log: isDebug()
+      log: isDebug(),
+      headers: {
+        'Accept': 'text/html, application/json, text/plain, */*'
+      }
     }
     debug('wait-on options %o', options)
 
