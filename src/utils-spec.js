@@ -26,6 +26,39 @@ describe('utils', () => {
     })
   })
 
+  context('crossArguments', () => {
+    const crossArguments = utils.crossArguments
+    ;['"', "'", '`'].forEach(char => {
+      it(`concates arguments if wrapped by ${char}`, () => {
+        snapshot(
+          crossArguments([
+            'start',
+            '8080',
+            `${char}test`,
+            'argument',
+            `--option${char}`
+          ])
+        )
+      })
+      it(`ignores end char (${char}) if not at the end of an argument`, () => {
+        snapshot(
+          crossArguments([
+            'start',
+            '8080',
+            `${char}test`,
+            `argu${char}ment`,
+            `--option${char}`
+          ])
+        )
+      })
+    })
+    it(`ignores end chars that are != the startChar of an argument`, () => {
+      snapshot(
+        crossArguments(['start', '8080', `"test`, `argument'`, `--option"`])
+      )
+    })
+  })
+
   context('getArguments', () => {
     const getArguments = utils.getArguments
 

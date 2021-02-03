@@ -4,6 +4,46 @@ const { join } = require('path')
 const { existsSync } = require('fs')
 
 /**
+ * Returns new array of command line arguments
+ * where leading and trailing " and ' are indicating
+ * the beginning and end of an argument.
+ */
+const crossArguments = cliArgs => {
+  let concatModeChar = false
+  const indicationChars = ["'", '"', '`']
+  const combinedArgs = []
+  for (let i = 0; i < cliArgs.length; i++) {
+    let arg = cliArgs[i]
+    if (
+      !concatModeChar &&
+      indicationChars.some(char => cliArgs[i].startsWith(char))
+    ) {
+      arg = arg.slice(1)
+    }
+    if (concatModeChar && cliArgs[i].endsWith(concatModeChar)) {
+      arg = arg.slice(0, -1)
+    }
+
+    if (concatModeChar && combinedArgs.length) {
+      combinedArgs[combinedArgs.length - 1] += ' ' + arg
+    } else {
+      combinedArgs.push(arg)
+    }
+
+    if (
+      !concatModeChar &&
+      indicationChars.some(char => cliArgs[i].startsWith(char))
+    ) {
+      concatModeChar = cliArgs[i][0]
+    }
+    if (concatModeChar && cliArgs[i].endsWith(concatModeChar)) {
+      concatModeChar = false
+    }
+  }
+  return combinedArgs
+}
+
+/**
  * Returns parsed command line arguments.
  * If start command is NPM script name defined in the package.json
  * file in the current working directory, returns 'npm run start' command.
@@ -166,6 +206,7 @@ function printArguments ({ services, test }) {
 // placing functions into a common object
 // makes them methods for easy stubbing
 const UTILS = {
+  crossArguments,
   getArguments,
   isPackageScriptName,
   isUrlOrPort,
