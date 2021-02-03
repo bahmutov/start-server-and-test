@@ -249,6 +249,14 @@ For example if API runs at port 3000 and server runs at port 8080:
 
 In the above example you would run `npm run test:all` to start the API first, then when it responds, start the server, and when the server is responding, it would run the tests. After the tests finish, it will shut down both servers. See the repo [start-two-servers-example](https://github.com/bahmutov/start-two-servers-example) for full example
 
+## Note for Apollo Server users
+
+If a pass a simple GET request to Apollo Server it will respond with a 405 error. To get around this problem you need to pass a valid GraphQL query into the query parameter. Passing in a basic schema introspection query will work to determine the presence of an Apollo Server. You can configure your npm script like so:
+
+```
+start-server-and-test start-server 'http-get://localhost:4000/graphql?query={ __schema { queryType { name } } }' test
+```
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
