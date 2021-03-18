@@ -122,7 +122,7 @@
     "execa": "3.4.0",
     "lazy-ass": "1.6.0",
     "ps-tree": "1.2.0",
-    "wait-on": "5.2.1"
+    "wait-on": "5.3.0"
   },
   "release": {
     "analyzeCommits": {
