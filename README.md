@@ -220,7 +220,7 @@ To see diagnostic messages, run with environment variable `DEBUG=start-server-an
 
 ### Disable HTTPS certificate checks
 
-To see disable HTTPS checks for `wait-on`, run with environment variable `START_SERVER_AND_TEST_INSECURE=1`.
+To disable HTTPS checks for `wait-on`, run with environment variable `START_SERVER_AND_TEST_INSECURE=1`.
 
 ### Timeout
 
