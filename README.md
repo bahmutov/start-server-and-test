@@ -152,6 +152,21 @@ You can provide multiple resources to wait on, separated by a pipe `|`. _(be sur
 
 or for multiple ports simply: `server-test '8000|9000' test`.
 
+If you want to start the server, wait for it to respond, and then run multiple test commands (and stop the server after they finish), you should be able to use `&&` to separate the test commands:
+
+```json
+{
+  "scripts": {
+    "start": "npm start",
+    "test:unit": "mocha test.js",
+    "test:e2e": "mocha e2e.js",
+    "ci": "start-test 9000 'npm run test:unit && npm run test:e2e'"
+  }
+}
+```
+
+The above script `ci` after the `localhost:9000` responds executes the `npm run test:unit` command. Then when it finishes it runs `npm run test:e2e`. If the first or second command fails, the `ci` script fails. Of course, your mileage on Windows might vary.
+
 ## `npx` and `yarn`
 
 If you have [npx](https://www.npmjs.com/package/npx) available, you can execute locally installed tools from the shell. For example, if the `package.json` has the following local tools:

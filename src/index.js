@@ -81,7 +81,7 @@ function waitAndRun ({ start, url, runFn }) {
       strictSSL: !isInsecure(),
       log: isDebug(),
       headers: {
-        'Accept': 'text/html, application/json, text/plain, */*'
+        Accept: 'text/html, application/json, text/plain, */*'
       }
     }
     debug('wait-on options %o', options)
