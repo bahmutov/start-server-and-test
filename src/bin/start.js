@@ -2,9 +2,9 @@
 
 const debug = require('debug')('start-server-and-test')
 
-const args = process.argv.slice(2)
 const startAndTest = require('..').startAndTest
 const utils = require('../utils')
+const args = utils.crossArguments(process.argv.slice(2))
 
 debug('parsing CLI arguments: %o', args)
 const parsed = utils.getArguments(args)

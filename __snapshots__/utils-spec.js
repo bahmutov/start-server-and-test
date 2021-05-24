@@ -1,3 +1,45 @@
+exports['utils crossArguments concates arguments if wrapped by " 1'] = [
+  "start",
+  "8080",
+  "test argument --option"
+]
+
+exports['utils crossArguments concates arguments if wrapped by \' 1'] = [
+  "start",
+  "8080",
+  "test argument --option"
+]
+
+exports['utils crossArguments concates arguments if wrapped by ` 1'] = [
+  "start",
+  "8080",
+  "test argument --option"
+]
+
+exports['utils crossArguments ignores end char (") if not at the end of an argument 1'] = [
+  "start",
+  "8080",
+  "test argu\"ment --option"
+]
+
+exports['utils crossArguments ignores end char (\') if not at the end of an argument 1'] = [
+  "start",
+  "8080",
+  "test argu'ment --option"
+]
+
+exports['utils crossArguments ignores end char (`) if not at the end of an argument 1'] = [
+  "start",
+  "8080",
+  "test argu`ment --option"
+]
+
+exports['utils crossArguments ignores end chars that are != the startChar of an argument 1'] = [
+  "start",
+  "8080",
+  "test argument' --option"
+]
+
 exports['utils getArguments allows 5 arguments 1'] = {
   "args": [
     "start",
