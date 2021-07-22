@@ -24,6 +24,7 @@ jobs:
           npm run demo7
           # hmm why are some demos skipped?
           npm run demo11
+          npm run demo12
           START_SERVER_AND_TEST_INSECURE=1 npm run demo9
           npm run demo-cross-env
           npm run demo-commands
