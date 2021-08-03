@@ -219,19 +219,57 @@ By default, npm is used to run scripts, however you can specify that yarn is use
 
 ## Note for webpack-dev-server users
 
-If you are using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) (directly or via `angular/cli` or other boilerplates) then please use the following URL form to check
+Also applies to **Vite** users!
+
+If you are using [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) (directly or via `angular/cli` or other boilerplates) then the server does not respond to HEAD requests from `start-server-and-test`. You can check if the server responds to the HEAD requests by starting the server and pinging it from another terminal using `curl`
+
+```
+# from the first terminal start the server
+$ npm start
+# from the second terminal call the server with HEAD request
+$ curl --head http://localhost:3000
+```
+
+If the server responds with 404, then it does not handle the HEAD requests. You have two solutions:
+
+### Use HTTP GET requests
+
+You can force the `start-server-and-test` to ping the server using GET requests using the `http-get://` prefix:
+
 
 ```
 start-server-and-test http-get://localhost:8080
 ```
 
-This is because under the hood this module uses [wait-on](https://github.com/jeffbski/wait-on) to ping the server. Wait-on uses `HEAD` by default, but `webpack-dev-server` does not respond to `HEAD` only to `GET` requests. Thus you need to use `http-get://` URL format to force `wait-on` to use `GET` probe.
+### Ping a specific resource
 
-You can even wait on the bundle JavaScript url instead of the page url, see discussion in this [issue #4](https://github.com/bahmutov/start-server-and-test/issues/4)
+As an alternative to using GET method to request the root page, you can try pinging a specific resource, see the discussion in the [issue #4](https://github.com/bahmutov/start-server-and-test/issues/4).
+
+```
+# maybe the server responds to HEAD requests to the HTML page
+start-server-and-test http://localhost:3000/index.html
+# or maybe the server responds to HEAD requests to JS resource
+start-server-and-test http://localhost:8080/app.js
+```
+
+### Explanation
+
+You can watch the explanation in the video [Debug a Problem in start-server-and-test](https://youtu.be/rxyZOxYCsAk).
+
+Under the hood this module uses [wait-on](https://github.com/jeffbski/wait-on) to ping the server. Wait-on uses `HEAD` by default, but `webpack-dev-server` does not respond to `HEAD` only to `GET` requests. Thus you need to use `http-get://` URL format to force `wait-on` to use `GET` probe or ask for a particular resource.
 
 ### Debugging
 
 To see diagnostic messages, run with environment variable `DEBUG=start-server-and-test`
+
+```
+$ DEBUG=start-server-and-test npm run test
+  start-server-and-test parsing CLI arguments: [ 'dev', '3000', 'subtask' ] +0ms
+  start-server-and-test parsed args: { services: [ { start: 'npm run dev', url: [Array] } ], test: 'npm run subtask' }
+...
+making HTTP(S) head request to  url:http://localhost:3000 ...
+  HTTP(S) error for http://localhost:3000 Error: Request failed with status code 404
+```
 
 ### Disable HTTPS certificate checks
 
