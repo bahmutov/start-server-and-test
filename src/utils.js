@@ -199,6 +199,14 @@ function printArguments ({ services, test }) {
     )
   })
 
+  if (process.env.WAIT_ON_INTERVAL !== undefined) {
+    console.log('WAIT_ON_INTERVAL is set to', process.env.WAIT_ON_INTERVAL)
+  }
+
+  if (process.env.WAIT_ON_TIMEOUT !== undefined) {
+    console.log('WAIT_ON_TIMEOUT is set to', process.env.WAIT_ON_TIMEOUT)
+  }
+
   console.log('running tests using command "%s"', test)
   console.log('')
 }
