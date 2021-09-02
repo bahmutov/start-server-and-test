@@ -279,6 +279,10 @@ To disable HTTPS checks for `wait-on`, run with environment variable `START_SERV
 
 This utility will wait for maximum of 5 minutes while checking for the server to respond (default). Setting an environment variable `WAIT_ON_TIMEOUT=600000` (milliseconds) sets the timeout for example to 10 minutes.
 
+### Interval
+
+This utility will check for a server response every two seconds (default). Setting an environment variable `WAIT_ON_INTERVAL=600000` (milliseconds) sets the interval for example to 10 minutes.
+
 ### Starting two servers
 
 Sometimes you need to start one API server and one webserver in order to test the application. Use the syntax:
