@@ -14,6 +14,7 @@ const debug = require('debug')('start-server-and-test')
  */
 const fiveMinutes = 5 * 60 * 1000
 const twoSeconds = 2000
+const zeroMseconds = 0
 
 const waitOnTimeout = process.env.WAIT_ON_TIMEOUT
   ? Number(process.env.WAIT_ON_TIMEOUT)
@@ -22,6 +23,10 @@ const waitOnTimeout = process.env.WAIT_ON_TIMEOUT
 const waitOnInterval = process.env.WAIT_ON_INTERVAL
   ? Number(process.env.WAIT_ON_INTERVAL)
   : twoSeconds
+
+const waitOnDelay = process.env.WAIT_ON_DELAY
+  ? Number(process.env.WAIT_ON_DELAY)
+  : zeroMseconds
 
 const isDebug = () =>
   process.env.DEBUG && process.env.DEBUG.indexOf('start-server-and-test') !== -1
@@ -81,6 +86,7 @@ function waitAndRun ({ start, url, runFn }) {
     const options = {
       resources: Array.isArray(url) ? url : [url],
       interval: waitOnInterval,
+      delay: waitOnDelay,
       window: 1000,
       timeout: waitOnTimeout,
       verbose: isDebug(),

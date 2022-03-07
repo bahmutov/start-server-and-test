@@ -92,6 +92,7 @@
     "demo10": "node src/bin/start.js start-fail http://127.0.0.1:9000 test",
     "demo11": "node src/bin/start.js http-get://127.0.0.1:9000",
     "demo12": "node src/bin/start.js start-304 9000 test2",
+    "demo-delay-interval": "WAIT_ON_DELAY=1000 WAIT_ON_INTERVAL=5000 node src/bin/start.js start http://127.0.0.1:9000 test2",
     "demo-interval": "WAIT_ON_INTERVAL=1000 node src/bin/start.js start http://127.0.0.1:9000 test2",
     "demo-timeout": "WAIT_ON_TIMEOUT=10000 node src/bin/start.js start http://127.0.0.1:9000 test2",
     "demo-cross-env": "node src/bin/start.js start-cross-env 9000",

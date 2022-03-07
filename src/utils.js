@@ -207,6 +207,10 @@ function printArguments ({ services, test }) {
     console.log('WAIT_ON_TIMEOUT is set to', process.env.WAIT_ON_TIMEOUT)
   }
 
+  if (process.env.WAIT_ON_DELAY !== undefined) {
+    console.log('WAIT_ON_DELAY is set to', process.env.WAIT_ON_DELAY)
+  }
+
   console.log('running tests using command "%s"', test)
   console.log('')
 }
