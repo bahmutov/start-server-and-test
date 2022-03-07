@@ -283,6 +283,10 @@ This utility will wait for maximum of 5 minutes while checking for the server to
 
 This utility will check for a server response every two seconds (default). Setting an environment variable `WAIT_ON_INTERVAL=600000` (milliseconds) sets the interval for example to 10 minutes.
 
+### Delay
+
+This utility will delay the initial scheduler request (default behavior is equivalent to WAIT_ON_INTERVAL). Setting an environment variable `WAIT_ON_DELAY=5000` (milliseconds) sets the intial delay for 5 seconds otherwise it will be the default WAIT_ON_INTERVAL.
+
 ### Starting two servers
 
 Sometimes you need to start one API server and one webserver in order to test the application. Use the syntax:
