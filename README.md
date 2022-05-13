@@ -313,7 +313,7 @@ When passing a simple GET request to Apollo Server it will respond with a 405 er
 ```json
 {
   "scripts": {
-    "ci": "start-server-and-test start 'http-get://localhost:4000/graphql?query={ __schema { queryType { name } } }' test"
+    "ci": "start-server-and-test start 'http-get://localhost:4000/graphql?query=%7B__typename%7D' test"
   }
 }
 ```
