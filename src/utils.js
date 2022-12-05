@@ -64,7 +64,9 @@ const getNamedArguments = cliArgs => {
   })
   debug('initial parsed arguments %o', args)
   return {
-    expect: args['--expect']
+    expect: args['--expect'],
+    // aliases
+    '--expected': '--expect'
   }
 }
 

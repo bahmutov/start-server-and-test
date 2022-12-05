@@ -167,6 +167,16 @@ If you want to start the server, wait for it to respond, and then run multiple t
 
 The above script `ci` after the `localhost:9000` responds executes the `npm run test:unit` command. Then when it finishes it runs `npm run test:e2e`. If the first or second command fails, the `ci` script fails. Of course, your mileage on Windows might vary.
 
+#### expected
+
+The server might respond, but require authorization, returning an error HTTP code by default. You can still know that the server is responding by using `--expect` argument (or its alias `--expected`):
+
+```
+$ start-test --expect 403 start :9000 test:e2e
+```
+
+See `demo-expect-403` NPM script.
+
 ## `npx` and `yarn`
 
 If you have [npx](https://www.npmjs.com/package/npx) available, you can execute locally installed tools from the shell. For example, if the `package.json` has the following local tools:

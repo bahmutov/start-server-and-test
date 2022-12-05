@@ -36,8 +36,11 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
     'missing url to wait on',
     url
   )
-  const isSuccessfulHttpCode = (status) => (status >= 200 && status < 300) || status === 304
-  const validateStatus = namedArguments.expect ? (status) => status === namedArguments.expect : isSuccessfulHttpCode
+  const isSuccessfulHttpCode = status =>
+    (status >= 200 && status < 300) || status === 304
+  const validateStatus = namedArguments.expect
+    ? status => status === namedArguments.expect
+    : isSuccessfulHttpCode
 
   debug('starting server with command "%s", verbose mode?', start, isDebug())
 
