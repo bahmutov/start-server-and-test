@@ -15,13 +15,10 @@ const namedArguments = {
  * the beginning and end of an argument.
  */
 const crossArguments = cliArguments => {
-  const args = arg(
-    namedArguments,
-    {
-      permissive: true,
-      argv: cliArguments
-    }
-  )
+  const args = arg(namedArguments, {
+    permissive: true,
+    argv: cliArguments
+  })
   debug('initial parsed arguments %o', args)
   // all other arguments
   const cliArgs = args._
@@ -60,17 +57,14 @@ const crossArguments = cliArguments => {
   return combinedArgs
 }
 
-const getNamedArguments = (cliArgs) => {
-  const args = arg(
-    namedArguments,
-    {
-      permissive: true,
-      argv: cliArgs
-    }
-  )
+const getNamedArguments = cliArgs => {
+  const args = arg(namedArguments, {
+    permissive: true,
+    argv: cliArgs
+  })
   debug('initial parsed arguments %o', args)
   return {
-    expect: args['--expect'] || 200
+    expect: args['--expect']
   }
 }
 
@@ -226,7 +220,8 @@ function printArguments ({ services, test, namedArguments }) {
     console.log('%d: starting server using command "%s"', k + 1, service.start)
     console.log(
       'and when url "%s" is responding with HTTP status code %d',
-      service.url, namedArguments.expect
+      service.url,
+      namedArguments.expect
     )
   })
 

@@ -48,7 +48,7 @@
   "main": "src/",
   "private": false,
   "publishConfig": {
-    "registry": "http://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",

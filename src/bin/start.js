@@ -20,7 +20,7 @@ if (!Array.isArray(services)) {
 
 utils.printArguments({ services, test, namedArguments })
 
-startAndTest({ services, test }).catch(e => {
+startAndTest({ services, test, namedArguments }).catch(e => {
   console.error(e)
   process.exit(1)
 })
