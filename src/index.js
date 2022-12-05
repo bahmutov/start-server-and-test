@@ -89,7 +89,8 @@ function waitAndRun ({ start, url, runFn }) {
       headers: {
         Accept: 'text/html, application/json, text/plain, */*'
       },
-      validateStatus: (status) => (status >= 200 && status < 300) || status === 304,
+      validateStatus: status =>
+        (status >= 200 && status < 300) || status === 304
     }
     debug('wait-on options %o', options)
 

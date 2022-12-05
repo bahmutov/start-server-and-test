@@ -2,13 +2,28 @@ const la = require('lazy-ass')
 const is = require('check-more-types')
 const { join } = require('path')
 const { existsSync } = require('fs')
+const arg = require('arg')
+const debug = require('debug')('start-server-and-test')
 
 /**
  * Returns new array of command line arguments
  * where leading and trailing " and ' are indicating
  * the beginning and end of an argument.
  */
-const crossArguments = cliArgs => {
+const crossArguments = cliArguments => {
+  const args = arg(
+    {
+      '--expect': Number
+    },
+    {
+      permissive: true,
+      argv: cliArguments
+    }
+  )
+  debug('initial parsed arguments %o', args)
+  // all other arguments
+  const cliArgs = args._
+
   let concatModeChar = false
   const indicationChars = ["'", '"', '`']
   const combinedArgs = []

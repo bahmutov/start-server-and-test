@@ -74,6 +74,7 @@
     "start-https": "node test/https-server.js",
     "start-fail": "node test/server-fail.js",
     "start-304": "node test/server-304.js",
+    "start-403": "node test/server-403.js",
     "start-cross-env": "cross-env FOO=bar node test/server.js",
     "test2": "curl http://127.0.0.1:9000",
     "test3": "curl http://127.0.0.1:9000 && curl http://127.0.0.1:9001",
@@ -92,6 +93,7 @@
     "demo10": "node src/bin/start.js start-fail http://127.0.0.1:9000 test",
     "demo11": "node src/bin/start.js http-get://127.0.0.1:9000",
     "demo12": "node src/bin/start.js start-304 9000 test2",
+    "demo13": "node src/bin/start.js --expect 403 start-403 9000 'echo Waited'",
     "demo-interval": "WAIT_ON_INTERVAL=1000 node src/bin/start.js start http://127.0.0.1:9000 test2",
     "demo-timeout": "WAIT_ON_TIMEOUT=10000 node src/bin/start.js start http://127.0.0.1:9000 test2",
     "demo-cross-env": "node src/bin/start.js start-cross-env 9000",
@@ -122,6 +124,7 @@
     "travis-deploy-once": "5.0.11"
   },
   "dependencies": {
+    "arg": "^5.0.2",
     "bluebird": "3.7.2",
     "check-more-types": "2.24.0",
     "debug": "4.3.2",
