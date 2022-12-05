@@ -54,6 +54,9 @@ jobs:
       - name: Run demo multiple 📊
         run: npm run demo-multiple
 
+      - name: Run demo expect 403 code 📊
+        run: npm run demo-expect-403
+
       - name: Semantic Release 🚀
         if: github.ref == 'refs/heads/master'
         uses: cycjimmy/semantic-release-action@v3
