@@ -28,7 +28,7 @@ const isDebug = () =>
 
 const isInsecure = () => process.env.START_SERVER_AND_TEST_INSECURE
 
-function waitAndRun ({ start, url, runFn }) {
+function waitAndRun ({ start, url, runFn, namedArguments }) {
   la(is.unemptyString(start), 'missing start script name', start)
   la(is.fn(runFn), 'missing test script name', runFn)
   la(
@@ -36,6 +36,11 @@ function waitAndRun ({ start, url, runFn }) {
     'missing url to wait on',
     url
   )
+  const isSuccessfulHttpCode = status =>
+    (status >= 200 && status < 300) || status === 304
+  const validateStatus = namedArguments.expect
+    ? status => status === namedArguments.expect
+    : isSuccessfulHttpCode
 
   debug('starting server with command "%s", verbose mode?', start, isDebug())
 
@@ -89,8 +94,7 @@ function waitAndRun ({ start, url, runFn }) {
       headers: {
         Accept: 'text/html, application/json, text/plain, */*'
       },
-      validateStatus: status =>
-        (status >= 200 && status < 300) || status === 304
+      validateStatus
     }
     debug('wait-on options %o', options)
 
@@ -121,7 +125,7 @@ const runTheTests = testCommand => () => {
  * Starts a single service and runs tests or recursively
  * runs a service, then goes to the next list, until it reaches 1 service and runs test.
  */
-function startAndTest ({ services, test }) {
+function startAndTest ({ services, test, namedArguments }) {
   if (services.length === 0) {
     throw new Error('Got zero services to start ...')
   }
@@ -132,6 +136,7 @@ function startAndTest ({ services, test }) {
     return waitAndRun({
       start: services[0].start,
       url: services[0].url,
+      namedArguments,
       runFn: runTests
     })
   }
@@ -139,9 +144,10 @@ function startAndTest ({ services, test }) {
   return waitAndRun({
     start: services[0].start,
     url: services[0].url,
+    namedArguments,
     runFn: () => {
       debug('previous service started, now going to the next one')
-      return startAndTest({ services: services.slice(1), test })
+      return startAndTest({ services: services.slice(1), test, namedArguments })
     }
   })
 }

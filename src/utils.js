@@ -5,21 +5,20 @@ const { existsSync } = require('fs')
 const arg = require('arg')
 const debug = require('debug')('start-server-and-test')
 
+const namedArguments = {
+  '--expect': Number
+}
+
 /**
  * Returns new array of command line arguments
  * where leading and trailing " and ' are indicating
  * the beginning and end of an argument.
  */
 const crossArguments = cliArguments => {
-  const args = arg(
-    {
-      '--expect': Number
-    },
-    {
-      permissive: true,
-      argv: cliArguments
-    }
-  )
+  const args = arg(namedArguments, {
+    permissive: true,
+    argv: cliArguments
+  })
   debug('initial parsed arguments %o', args)
   // all other arguments
   const cliArgs = args._
@@ -56,6 +55,19 @@ const crossArguments = cliArguments => {
     }
   }
   return combinedArgs
+}
+
+const getNamedArguments = cliArgs => {
+  const args = arg(namedArguments, {
+    permissive: true,
+    argv: cliArgs
+  })
+  debug('initial parsed arguments %o', args)
+  return {
+    expect: args['--expect'],
+    // aliases
+    '--expected': '--expect'
+  }
 }
 
 /**
@@ -205,12 +217,13 @@ const normalizeUrl = input => {
   })
 }
 
-function printArguments ({ services, test }) {
+function printArguments ({ services, test, namedArguments }) {
   services.forEach((service, k) => {
     console.log('%d: starting server using command "%s"', k + 1, service.start)
     console.log(
-      'and when url "%s" is responding with HTTP status code 200',
-      service.url
+      'and when url "%s" is responding with HTTP status code %d',
+      service.url,
+      namedArguments.expect
     )
   })
 
@@ -231,6 +244,7 @@ function printArguments ({ services, test }) {
 const UTILS = {
   crossArguments,
   getArguments,
+  getNamedArguments,
   isPackageScriptName,
   isUrlOrPort,
   normalizeUrl,

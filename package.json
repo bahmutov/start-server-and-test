@@ -48,7 +48,7 @@
   "main": "src/",
   "private": false,
   "publishConfig": {
-    "registry": "http://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
@@ -93,7 +93,7 @@
     "demo10": "node src/bin/start.js start-fail http://127.0.0.1:9000 test",
     "demo11": "node src/bin/start.js http-get://127.0.0.1:9000",
     "demo12": "node src/bin/start.js start-304 9000 test2",
-    "demo13": "node src/bin/start.js --expect 403 start-403 9000 'echo Waited'",
+    "demo-expect-403": "node src/bin/start.js --expect 403 start-403 9000 'echo Waited'",
     "demo-interval": "WAIT_ON_INTERVAL=1000 node src/bin/start.js start http://127.0.0.1:9000 test2",
     "demo-timeout": "WAIT_ON_TIMEOUT=10000 node src/bin/start.js start http://127.0.0.1:9000 test2",
     "demo-cross-env": "node src/bin/start.js start-cross-env 9000",
