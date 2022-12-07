@@ -131,7 +131,7 @@
     "execa": "5.1.1",
     "lazy-ass": "1.6.0",
     "ps-tree": "1.2.0",
-    "wait-on": "6.0.0"
+    "wait-on": "6.0.1"
   },
   "release": {
     "analyzeCommits": {
