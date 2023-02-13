@@ -130,6 +130,12 @@ function startAndTest ({ services, test, namedArguments }) {
     throw new Error('Got zero services to start ...')
   }
 
+  la(
+    is.number(namedArguments.expect),
+    'expected status should be a number',
+    namedArguments.expect
+  )
+
   if (services.length === 1) {
     const runTests = runTheTests(test)
     debug('single service "%s" to run and test', services[0].start)

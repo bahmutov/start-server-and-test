@@ -218,6 +218,12 @@ const normalizeUrl = input => {
 }
 
 function printArguments ({ services, test, namedArguments }) {
+  la(
+    is.number(namedArguments.expect),
+    'expected status code should be a number',
+    namedArguments.expect
+  )
+
   services.forEach((service, k) => {
     console.log('%d: starting server using command "%s"', k + 1, service.start)
     console.log(

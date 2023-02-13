@@ -177,6 +177,8 @@ $ start-test --expect 403 start :9000 test:e2e
 
 See `demo-expect-403` NPM script.
 
+Default expected value is 200.
+
 ## `npx` and `yarn`
 
 If you have [npx](https://www.npmjs.com/package/npx) available, you can execute locally installed tools from the shell. For example, if the `package.json` has the following local tools:

@@ -18,6 +18,10 @@ if (!Array.isArray(services)) {
   throw new Error(`Could not parse arguments %o, got %o`, args, parsed)
 }
 
+if (!namedArguments.expect) {
+  namedArguments.expect = 200
+}
+
 utils.printArguments({ services, test, namedArguments })
 
 startAndTest({ services, test, namedArguments }).catch(e => {
