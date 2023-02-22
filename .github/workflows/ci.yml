@@ -1,11 +1,14 @@
 name: ci
 on: [push, pull_request]
 jobs:
-  tests:
+  tests1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
+
+      - name: Node version 🖨️
+        run: node -v
 
       - name: NPM install
         uses: bahmutov/npm-install@v1
@@ -34,6 +37,17 @@ jobs:
       - name: Run demo 7 📊
         run: npm run demo7
 
+  tests2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Node version 🖨️
+        run: node -v
+
+      - name: NPM install
+        uses: bahmutov/npm-install@v1
       # hmm why are some demos skipped?
 
       - name: Run demo 11 📊
@@ -57,8 +71,15 @@ jobs:
       - name: Run demo expect 403 code 📊
         run: npm run demo-expect-403
 
+  release:
+    needs: ['tests1', 'tests2']
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
       - name: Semantic Release 🚀
-        if: github.ref == 'refs/heads/master'
         uses: cycjimmy/semantic-release-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
