@@ -102,7 +102,7 @@
     "demo-multiple-test-commands": "node src/bin/start.js 9000 'npm run message && npm run message2'",
     "demo-json-server": "node src/bin/start.js 'json-server test/data.json' 3000 'echo json-server working'",
     "demo-ip6": "node src/bin/start.js 'node test/ip6.mjs' 8000 'echo server with ::1 working'",
-    "demo-zero": "node src/bin/start.js 'node test/zero.mjs' 8000 'echo server with 0.0.0.0 working'",
+    "demo-zero": "WAIT_ON_TIMEOUT=10000 node src/bin/start.js 'node test/zero.mjs' 8000 'echo server with 0.0.0.0 working'",
     "demo-zero-explicit": "node src/bin/start.js 'node test/zero.mjs' http://0.0.0.0:8000 'echo server with 0.0.0.0 working'"
   },
   "devDependencies": {
