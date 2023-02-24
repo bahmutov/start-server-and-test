@@ -201,12 +201,12 @@ describe('utils', () => {
     })
 
     it('changes port to localhost', () => {
-      la(arrayEq(normalizeUrl('6006'), ['http://localhost:6006']))
-      la(arrayEq(normalizeUrl(8080), ['http://localhost:8080']))
+      la(arrayEq(normalizeUrl('6006'), ['http://127.0.0.1:6006']))
+      la(arrayEq(normalizeUrl(8080), ['http://127.0.0.1:8080']))
     })
 
     it('changes :port to localhost', () => {
-      la(arrayEq(normalizeUrl(':6006'), ['http://localhost:6006']))
+      la(arrayEq(normalizeUrl(':6006'), ['http://127.0.0.1:6006']))
     })
 
     it('returns original argument if does not know what to do', () => {
@@ -217,7 +217,7 @@ describe('utils', () => {
     it('parses multiple resources', () => {
       la(
         arrayEq(normalizeUrl(':6006|http://foo.com'), [
-          'http://localhost:6006',
+          'http://127.0.0.1:6006',
           'http://foo.com'
         ])
       )

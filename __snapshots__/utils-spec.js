@@ -53,13 +53,13 @@ exports['utils getArguments allows 5 arguments 1'] = {
       {
         "start": "npm run start",
         "url": [
-          "http://localhost:6000"
+          "http://127.0.0.1:6000"
         ]
       },
       {
         "start": "start:web",
         "url": [
-          "http://localhost:6010"
+          "http://127.0.0.1:6010"
         ]
       }
     ],
@@ -80,13 +80,13 @@ exports['utils getArguments determines NPM script for each command 1'] = {
       {
         "start": "npm run startA",
         "url": [
-          "http://localhost:6000"
+          "http://127.0.0.1:6000"
         ]
       },
       {
         "start": "npm run startB",
         "url": [
-          "http://localhost:6010"
+          "http://127.0.0.1:6010"
         ]
       }
     ],
@@ -117,7 +117,7 @@ exports['utils getArguments returns 3 arguments 1'] = {
       {
         "start": "npm run start",
         "url": [
-          "http://localhost:8080"
+          "http://127.0.0.1:8080"
         ]
       }
     ],
@@ -142,7 +142,7 @@ exports['utils getArguments understands custom commands 1'] = {
     {
       "start": "custom-command --with argument",
       "url": [
-        "http://localhost:3000"
+        "http://127.0.0.1:3000"
       ]
     }
   ],
@@ -154,9 +154,9 @@ exports['utils getArguments understands several ports 1'] = {
     {
       "start": "npm run start",
       "url": [
-        "http://localhost:3000",
-        "http://localhost:4000",
-        "http://localhost:5000"
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:4000",
+        "http://127.0.0.1:5000"
       ]
     }
   ],
@@ -168,7 +168,7 @@ exports['utils getArguments understands single :port 1'] = {
     {
       "start": "npm run start",
       "url": [
-        "http://localhost:3000"
+        "http://127.0.0.1:3000"
       ]
     }
   ],
@@ -180,7 +180,7 @@ exports['utils getArguments understands single port 1'] = {
     {
       "start": "npm run start",
       "url": [
-        "http://localhost:3000"
+        "http://127.0.0.1:3000"
       ]
     }
   ],
@@ -192,7 +192,7 @@ exports['utils getArguments understands start plus url 1'] = {
     {
       "start": "start-server",
       "url": [
-        "http://localhost:6000"
+        "http://127.0.0.1:6000"
       ]
     }
   ],
@@ -204,7 +204,7 @@ exports['utils getArguments understands url plus test 1'] = {
     {
       "start": "npm run start",
       "url": [
-        "http://localhost:6000"
+        "http://127.0.0.1:6000"
       ]
     }
   ],
