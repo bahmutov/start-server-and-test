@@ -96,6 +96,9 @@ jobs:
       - name: Run explicit 0.0.0.0 host example
         run: npm run demo-zero-explicit
 
+      - name: Run 0.0.0.0 host with 127.0.0.1 url
+        run: npm run demo-zero-127
+
       - name: Run 0.0.0.0 host example
         run: npm run demo-zero
 

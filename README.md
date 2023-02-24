@@ -217,6 +217,22 @@ Starting up http-server, serving .
 ...
 ```
 
+## localhost vs 0.0.0.0 vs 127.0.0.1
+
+The latest versions of Node and some web servers listen on host `0.0.0.0` which _no longer means localhost_. Thus if you specify _just the port number_, like `:3000`, this package will try `http://127.0.0.1:3000` to ping the server. A good practice is to specify the full URL you would like to ping.
+
+```
+# same as "http://127.0.0.1:3000"
+start-server start 3000 test
+# better
+start-server start http://127.0.0.1:3000 test
+# or
+start-server start http://0.0.0.0:3000 test
+# of course, if your server is listening on localhost
+# you can still set the URL
+start-server start http://localhost:3000 test
+```
+
 ## Note for yarn users
 
 By default, npm is used to run scripts, however you can specify that yarn is used as follows:
