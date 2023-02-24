@@ -209,6 +209,21 @@ describe('utils', () => {
       la(arrayEq(normalizeUrl(':6006'), ['http://127.0.0.1:6006']))
     })
 
+    it('appends http to localhost', () => {
+      la(arrayEq(normalizeUrl('localhost'), ['http://localhost']))
+      la(arrayEq(normalizeUrl('localhost:3030'), ['http://localhost:3030']))
+    })
+
+    it('appends http to 127.0.0.1', () => {
+      la(arrayEq(normalizeUrl('127.0.0.1'), ['http://127.0.0.1']))
+      la(arrayEq(normalizeUrl('127.0.0.1:3030'), ['http://127.0.0.1:3030']))
+    })
+
+    it('appends http to 0.0.0.0', () => {
+      la(arrayEq(normalizeUrl('0.0.0.0'), ['http://0.0.0.0']))
+      la(arrayEq(normalizeUrl('0.0.0.0:3030'), ['http://0.0.0.0:3030']))
+    })
+
     it('returns original argument if does not know what to do', () => {
       la(arrayEq(normalizeUrl('foo'), ['foo']), normalizeUrl('foo'))
       la(arrayEq(normalizeUrl(808000), [808000]), normalizeUrl(808000))

@@ -88,6 +88,8 @@ start-test 8080 test
 start-test 8080
 ```
 
+**Tip:** I highly recommend you specify the full url instead of the port, see the `localhost vs 0.0.0.0 vs 127.0.0.1` section later in this README.
+
 ### Options
 
 If you use convention and name your scripts "start" and "test" you can simply provide URL
