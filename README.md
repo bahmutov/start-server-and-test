@@ -80,9 +80,10 @@ You can use either `start-server-and-test`, `server-test` or `start-test` comman
 You can use `:` in front of port number like `server-test :8080`, so all these are equivalent
 
 ```
-start-server-and-test start http://localhost:8080 test
-server-test start http://localhost:8080 test
-server-test http://localhost:8080 test
+start-server-and-test start http://127.0.0.1:8080 test
+server-test start http://127.0.0.1:8080 test
+server-test http://127.0.0.1:8080 test
+server-test 127.0.0.1:8080 test
 start-test :8080 test
 start-test 8080 test
 start-test 8080
