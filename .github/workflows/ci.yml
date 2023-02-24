@@ -91,7 +91,7 @@ jobs:
         run: npm run demo-json-server
 
       - name: Run ::1 host example
-        run: npm run ip6
+        run: npm run demo-ip6
 
   release:
     needs: ['tests1', 'tests2', 'tests-node-v18']
