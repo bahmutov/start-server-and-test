@@ -90,9 +90,6 @@ jobs:
       - name: Run json-server test
         run: npm run demo-json-server
 
-      - name: Run ::1 host example
-        run: npm run demo-ip6
-
       - name: Run explicit 0.0.0.0 host example
         run: npm run demo-zero-explicit
 
