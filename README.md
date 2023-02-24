@@ -105,7 +105,7 @@ If you use convention and name your scripts "start" and "test" you can simply pr
 }
 ```
 
-You can also shorten local url to just port, the code below is equivalent to checking `http://localhost:8080`.
+You can also shorten local url to just port, the code below is equivalent to checking `http://127.0.0.1:8080`.
 
 ```json
 {
@@ -168,7 +168,7 @@ If you want to start the server, wait for it to respond, and then run multiple t
 }
 ```
 
-The above script `ci` after the `localhost:9000` responds executes the `npm run test:unit` command. Then when it finishes it runs `npm run test:e2e`. If the first or second command fails, the `ci` script fails. Of course, your mileage on Windows might vary.
+The above script `ci` after the `127.0.0.1:9000` responds executes the `npm run test:unit` command. Then when it finishes it runs `npm run test:e2e`. If the first or second command fails, the `ci` script fails. Of course, your mileage on Windows might vary.
 
 #### expected
 
@@ -201,7 +201,7 @@ Then you can execute tests simply:
 ```text
 $ npx start-test 'http-server -c-1 .' 8080 'cypress run'
 starting server using command "http-server -c-1 ."
-and when url "http://localhost:8080" is responding
+and when url "http://127.0.0.1:8080" is responding
 running tests using command "cypress run"
 Starting up http-server, serving .
 ...
@@ -214,7 +214,7 @@ $ yarn start-test 'http-server -c-1 .' 8080 'cypress run'
 yarn run v1.13.0
 $ /private/tmp/test-t/node_modules/.bin/start-test 'http-server -c-1 .' 8080 'cypress run'
 starting server using command "http-server -c-1 ."
-and when url "http://localhost:8080" is responding
+and when url "http://127.0.0.1:8080" is responding
 running tests using command "cypress run"
 Starting up http-server, serving .
 ...
@@ -298,8 +298,8 @@ $ DEBUG=start-server-and-test npm run test
   start-server-and-test parsing CLI arguments: [ 'dev', '3000', 'subtask' ] +0ms
   start-server-and-test parsed args: { services: [ { start: 'npm run dev', url: [Array] } ], test: 'npm run subtask' }
 ...
-making HTTP(S) head request to url:http://localhost:3000 ...
-  HTTP(S) error for http://localhost:3000 Error: Request failed with status code 404
+making HTTP(S) head request to url:http://127.0.0.1:3000 ...
+  HTTP(S) error for http://127.0.0.1:3000 Error: Request failed with status code 404
 ```
 
 ### Disable HTTPS certificate checks
