@@ -101,7 +101,8 @@
     "demo-multiple": "node src/bin/start.js 'node test/server --port 6000' 6000 'node test/server --port 6010' 6010 'curl http://127.0.0.1:6000 && curl http://127.0.0.1:6010'",
     "demo-multiple-test-commands": "node src/bin/start.js 9000 'npm run message && npm run message2'",
     "demo-json-server": "node src/bin/start.js 'json-server test/data.json' 3000 'echo json-server working'",
-    "demo-ip6": "node src/bin/start.js 'node test/ip6.mjs' 8000 'echo server with ::1 working'"
+    "demo-ip6": "node src/bin/start.js 'node test/ip6.mjs' 8000 'echo server with ::1 working'",
+    "demo-zero": "node src/bin/start.js 'node test/zero.mjs' 8000 'echo server with 0.0.0.0 working'"
   },
   "devDependencies": {
     "@types/node": "^18.14.1",

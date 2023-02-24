@@ -93,6 +93,9 @@ jobs:
       - name: Run ::1 host example
         run: npm run demo-ip6
 
+      - name: Run 0.0.0.0 host example
+        run: npm run demo-zero
+
   release:
     needs: ['tests1', 'tests2', 'tests-node-v18']
     if: github.ref == 'refs/heads/master'

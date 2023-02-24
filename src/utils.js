@@ -189,8 +189,11 @@ const isUrlOrPort = input => {
   })
 }
 
+const getHost = () => 'localhost'
+
 const normalizeUrl = input => {
   const str = is.string(input) ? input.split('|') : [input]
+  const defaultHost = getHost()
 
   return str.map(s => {
     if (is.url(s)) {
@@ -198,7 +201,7 @@ const normalizeUrl = input => {
     }
 
     if (is.number(s) && is.port(s)) {
-      return `http://localhost:${s}`
+      return `http://${defaultHost}:${s}`
     }
 
     if (!is.string(s)) {
@@ -206,11 +209,11 @@ const normalizeUrl = input => {
     }
 
     if (is.port(parseInt(s))) {
-      return `http://localhost:${s}`
+      return `http://${defaultHost}:${s}`
     }
 
     if (s[0] === ':') {
-      return `http://localhost${s}`
+      return `http://${defaultHost}${s}`
     }
     // for anything else, return original argument
     return s
