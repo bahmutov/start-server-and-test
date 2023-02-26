@@ -80,13 +80,16 @@ You can use either `start-server-and-test`, `server-test` or `start-test` comman
 You can use `:` in front of port number like `server-test :8080`, so all these are equivalent
 
 ```
-start-server-and-test start http://localhost:8080 test
-server-test start http://localhost:8080 test
-server-test http://localhost:8080 test
+start-server-and-test start http://127.0.0.1:8080 test
+server-test start http://127.0.0.1:8080 test
+server-test http://127.0.0.1:8080 test
+server-test 127.0.0.1:8080 test
 start-test :8080 test
 start-test 8080 test
 start-test 8080
 ```
+
+**Tip:** I highly recommend you specify the full url instead of the port, see the `localhost vs 0.0.0.0 vs 127.0.0.1` section later in this README.
 
 ### Options
 
@@ -102,7 +105,7 @@ If you use convention and name your scripts "start" and "test" you can simply pr
 }
 ```
 
-You can also shorten local url to just port, the code below is equivalent to checking `http://localhost:8080`.
+You can also shorten local url to just port, the code below is equivalent to checking `http://127.0.0.1:8080`.
 
 ```json
 {
@@ -165,7 +168,7 @@ If you want to start the server, wait for it to respond, and then run multiple t
 }
 ```
 
-The above script `ci` after the `localhost:9000` responds executes the `npm run test:unit` command. Then when it finishes it runs `npm run test:e2e`. If the first or second command fails, the `ci` script fails. Of course, your mileage on Windows might vary.
+The above script `ci` after the `127.0.0.1:9000` responds executes the `npm run test:unit` command. Then when it finishes it runs `npm run test:e2e`. If the first or second command fails, the `ci` script fails. Of course, your mileage on Windows might vary.
 
 #### expected
 
@@ -198,7 +201,7 @@ Then you can execute tests simply:
 ```text
 $ npx start-test 'http-server -c-1 .' 8080 'cypress run'
 starting server using command "http-server -c-1 ."
-and when url "http://localhost:8080" is responding
+and when url "http://127.0.0.1:8080" is responding
 running tests using command "cypress run"
 Starting up http-server, serving .
 ...
@@ -211,10 +214,26 @@ $ yarn start-test 'http-server -c-1 .' 8080 'cypress run'
 yarn run v1.13.0
 $ /private/tmp/test-t/node_modules/.bin/start-test 'http-server -c-1 .' 8080 'cypress run'
 starting server using command "http-server -c-1 ."
-and when url "http://localhost:8080" is responding
+and when url "http://127.0.0.1:8080" is responding
 running tests using command "cypress run"
 Starting up http-server, serving .
 ...
+```
+
+## localhost vs 0.0.0.0 vs 127.0.0.1
+
+The latest versions of Node and some web servers listen on host `0.0.0.0` which _no longer means localhost_. Thus if you specify _just the port number_, like `:3000`, this package will try `http://127.0.0.1:3000` to ping the server. A good practice is to specify the full URL you would like to ping.
+
+```
+# same as "http://127.0.0.1:3000"
+start-server start 3000 test
+# better
+start-server start http://127.0.0.1:3000 test
+# or
+start-server start http://0.0.0.0:3000 test
+# of course, if your server is listening on localhost
+# you can still set the URL
+start-server start http://localhost:3000 test
 ```
 
 ## Note for yarn users
@@ -279,8 +298,8 @@ $ DEBUG=start-server-and-test npm run test
   start-server-and-test parsing CLI arguments: [ 'dev', '3000', 'subtask' ] +0ms
   start-server-and-test parsed args: { services: [ { start: 'npm run dev', url: [Array] } ], test: 'npm run subtask' }
 ...
-making HTTP(S) head request to  url:http://localhost:3000 ...
-  HTTP(S) error for http://localhost:3000 Error: Request failed with status code 404
+making HTTP(S) head request to url:http://127.0.0.1:3000 ...
+  HTTP(S) error for http://127.0.0.1:3000 Error: Request failed with status code 404
 ```
 
 ### Disable HTTPS certificate checks

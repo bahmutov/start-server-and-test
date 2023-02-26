@@ -189,8 +189,17 @@ const isUrlOrPort = input => {
   })
 }
 
+/**
+ * Returns the host to ping if the user specified just the port.
+ * For a long time, the safest bet was "localhost", but now modern
+ * web servers seem to bind to "0.0.0.0", which means
+ * the "127.0.0.1" works better
+ */
+const getHost = () => '127.0.0.1'
+
 const normalizeUrl = input => {
   const str = is.string(input) ? input.split('|') : [input]
+  const defaultHost = getHost()
 
   return str.map(s => {
     if (is.url(s)) {
@@ -198,19 +207,23 @@ const normalizeUrl = input => {
     }
 
     if (is.number(s) && is.port(s)) {
-      return `http://localhost:${s}`
+      return `http://${defaultHost}:${s}`
     }
 
     if (!is.string(s)) {
       return s
     }
 
+    if (s.startsWith('localhost') || s.startsWith('127.0.0.1') || s.startsWith('0.0.0.0')) {
+      return `http://${s}`
+    }
+
     if (is.port(parseInt(s))) {
-      return `http://localhost:${s}`
+      return `http://${defaultHost}:${s}`
     }
 
     if (s[0] === ':') {
-      return `http://localhost${s}`
+      return `http://${defaultHost}${s}`
     }
     // for anything else, return original argument
     return s

@@ -71,6 +71,34 @@ jobs:
       - name: Run demo expect 403 code 📊
         run: npm run demo-expect-403
 
+  tests-node-v16:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Node version 🖨️
+        run: node -v
+
+      - name: NPM install
+        uses: bahmutov/npm-install@v1
+
+      - name: Run json-server test
+        run: npm run demo-json-server
+
+      - name: Run explicit 0.0.0.0 host example
+        run: npm run demo-zero-explicit
+
+      - name: Run 0.0.0.0 host with 127.0.0.1 url
+        run: npm run demo-zero-127
+
+      - name: Run 0.0.0.0 host example
+        run: npm run demo-zero
+
   tests-node-v18:
     runs-on: ubuntu-latest
     steps:
@@ -93,8 +121,17 @@ jobs:
       - name: Run ::1 host example
         run: npm run demo-ip6
 
+      - name: Run explicit 0.0.0.0 host example
+        run: npm run demo-zero-explicit
+
+      - name: Run 0.0.0.0 host with 127.0.0.1 url
+        run: npm run demo-zero-127
+
+      - name: Run 0.0.0.0 host example
+        run: npm run demo-zero
+
   release:
-    needs: ['tests1', 'tests2', 'tests-node-v18']
+    needs: ['tests1', 'tests2', 'tests-node-v16', 'tests-node-v18']
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
