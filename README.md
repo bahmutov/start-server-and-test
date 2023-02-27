@@ -17,6 +17,19 @@ Requires [Node](https://nodejs.org/en/) version 8.9 or above.
 npm install --save-dev start-server-and-test
 ```
 
+## Upgrade
+
+### v1 to v2
+
+If you are using just the port number, and the resolved URL `localhost:xxxx` no longer works, use the explicit `http://localhost:xxxx` instead
+
+```
+# v1
+$ npx start-test 3000
+# v2
+$ npx start-test http://localhost:3000
+```
+
 ## Use
 
 This command is meant to be used with NPM script commands. If you have a "start server", and "test" script names for example, you can start the server, wait for a url to respond, then run tests. When the test process exits, the server is shut down.
