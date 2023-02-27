@@ -214,7 +214,11 @@ const normalizeUrl = input => {
       return s
     }
 
-    if (s.startsWith('localhost') || s.startsWith('127.0.0.1') || s.startsWith('0.0.0.0')) {
+    if (
+      s.startsWith('localhost') ||
+      s.startsWith('127.0.0.1') ||
+      s.startsWith('0.0.0.0')
+    ) {
       return `http://${s}`
     }
 
