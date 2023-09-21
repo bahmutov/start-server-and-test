@@ -249,6 +249,14 @@ start-server start http://0.0.0.0:3000 test
 start-server start http://localhost:3000 test
 ```
 
+If you specify just `localhost` or `127.0.0.1` or `0.0.0.0`, it automatically pings `http://...` URL.
+
+```
+start-test localhost:3000
+# is the same as
+start-test http://localhost:3000
+```
+
 ## Note for yarn users
 
 By default, npm is used to run scripts, however you can specify that yarn is used as follows:
