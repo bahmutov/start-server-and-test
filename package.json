@@ -28,7 +28,7 @@
     }
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=16"
   },
   "files": [
     "src/**/*.js",
