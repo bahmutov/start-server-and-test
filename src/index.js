@@ -44,7 +44,10 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
 
   debug('starting server with command "%s", verbose mode?', start, isDebug())
 
-  const server = execa(start, { shell: true, stdio: ['ignore', 'inherit', 'inherit'] })
+  const server = execa(start, {
+    shell: true,
+    stdio: ['ignore', 'inherit', 'inherit']
+  })
   let serverStopped
 
   function stopServer () {
