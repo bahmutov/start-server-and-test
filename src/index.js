@@ -38,7 +38,7 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
   )
   const isSuccessfulHttpCode = status =>
     (status >= 200 && status < 300) || status === 304
-  const validateStatus = namedArguments.expect
+  const validateStatus = namedArguments.expect !== -1
     ? status => status === namedArguments.expect
     : isSuccessfulHttpCode
 
