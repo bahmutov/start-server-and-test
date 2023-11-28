@@ -244,9 +244,9 @@ function printArguments ({ services, test, namedArguments }) {
   services.forEach((service, k) => {
     console.log('%d: starting server using command "%s"', k + 1, service.start)
     console.log(
-      'and when url "%s" is responding with HTTP status code %d',
+      'and when url "%s" is responding with HTTP status code %s',
       service.url,
-      namedArguments.expect
+      namedArguments.expect === -1 ? '2xx or 304' : namedArguments.expect.toString()
     )
   })
 

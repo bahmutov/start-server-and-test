@@ -19,7 +19,7 @@ if (!Array.isArray(services)) {
 }
 
 if (!namedArguments.expect) {
-  namedArguments.expect = 200
+  namedArguments.expect = -1
 }
 
 utils.printArguments({ services, test, namedArguments })
