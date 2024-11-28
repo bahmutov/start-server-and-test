@@ -75,7 +75,6 @@ class LinesToPsObjectsArrayTransform extends Transform {
    */
   _transform(chunk, encoding, callback) {
     let line = Buffer.isBuffer(chunk) ? chunk.toString(): chunk;
-    line = line.trim();
 
     // Remove unnecessary lines created by powershell
     if ((line.length === 0) || line.includes('----')) {
@@ -155,7 +154,7 @@ class LinesToPsObjectsArrayTransform extends Transform {
 
     // last column
     const header = line.substring(startOfColumnIncl, line.length).trim();
-    columnDefinitions.push({start:startOfColumnIncl, end:line.length, header:header});
+    columnDefinitions.push({start:startOfColumnIncl, end:undefined, header:header});
     return columnDefinitions;
   }
 
