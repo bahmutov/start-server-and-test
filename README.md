@@ -11,7 +11,8 @@
 
 ## Install
 
-Requires [Node](https://nodejs.org/en/) version 16 or above.
+- Requires [Node](https://nodejs.org/en/) version 16 or above.
+- Requires the "Windows Management Instrumentation command-line" (WMIC) utility on Windows for shut down server functionality. Refer to [How to install WMIC Feature on Demand on Windows 11](https://techcommunity.microsoft.com/blog/windows-itpro-blog/how-to-install-wmic-feature-on-demand-on-windows-11/4189530) if you are using Windows 11 24H2, since WMIC is no longer installed by default.
 
 ```sh
 npm install --save-dev start-server-and-test
