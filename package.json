@@ -127,7 +127,7 @@
     "sinon": "9.0.2",
     "sinon-chai": "3.5.0",
     "snap-shot-it": "^7.9.10",
-    "standard": "13.1.0",
+    "standard": "^17.1.2",
     "typescript": "^5.7.2"
   },
   "dependencies": {

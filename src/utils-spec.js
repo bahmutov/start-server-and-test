@@ -52,9 +52,9 @@ describe('utils', () => {
         )
       })
     })
-    it(`ignores end chars that are != the startChar of an argument`, () => {
+    it('ignores end chars that are != the startChar of an argument', () => {
       snapshot(
-        crossArguments(['start', '8080', `"test`, `argument'`, `--option"`])
+        crossArguments(['start', '8080', '"test', "argument'", '--option"'])
       )
     })
   })
