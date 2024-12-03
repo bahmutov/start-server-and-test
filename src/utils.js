@@ -1,4 +1,4 @@
-const la = require('lazy-ass')
+const { lazyAss: la } = require('lazy-ass')
 const is = require('check-more-types')
 const { join } = require('path')
 const { existsSync } = require('fs')

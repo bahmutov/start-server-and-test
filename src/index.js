@@ -113,10 +113,7 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
     })
   })
 
-  return waited
-    .tapCatch(stopServer)
-    .then(runFn)
-    .finally(stopServer)
+  return waited.tapCatch(stopServer).then(runFn).finally(stopServer)
 }
 
 const runTheTests = testCommand => () => {
@@ -156,7 +153,11 @@ function startAndTest ({ services, test, namedArguments }) {
     namedArguments,
     runFn: () => {
       debug('previous service started, now going to the next one')
-      return startAndTest({ services: services.slice(1), test, namedArguments })
+      return startAndTest({
+        services: services.slice(1),
+        test,
+        namedArguments
+      })
     }
   })
 }

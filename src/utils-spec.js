@@ -1,7 +1,7 @@
 'use strict'
 
 /* eslint-env mocha */
-const la = require('lazy-ass')
+const { lazyAss: la } = require('lazy-ass')
 const snapshot = require('snap-shot-it')
 const debug = require('debug')('test')
 
@@ -52,9 +52,9 @@ describe('utils', () => {
         )
       })
     })
-    it(`ignores end chars that are != the startChar of an argument`, () => {
+    it('ignores end chars that are != the startChar of an argument', () => {
       snapshot(
-        crossArguments(['start', '8080', `"test`, `argument'`, `--option"`])
+        crossArguments(['start', '8080', '"test', "argument'", '--option"'])
       )
     })
   })
