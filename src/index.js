@@ -6,7 +6,7 @@ const is = require('check-more-types')
 const execa = require('execa')
 const waitOn = require('wait-on')
 const Promise = require('bluebird')
-const psTree = require('ps-tree')
+const { psTree2: psTree} = require('./ps-tree2.js')
 const debug = require('debug')('start-server-and-test')
 
 /**
