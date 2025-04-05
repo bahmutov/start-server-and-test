@@ -86,6 +86,28 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
     server.on('close', onClose)
 
     debug('starting waitOn %s', url)
+
+    let proxy
+    if (namedArguments.proxyHost) {
+      if (!namedArguments.proxyPort) {
+        throw new Error('Proxy host provided but no port provided')
+      }
+      proxy = {
+        host: namedArguments.proxyHost,
+        port: namedArguments.proxyPort,
+        protocol: namedArguments.proxyProtocol
+      }
+      if (namedArguments.proxyUser) {
+        if (typeof namedArguments.proxyPassword !== 'string') {
+          throw new Error('Proxy username provided but no password provided')
+        }
+        proxy.auth = {
+          username: namedArguments.proxyUser,
+          password: namedArguments.proxyPassword
+        }
+      }
+    }
+
     const options = {
       resources: Array.isArray(url) ? url : [url],
       interval: waitOnInterval,
@@ -97,7 +119,8 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
       headers: {
         Accept: 'text/html, application/json, text/plain, */*'
       },
-      validateStatus
+      validateStatus,
+      proxy
     }
     debug('wait-on options %o', options)
 
