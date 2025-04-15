@@ -15,7 +15,7 @@ debug('parsed args: %o', parsed)
 
 const { services, test } = parsed
 if (!Array.isArray(services)) {
-  throw new Error(`Could not parse arguments %o, got %o`, args, parsed)
+  throw new Error(`Could not parse arguments ${JSON.stringify(args)}, got ${JSON.stringify(parsed)}`)
 }
 
 if (!namedArguments.expect) {
