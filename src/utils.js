@@ -6,7 +6,13 @@ const arg = require('arg')
 const debug = require('debug')('start-server-and-test')
 
 const namedArguments = {
-  '--expect': Number
+  '--expect': Number,
+
+  '--proxy-host': String,
+  '--proxy-protocol': String,
+  '--proxy-port': Number,
+  '--proxy-user': String,
+  '--proxy-pass': String
 }
 
 /**
@@ -65,6 +71,11 @@ const getNamedArguments = cliArgs => {
   debug('initial parsed arguments %o', args)
   return {
     expect: args['--expect'],
+    proxyHost: args['--proxy-host'],
+    proxyUser: args['--proxy-user'],
+    proxyPassword: args['--proxy-password'],
+    proxyPort: args['--proxy-port'],
+    proxyProtocol: args['--proxy-protocol'],
     // aliases
     '--expected': '--expect'
   }
