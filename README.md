@@ -370,12 +370,13 @@ In the above example you would run `npm run test:all` to start the API first, th
 
 ## Note for Apollo Server users
 
-When passing a simple GET request to Apollo Server it will respond with a 405 error. To get around this problem you need to pass a valid GraphQL query into the query parameter. Passing in a basic schema introspection query will work to determine the presence of an Apollo Server. You can configure your npm script like so:
+When passing a GET request to the Apollo root or GraphQL endpoints, it will respond with an error. However, Apollo provides a health-check endpoint that can be used to determine whether the server is ready.
+
 
 ```json
 {
   "scripts": {
-    "ci": "start-server-and-test start 'http-get://localhost:4000/graphql?query={ __schema { queryType { name } } }' test"
+    "ci": "start-server-and-test start 'http-get://localhost:4000/.well-known/apollo/server-health' test"
   }
 }
 ```
