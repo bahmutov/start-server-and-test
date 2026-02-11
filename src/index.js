@@ -6,7 +6,7 @@ const is = require('check-more-types')
 const execa = require('execa')
 const waitOn = require('wait-on')
 const Promise = require('bluebird')
-const psTree = require('ps-tree')
+const kill = require('tree-kill')
 const debug = require('debug')('start-server-and-test')
 
 /**
@@ -51,29 +51,15 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
   let serverStopped
 
   function stopServer () {
-    debug('getting child processes')
+    debug('stopping server and child processes')
     if (!serverStopped) {
       serverStopped = true
-      return Promise.fromNode(cb => psTree(server.pid, cb))
-        .then(children => {
-          debug('stopping child processes')
-          children.forEach(child => {
-            try {
-              process.kill(child.PID, 'SIGINT')
-            } catch (e) {
-              if (e.code === 'ESRCH') {
-                console.log(
-                  `Child process ${child.PID} exited before trying to stop it`
-                )
-              } else {
-                throw e
-              }
-            }
-          })
-        })
-        .then(() => {
-          debug('stopping server')
-          server.kill()
+      return Promise.fromNode(cb => kill(server.pid, 'SIGINT', cb))
+        .catch(err => {
+          if (err && err.code !== 'ESRCH') {
+            throw err
+          }
+          debug('process already exited')
         })
     }
   }
