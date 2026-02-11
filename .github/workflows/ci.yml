@@ -2,7 +2,11 @@ name: ci
 on: [push, pull_request]
 jobs:
   tests1:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v6
@@ -38,7 +42,11 @@ jobs:
         run: npm run demo7
 
   tests2:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v6
@@ -56,8 +64,13 @@ jobs:
       - name: Run demo 12 📊
         run: npm run demo12
 
-      - name: Run demo 9 📊
+      - name: Run demo 9 (Linux) 📊
+        if: ${{ runner.os == 'Linux' }}
         run: START_SERVER_AND_TEST_INSECURE=1 npm run demo9
+
+      - name: Run demo 9 (Windows) 📊
+        if: ${{ runner.os == 'Windows' }}
+        run: $Env:START_SERVER_AND_TEST_INSECURE=1; npm run demo9
 
       - name: Run demo cross env 📊
         run: npm run demo-cross-env
@@ -65,17 +78,26 @@ jobs:
       - name: Run demo commands 📊
         run: npm run demo-commands
 
-      - name: Run demo multiple 📊
+      - name: Run demo multiple (Linux) 📊
+        if: ${{ runner.os == 'Linux' }}
         run: npm run demo-multiple
+
+      - name: Run demo multiple (Windows) 📊
+        # Windows requires other escaping in npm script
+        if: ${{ runner.os == 'Windows' }}
+        run: npm run demo-multiple:windows
 
       - name: Run demo expect 403 code 📊
         run: npm run demo-expect-403
 
   tests-node-matrix:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
         node:
           - 20
           - 22
@@ -96,18 +118,26 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Run json-server test
+        # Currently only supported on linux as setting environment variable WAIT_ON_INTERVAL in npm script is not cross-platform compatible
+        if: ${{ runner.os == 'Linux' }}
         run: npm run demo-json-server
 
       - name: Run ::1 host example
+        # Currently only supported on linux as setting environment variable WAIT_ON_INTERVAL in npm script is not cross-platform compatible
+        if: ${{ runner.os == 'Linux' }}
         run: npm run demo-ip6
 
       - name: Run explicit 0.0.0.0 host example
         run: npm run demo-zero-explicit
 
       - name: Run 0.0.0.0 host with 127.0.0.1 url
+        # Currently only supported on linux as setting environment variable WAIT_ON_INTERVAL in npm script is not cross-platform compatible
+        if: ${{ runner.os == 'Linux' }}
         run: npm run demo-zero-127
 
       - name: Run 0.0.0.0 host example
+        # Currently only supported on linux as setting environment variable WAIT_ON_INTERVAL in npm script is not cross-platform compatible
+        if: ${{ runner.os == 'Linux' }}
         run: npm run demo-zero
 
   release:
