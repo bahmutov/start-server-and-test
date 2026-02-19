@@ -125,6 +125,23 @@ const getArguments = cliArgs => {
     services.push(secondService)
 
     test = cliArgs[4]
+  } else if (cliArgs.length === 7) {
+    service.start = cliArgs[0]
+    service.url = normalizeUrl(cliArgs[1])
+
+    const secondService = {
+      start: cliArgs[2],
+      url: normalizeUrl(cliArgs[3])
+    }
+    services.push(secondService)
+
+    const thirdService = {
+      start: cliArgs[4],
+      url: normalizeUrl(cliArgs[5])
+    }
+    services.push(thirdService)
+
+    test = cliArgs[6]
   } else {
     la(
       cliArgs.length === 3,

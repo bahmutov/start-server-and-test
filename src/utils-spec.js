@@ -71,6 +71,23 @@ describe('utils', () => {
       snapshot({ args, parsed })
     })
 
+    it('allows 7 arguments', () => {
+      const args = [
+        'start',
+        '6000',
+        'start:db',
+        '6005',
+        'start:web',
+        '6010',
+        'test'
+      ]
+      const parsed = getArguments(args)
+      debug('from %o', args)
+      debug('parsed %o', parsed)
+      debug('services %o', parsed.services)
+      snapshot({ args, parsed })
+    })
+
     it('determines NPM script for each command', () => {
       sandbox.stub(utils, 'isPackageScriptName').returns(true)
       const args = ['startA', '6000', 'startB', '6010', 'testC']
