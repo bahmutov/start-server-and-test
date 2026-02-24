@@ -195,6 +195,16 @@ See `demo-expect-403` NPM script.
 
 Default expected value is 200.
 
+#### proxy
+
+You can have requests to the resolved URL be passed through a proxy server. To do this, specify both the `--proxy-host` and `--proxy-port` arguments. For example, specifying these as `localhost` and `8000` will pass requests through the proxy server at `localhost:8000`.
+
+```
+$ start-test --proxy-host localhost --proxy-port 8000 start :9000 test:e2e
+```
+
+Authentication is also supported, as well as custom protocol for the proxy (e.g. `socks5` or `https`), through the `--proxy-user`, `--proxy-password`, and `--proxy-protocol` options.
+
 ## `npx` and `yarn`
 
 If you have [npx](https://www.npmjs.com/package/npx) available, you can execute locally installed tools from the shell. For example, if the `package.json` has the following local tools:

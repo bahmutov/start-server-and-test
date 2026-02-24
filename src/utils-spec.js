@@ -5,8 +5,10 @@ const la = require('lazy-ass')
 const snapshot = require('snap-shot-it')
 const debug = require('debug')('test')
 
-function arrayEq (a, b) {
-  return a.length === b.length && a.every((el, index) => el === b[index])
+function arrayEq(a, b) {
+  return (
+    a.length === b.length && a.every((el, index) => el === b[index])
+  )
 }
 
 describe('utils', () => {
@@ -28,7 +30,7 @@ describe('utils', () => {
 
   context('crossArguments', () => {
     const crossArguments = utils.crossArguments
-    ;['"', "'", '`'].forEach(char => {
+    ;['"', "'", '`'].forEach((char) => {
       it(`concates arguments if wrapped by ${char}`, () => {
         snapshot(
           crossArguments([
@@ -36,8 +38,8 @@ describe('utils', () => {
             '8080',
             `${char}test`,
             'argument',
-            `--option${char}`
-          ])
+            `--option${char}`,
+          ]),
         )
       })
       it(`ignores end char (${char}) if not at the end of an argument`, () => {
@@ -47,14 +49,20 @@ describe('utils', () => {
             '8080',
             `${char}test`,
             `argu${char}ment`,
-            `--option${char}`
-          ])
+            `--option${char}`,
+          ]),
         )
       })
     })
     it(`ignores end chars that are != the startChar of an argument`, () => {
       snapshot(
-        crossArguments(['start', '8080', `"test`, `argument'`, `--option"`])
+        crossArguments([
+          'start',
+          '8080',
+          `"test`,
+          `argument'`,
+          `--option"`,
+        ]),
       )
     })
   })
@@ -88,11 +96,15 @@ describe('utils', () => {
     })
 
     it('returns 3 arguments with url', () => {
-      snapshot(getArguments(['start', 'http://localhost:8080', 'test']))
+      snapshot(
+        getArguments(['start', 'http://localhost:8080', 'test']),
+      )
     })
 
     it('handles 3 arguments with http-get url', () => {
-      snapshot(getArguments(['start', 'http-get://localhost:8080', 'test']))
+      snapshot(
+        getArguments(['start', 'http-get://localhost:8080', 'test']),
+      )
     })
 
     it('understands url plus test', () => {
@@ -118,7 +130,11 @@ describe('utils', () => {
     })
 
     it('asks if command is a script name', () => {
-      const args = ['custom-command-name', '3000', 'some-test-command']
+      const args = [
+        'custom-command-name',
+        '3000',
+        'some-test-command',
+      ]
       const isPackageScriptName = sandbox
         .stub(utils, 'isPackageScriptName')
         .returns(false)
@@ -127,8 +143,12 @@ describe('utils', () => {
       debug('parsed %o', parsed)
       /* eslint-disable-next-line no-unused-expressions */
       expect(isPackageScriptName).to.have.been.calledTwice
-      expect(isPackageScriptName).to.have.been.calledWith('custom-command-name')
-      expect(isPackageScriptName).to.have.been.calledWith('some-test-command')
+      expect(isPackageScriptName).to.have.been.calledWith(
+        'custom-command-name',
+      )
+      expect(isPackageScriptName).to.have.been.calledWith(
+        'some-test-command',
+      )
     })
 
     it('understands custom commands', () => {
@@ -138,8 +158,8 @@ describe('utils', () => {
         getArguments([
           'custom-command --with argument',
           '3000',
-          'test-command --x=1'
-        ])
+          'test-command --x=1',
+        ]),
       )
     })
   })
@@ -192,11 +212,15 @@ describe('utils', () => {
     const normalizeUrl = utils.normalizeUrl
 
     it('passes url', () => {
-      la(arrayEq(normalizeUrl('http://localhost'), ['http://localhost']))
+      la(
+        arrayEq(normalizeUrl('http://localhost'), [
+          'http://localhost',
+        ]),
+      )
       la(
         arrayEq(normalizeUrl('http://localhost:6000'), [
-          'http://localhost:6000'
-        ])
+          'http://localhost:6000',
+        ]),
       )
     })
 
@@ -211,30 +235,45 @@ describe('utils', () => {
 
     it('appends http to localhost', () => {
       la(arrayEq(normalizeUrl('localhost'), ['http://localhost']))
-      la(arrayEq(normalizeUrl('localhost:3030'), ['http://localhost:3030']))
+      la(
+        arrayEq(normalizeUrl('localhost:3030'), [
+          'http://localhost:3030',
+        ]),
+      )
     })
 
     it('appends http to 127.0.0.1', () => {
       la(arrayEq(normalizeUrl('127.0.0.1'), ['http://127.0.0.1']))
-      la(arrayEq(normalizeUrl('127.0.0.1:3030'), ['http://127.0.0.1:3030']))
+      la(
+        arrayEq(normalizeUrl('127.0.0.1:3030'), [
+          'http://127.0.0.1:3030',
+        ]),
+      )
     })
 
     it('appends http to 0.0.0.0', () => {
       la(arrayEq(normalizeUrl('0.0.0.0'), ['http://0.0.0.0']))
-      la(arrayEq(normalizeUrl('0.0.0.0:3030'), ['http://0.0.0.0:3030']))
+      la(
+        arrayEq(normalizeUrl('0.0.0.0:3030'), [
+          'http://0.0.0.0:3030',
+        ]),
+      )
     })
 
     it('returns original argument if does not know what to do', () => {
       la(arrayEq(normalizeUrl('foo'), ['foo']), normalizeUrl('foo'))
-      la(arrayEq(normalizeUrl(808000), [808000]), normalizeUrl(808000))
+      la(
+        arrayEq(normalizeUrl(808000), [808000]),
+        normalizeUrl(808000),
+      )
     })
 
     it('parses multiple resources', () => {
       la(
         arrayEq(normalizeUrl(':6006|http://foo.com'), [
           'http://127.0.0.1:6006',
-          'http://foo.com'
-        ])
+          'http://foo.com',
+        ]),
       )
     })
   })

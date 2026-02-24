@@ -24,7 +24,7 @@ if (!namedArguments.expect) {
 
 utils.printArguments({ services, test, namedArguments })
 
-startAndTest({ services, test, namedArguments }).catch(e => {
+startAndTest({ services, test, namedArguments }).catch((e) => {
   console.error(e)
   process.exit(1)
 })
