@@ -12,7 +12,7 @@ const namedArguments = {
   '--proxy-protocol': String,
   '--proxy-port': Number,
   '--proxy-user': String,
-  '--proxy-pass': String
+  '--proxy-pass': String,
 }
 
 /**
@@ -20,10 +20,10 @@ const namedArguments = {
  * where leading and trailing " and ' are indicating
  * the beginning and end of an argument.
  */
-const crossArguments = cliArguments => {
+const crossArguments = (cliArguments) => {
   const args = arg(namedArguments, {
     permissive: true,
-    argv: cliArguments
+    argv: cliArguments,
   })
   debug('initial parsed arguments %o', args)
   // all other arguments
@@ -36,7 +36,7 @@ const crossArguments = cliArguments => {
     let arg = cliArgs[i]
     if (
       !concatModeChar &&
-      indicationChars.some(char => cliArgs[i].startsWith(char))
+      indicationChars.some((char) => cliArgs[i].startsWith(char))
     ) {
       arg = arg.slice(1)
     }
@@ -52,7 +52,7 @@ const crossArguments = cliArguments => {
 
     if (
       !concatModeChar &&
-      indicationChars.some(char => cliArgs[i].startsWith(char))
+      indicationChars.some((char) => cliArgs[i].startsWith(char))
     ) {
       concatModeChar = cliArgs[i][0]
     }
@@ -63,10 +63,10 @@ const crossArguments = cliArguments => {
   return combinedArgs
 }
 
-const getNamedArguments = cliArgs => {
+const getNamedArguments = (cliArgs) => {
   const args = arg(namedArguments, {
     permissive: true,
-    argv: cliArgs
+    argv: cliArgs,
   })
   debug('initial parsed arguments %o', args)
   return {
@@ -77,7 +77,7 @@ const getNamedArguments = cliArgs => {
     proxyPort: args['--proxy-port'],
     proxyProtocol: args['--proxy-protocol'],
     // aliases
-    '--expected': '--expect'
+    '--expected': '--expect',
   }
 }
 
@@ -86,12 +86,12 @@ const getNamedArguments = cliArgs => {
  * If start command is NPM script name defined in the package.json
  * file in the current working directory, returns 'npm run start' command.
  */
-const getArguments = cliArgs => {
+const getArguments = (cliArgs) => {
   la(is.strings(cliArgs), 'expected list of strings', cliArgs)
 
   const service = {
     start: 'start',
-    url: undefined
+    url: undefined,
   }
   const services = [service]
 
@@ -120,7 +120,7 @@ const getArguments = cliArgs => {
 
     const secondService = {
       start: cliArgs[2],
-      url: normalizeUrl(cliArgs[3])
+      url: normalizeUrl(cliArgs[3]),
     }
     services.push(secondService)
 
@@ -130,14 +130,14 @@ const getArguments = cliArgs => {
       cliArgs.length === 3,
       'expected <NPM script name that starts server> <url or port> <NPM script name that runs tests>\n',
       'example: start-test start 8080 test\n',
-      'see https://github.com/bahmutov/start-server-and-test#use\n'
+      'see https://github.com/bahmutov/start-server-and-test#use\n',
     )
     service.start = cliArgs[0]
     service.url = normalizeUrl(cliArgs[1])
     test = cliArgs[2]
   }
 
-  services.forEach(service => {
+  services.forEach((service) => {
     service.start = normalizeCommand(service.start)
   })
 
@@ -145,20 +145,26 @@ const getArguments = cliArgs => {
 
   return {
     services,
-    test
+    test,
   }
 }
 
-function normalizeCommand (command) {
-  return UTILS.isPackageScriptName(command) ? `npm run ${command}` : command
+function normalizeCommand(command) {
+  return UTILS.isPackageScriptName(command)
+    ? `npm run ${command}`
+    : command
 }
 
 /**
  * Returns true if the given string is a name of a script in the package.json file
  * in the current working directory
  */
-const isPackageScriptName = command => {
-  la(is.unemptyString(command), 'expected command name string', command)
+const isPackageScriptName = (command) => {
+  la(
+    is.unemptyString(command),
+    'expected command name string',
+    command,
+  )
 
   const packageFilename = join(process.cwd(), 'package.json')
   if (!existsSync(packageFilename)) {
@@ -171,12 +177,12 @@ const isPackageScriptName = command => {
   return Boolean(packageJson.scripts[command])
 }
 
-const isWaitOnUrl = s => /^https?-(?:get|head|options)/.test(s)
+const isWaitOnUrl = (s) => /^https?-(?:get|head|options)/.test(s)
 
-const isUrlOrPort = input => {
+const isUrlOrPort = (input) => {
   const str = is.string(input) ? input.split('|') : [input]
 
-  return str.every(s => {
+  return str.every((s) => {
     if (is.url(s)) {
       return s
     }
@@ -208,11 +214,11 @@ const isUrlOrPort = input => {
  */
 const getHost = () => '127.0.0.1'
 
-const normalizeUrl = input => {
+const normalizeUrl = (input) => {
   const str = is.string(input) ? input.split('|') : [input]
   const defaultHost = getHost()
 
-  return str.map(s => {
+  return str.map((s) => {
     if (is.url(s)) {
       return s
     }
@@ -245,28 +251,38 @@ const normalizeUrl = input => {
   })
 }
 
-function printArguments ({ services, test, namedArguments }) {
+function printArguments({ services, test, namedArguments }) {
   la(
     is.number(namedArguments.expect),
     'expected status code should be a number',
-    namedArguments.expect
+    namedArguments.expect,
   )
 
   services.forEach((service, k) => {
-    console.log('%d: starting server using command "%s"', k + 1, service.start)
+    console.log(
+      '%d: starting server using command "%s"',
+      k + 1,
+      service.start,
+    )
     console.log(
       'and when url "%s" is responding with HTTP status code %d',
       service.url,
-      namedArguments.expect
+      namedArguments.expect,
     )
   })
 
   if (process.env.WAIT_ON_INTERVAL !== undefined) {
-    console.log('WAIT_ON_INTERVAL is set to', process.env.WAIT_ON_INTERVAL)
+    console.log(
+      'WAIT_ON_INTERVAL is set to',
+      process.env.WAIT_ON_INTERVAL,
+    )
   }
 
   if (process.env.WAIT_ON_TIMEOUT !== undefined) {
-    console.log('WAIT_ON_TIMEOUT is set to', process.env.WAIT_ON_TIMEOUT)
+    console.log(
+      'WAIT_ON_TIMEOUT is set to',
+      process.env.WAIT_ON_TIMEOUT,
+    )
   }
 
   console.log('running tests using command "%s"', test)
@@ -282,7 +298,7 @@ const UTILS = {
   isPackageScriptName,
   isUrlOrPort,
   normalizeUrl,
-  printArguments
+  printArguments,
 }
 
 module.exports = UTILS

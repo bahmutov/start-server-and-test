@@ -59,10 +59,10 @@
     "deps": "deps-ok && dependency-check --no-dev .",
     "issues": "git-issues",
     "license": "license-checker --production --onlyunknown --csv",
-    "lint": "standard --verbose --fix 'src/**/*.js'",
+    "lint": "prettier --write 'src/**/*.js'",
     "prelint": "npm run pretty",
     "pretest": "npm run lint",
-    "pretty": "prettier-standard 'src/**/*.js'",
+    "pretty": "prettier --write 'src/**/*.js'",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "mocha test/helper src/*-spec.js",
@@ -121,13 +121,12 @@
     "minimist": "1.2.5",
     "mocha": "7.1.1",
     "pre-git": "3.17.1",
-    "prettier-standard": "8.0.1",
+    "prettier": "^3.8.1",
     "semantic-release": "^25.0.3",
     "simple-commit-message": "4.0.13",
     "sinon": "9.0.2",
     "sinon-chai": "3.5.0",
-    "snap-shot-it": "6.3.5",
-    "standard": "13.1.0"
+    "snap-shot-it": "6.3.5"
   },
   "dependencies": {
     "arg": "^5.0.2",

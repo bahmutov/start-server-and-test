@@ -24,46 +24,51 @@ const waitOnInterval = process.env.WAIT_ON_INTERVAL
   : twoSeconds
 
 const isDebug = () =>
-  process.env.DEBUG && process.env.DEBUG.indexOf('start-server-and-test') !== -1
+  process.env.DEBUG &&
+  process.env.DEBUG.indexOf('start-server-and-test') !== -1
 
 const isInsecure = () => process.env.START_SERVER_AND_TEST_INSECURE
 
-function waitAndRun ({ start, url, runFn, namedArguments }) {
+function waitAndRun({ start, url, runFn, namedArguments }) {
   la(is.unemptyString(start), 'missing start script name', start)
   la(is.fn(runFn), 'missing test script name', runFn)
   la(
     is.unemptyString(url) || is.unemptyArray(url),
     'missing url to wait on',
-    url
+    url,
   )
-  const isSuccessfulHttpCode = status =>
+  const isSuccessfulHttpCode = (status) =>
     (status >= 200 && status < 300) || status === 304
   const validateStatus = namedArguments.expect
-    ? status => status === namedArguments.expect
+    ? (status) => status === namedArguments.expect
     : isSuccessfulHttpCode
 
-  debug('starting server with command "%s", verbose mode?', start, isDebug())
+  debug(
+    'starting server with command "%s", verbose mode?',
+    start,
+    isDebug(),
+  )
 
   const server = execa(start, {
     shell: true,
-    stdio: ['ignore', 'inherit', 'inherit']
+    stdio: ['ignore', 'inherit', 'inherit'],
   })
   let serverStopped
 
-  function stopServer () {
+  function stopServer() {
     debug('getting child processes')
     if (!serverStopped) {
       serverStopped = true
-      return Promise.fromNode(cb => psTree(server.pid, cb))
-        .then(children => {
+      return Promise.fromNode((cb) => psTree(server.pid, cb))
+        .then((children) => {
           debug('stopping child processes')
-          children.forEach(child => {
+          children.forEach((child) => {
             try {
               process.kill(child.PID, 'SIGINT')
             } catch (e) {
               if (e.code === 'ESRCH') {
                 console.log(
-                  `Child process ${child.PID} exited before trying to stop it`
+                  `Child process ${child.PID} exited before trying to stop it`,
                 )
               } else {
                 throw e
@@ -95,15 +100,17 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
       proxy = {
         host: namedArguments.proxyHost,
         port: namedArguments.proxyPort,
-        protocol: namedArguments.proxyProtocol
+        protocol: namedArguments.proxyProtocol,
       }
       if (namedArguments.proxyUser) {
         if (typeof namedArguments.proxyPassword !== 'string') {
-          throw new Error('Proxy username provided but no password provided')
+          throw new Error(
+            'Proxy username provided but no password provided',
+          )
         }
         proxy.auth = {
           username: namedArguments.proxyUser,
-          password: namedArguments.proxyPassword
+          password: namedArguments.proxyPassword,
         }
       }
     }
@@ -117,14 +124,14 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
       strictSSL: !isInsecure(),
       log: isDebug(),
       headers: {
-        Accept: 'text/html, application/json, text/plain, */*'
+        Accept: 'text/html, application/json, text/plain, */*',
       },
       validateStatus,
-      proxy
+      proxy,
     }
     debug('wait-on options %o', options)
 
-    waitOn(options, err => {
+    waitOn(options, (err) => {
       if (err) {
         debug('error waiting for url', url)
         debug(err.message)
@@ -136,13 +143,10 @@ function waitAndRun ({ start, url, runFn, namedArguments }) {
     })
   })
 
-  return waited
-    .tapCatch(stopServer)
-    .then(runFn)
-    .finally(stopServer)
+  return waited.tapCatch(stopServer).then(runFn).finally(stopServer)
 }
 
-const runTheTests = testCommand => () => {
+const runTheTests = (testCommand) => () => {
   debug('running test script command: %s', testCommand)
   return execa(testCommand, { shell: true, stdio: 'inherit' })
 }
@@ -151,7 +155,7 @@ const runTheTests = testCommand => () => {
  * Starts a single service and runs tests or recursively
  * runs a service, then goes to the next list, until it reaches 1 service and runs test.
  */
-function startAndTest ({ services, test, namedArguments }) {
+function startAndTest({ services, test, namedArguments }) {
   if (services.length === 0) {
     throw new Error('Got zero services to start ...')
   }
@@ -159,7 +163,7 @@ function startAndTest ({ services, test, namedArguments }) {
   la(
     is.number(namedArguments.expect),
     'expected status should be a number',
-    namedArguments.expect
+    namedArguments.expect,
   )
 
   if (services.length === 1) {
@@ -169,7 +173,7 @@ function startAndTest ({ services, test, namedArguments }) {
       start: services[0].start,
       url: services[0].url,
       namedArguments,
-      runFn: runTests
+      runFn: runTests,
     })
   }
 
@@ -179,11 +183,15 @@ function startAndTest ({ services, test, namedArguments }) {
     namedArguments,
     runFn: () => {
       debug('previous service started, now going to the next one')
-      return startAndTest({ services: services.slice(1), test, namedArguments })
-    }
+      return startAndTest({
+        services: services.slice(1),
+        test,
+        namedArguments,
+      })
+    },
   })
 }
 
 module.exports = {
-  startAndTest
+  startAndTest,
 }
