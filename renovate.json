@@ -1,12 +1,13 @@
 {
+  "configMigration": true,
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "automerge": true,
   "major": {
     "automerge": false
   },
-  "masterIssue": true,
+  "dependencyDashboard": true,
   "schedule": [
     "before 2am"
   ],
@@ -14,7 +15,7 @@
   "timezone": "America/New_York",
   "packageRules": [
     {
-      "packagePatterns": [
+      "matchPackagePatterns": [
         "*"
       ],
       "excludePackagePatterns": [
