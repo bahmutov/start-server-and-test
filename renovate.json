@@ -24,7 +24,7 @@
         "debug",
         "execa",
         "lazy-ass",
-        "ps-tree",
+        "tree-kill",
         "wait-on"
       ],
       "enabled": false
