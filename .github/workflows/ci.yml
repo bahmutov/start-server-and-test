@@ -132,7 +132,10 @@ jobs:
 
   release:
     needs: ['tests1', 'tests2', 'tests-node-v22', 'tests-node-v24']
-    if: github.ref == 'refs/heads/master'
+    # only release from the master branch
+    # in parent repository, not in a fork
+    if: (github.ref == 'refs/heads/master') &&
+      (github.repository == 'bahmutov/start-server-and-test')
     runs-on: ubuntu-latest
     permissions:
       # allow the release step to comment on
