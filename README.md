@@ -11,7 +11,9 @@
 
 ## Install
 
-Requires [Node](https://nodejs.org/en/) version 16 or above.
+Requires [Node.js](https://nodejs.org/en/) version 16 or above.
+[Node.js releases](https://github.com/nodejs/release#readme) that have reached end-of-life status are deprecated.
+Support will be removed in a future major version of `start-server-and-test`.
 
 ```sh
 npm install --save-dev start-server-and-test
