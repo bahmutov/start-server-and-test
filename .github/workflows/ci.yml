@@ -158,6 +158,10 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Semantic Release 🚀
+        # https://github.com/cycjimmy/semantic-release-action
         uses: cycjimmy/semantic-release-action@v6
+        with:
+          # https://github.com/semantic-release/semantic-release
+          semantic_version: 25.0.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
