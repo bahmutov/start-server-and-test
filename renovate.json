@@ -1,33 +1,27 @@
 {
   "configMigration": true,
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
   "automerge": true,
   "major": {
     "automerge": false
   },
   "dependencyDashboard": true,
-  "schedule": [
-    "before 2am"
-  ],
+  "schedule": ["before 2am"],
   "updateNotScheduled": false,
   "timezone": "America/New_York",
   "packageRules": [
     {
-      "matchPackagePatterns": [
-        "*"
-      ],
-      "excludePackagePatterns": [
-        "bluebird",
-        "check-more-types",
-        "debug",
-        "execa",
-        "lazy-ass",
-        "ps-tree",
-        "wait-on"
-      ],
-      "enabled": false
+      "enabled": false,
+      "matchPackageNames": [
+        "*",
+        "!/bluebird/",
+        "!/check-more-types/",
+        "!/debug/",
+        "!/execa/",
+        "!/lazy-ass/",
+        "!/ps-tree/",
+        "!/wait-on/"
+      ]
     }
   ]
 }
