@@ -11,17 +11,8 @@
   "timezone": "America/New_York",
   "packageRules": [
     {
-      "enabled": false,
-      "matchPackageNames": [
-        "*",
-        "!/bluebird/",
-        "!/check-more-types/",
-        "!/debug/",
-        "!/execa/",
-        "!/lazy-ass/",
-        "!/ps-tree/",
-        "!/wait-on/"
-      ]
+      "matchDepTypes": ["devDependencies"],
+      "enabled": false
     }
   ]
 }
