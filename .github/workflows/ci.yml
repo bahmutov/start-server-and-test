@@ -71,48 +71,28 @@ jobs:
       - name: Run demo expect 403 code 📊
         run: npm run demo-expect-403
 
-  tests-node-v22:
+  tests-node-matrix:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node:
+          - 20
+          - 22
+          - 24
+          - 25
     steps:
-      - name: Checkout 🛎
+      - name: Checkout
         uses: actions/checkout@v6
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: ${{ matrix.node }}
 
-      - name: Node version 🖨️
+      - name: Node version
         run: node -v
 
-      - name: NPM install
-        uses: bahmutov/npm-install@v1
-
-      - name: Run json-server test
-        run: npm run demo-json-server
-
-      - name: Run explicit 0.0.0.0 host example
-        run: npm run demo-zero-explicit
-
-      - name: Run 0.0.0.0 host with 127.0.0.1 url
-        run: npm run demo-zero-127
-
-      - name: Run 0.0.0.0 host example
-        run: npm run demo-zero
-
-  tests-node-v24:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@v6
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Node version 🖨️
-        run: node -v
-
-      - name: NPM install
+      - name: npm install
         uses: bahmutov/npm-install@v1
 
       - name: Run json-server test
@@ -131,7 +111,7 @@ jobs:
         run: npm run demo-zero
 
   release:
-    needs: ['tests1', 'tests2', 'tests-node-v22', 'tests-node-v24']
+    needs: ['tests1', 'tests2', 'tests-node-matrix']
     # only release from the master branch
     # in parent repository, not in a fork
     if: (github.ref == 'refs/heads/master') &&
