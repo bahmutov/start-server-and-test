@@ -16,7 +16,8 @@
     },
     {
       "matchManagers": ["github-actions"],
-      "matchDatasources": ["node-version"],
+      "matchDepTypes": ["uses-with"],
+      "matchPackageNames": ["node"],
       "enabled": false
     }
   ]
