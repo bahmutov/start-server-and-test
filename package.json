@@ -106,7 +106,7 @@
     "dependency-check": "3.4.1",
     "got": "9.6.0",
     "json-server": "^0.17.1",
-    "minimist": "1.2.5",
+    "minimist": "1.2.8",
     "mocha": "7.1.1",
     "pre-git": "3.17.1",
     "prettier": "^3.8.1",
