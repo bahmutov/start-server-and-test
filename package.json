@@ -100,12 +100,12 @@
     "demo-zero-explicit": "node src/bin/start.js 'node test/zero.mjs' http://0.0.0.0:8000 'echo server with 0.0.0.0 working'"
   },
   "devDependencies": {
-    "@types/node": "^18.14.1",
+    "@types/node": "^18.19.130",
     "chai": "4.2.0",
     "cross-env": "7.0.2",
     "dependency-check": "3.4.1",
     "got": "9.6.0",
-    "json-server": "^0.17.1",
+    "json-server": "^0.17.4",
     "minimist": "1.2.8",
     "mocha": "7.1.1",
     "pre-git": "3.17.1",
