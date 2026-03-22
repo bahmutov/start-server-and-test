@@ -16,7 +16,7 @@
     },
     {
       "matchManagers": ["github-actions"],
-      "matchPackageNames": ["node"],
+      "matchDatasources": ["node-version"],
       "enabled": false
     }
   ]
