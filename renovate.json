@@ -13,12 +13,6 @@
     {
       "matchDepTypes": ["devDependencies"],
       "enabled": false
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "matchDepTypes": ["uses-with"],
-      "matchPackageNames": ["node"],
-      "enabled": false
     }
   ]
 }
