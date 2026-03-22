@@ -51,7 +51,7 @@
     "url": "git+https://github.com/bahmutov/start-server-and-test.git"
   },
   "scripts": {
-    "deps": "deps-ok && dependency-check --no-dev .",
+    "deps": "dependency-check --no-dev .",
     "lint": "prettier --write src/**/*.js",
     "prelint": "npm run pretty",
     "pretest": "npm run lint",
@@ -104,7 +104,6 @@
     "chai": "4.2.0",
     "cross-env": "7.0.2",
     "dependency-check": "3.4.1",
-    "deps-ok": "1.4.1",
     "got": "9.6.0",
     "json-server": "^0.17.1",
     "minimist": "1.2.5",
