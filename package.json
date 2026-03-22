@@ -14,12 +14,10 @@
       "commit-msg": "simple",
       "pre-commit": [
         "npm run deps",
-        "npm test",
-        "npm run ban"
+        "npm test"
       ],
       "pre-push": [
-        "npm run unused-deps",
-        "npm run ban -- --all"
+        "npm run unused-deps"
       ],
       "post-commit": [],
       "post-merge": []
@@ -53,7 +51,6 @@
     "url": "git+https://github.com/bahmutov/start-server-and-test.git"
   },
   "scripts": {
-    "ban": "ban",
     "deps": "deps-ok && dependency-check --no-dev .",
     "lint": "prettier --write src/**/*.js",
     "prelint": "npm run pretty",
@@ -104,7 +101,6 @@
   },
   "devDependencies": {
     "@types/node": "^18.14.1",
-    "ban-sensitive-files": "1.9.7",
     "chai": "4.2.0",
     "cross-env": "7.0.2",
     "dependency-check": "3.4.1",
