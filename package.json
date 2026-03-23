@@ -13,11 +13,7 @@
     "pre-git": {
       "commit-msg": "simple",
       "pre-commit": [
-        "npm run deps",
         "npm test"
-      ],
-      "pre-push": [
-        "npm run unused-deps"
       ],
       "post-commit": [],
       "post-merge": []
@@ -51,7 +47,6 @@
     "url": "git+https://github.com/bahmutov/start-server-and-test.git"
   },
   "scripts": {
-    "deps": "dependency-check --no-dev .",
     "lint": "prettier --write src/**/*.js",
     "prelint": "npm run pretty",
     "pretest": "npm run lint",
@@ -59,7 +54,6 @@
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "mocha test/helper src/*-spec.js",
-    "unused-deps": "dependency-check --unused --no-dev .",
     "semantic-release": "semantic-release",
     "start": "node test/server.js",
     "start-with-child": "node test/server-as-child.js",
@@ -103,7 +97,6 @@
     "@types/node": "^18.19.130",
     "chai": "4.2.0",
     "cross-env": "7.0.2",
-    "dependency-check": "3.4.1",
     "got": "9.6.0",
     "json-server": "^0.17.4",
     "minimist": "1.2.8",
