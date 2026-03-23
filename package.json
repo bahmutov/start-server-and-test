@@ -128,11 +128,5 @@
         }
       ]
     }
-  },
-  "standard": {
-    "globals": [
-      "sandbox",
-      "expect"
-    ]
   }
 }
