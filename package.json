@@ -9,16 +9,6 @@
     "server-test": "src/bin/start.js",
     "start-test": "src/bin/start.js"
   },
-  "config": {
-    "pre-git": {
-      "commit-msg": "simple",
-      "pre-commit": [
-        "npm test"
-      ],
-      "post-commit": [],
-      "post-merge": []
-    }
-  },
   "engines": {
     "node": ">=16"
   },
@@ -91,19 +81,19 @@
     "demo-ip6": "WAIT_ON_TIMEOUT=10000 DEBUG=start-server-and-test node src/bin/start.js 'node test/ip6.mjs' localhost:8000 'echo server with ::1 working'",
     "demo-zero": "WAIT_ON_TIMEOUT=10000 node src/bin/start.js 'node test/zero.mjs' 8000 'echo server with 0.0.0.0 working'",
     "demo-zero-127": "WAIT_ON_TIMEOUT=10000 node src/bin/start.js 'node test/zero.mjs' http://127.0.0.1:8000 'echo server with 0.0.0.0 working'",
-    "demo-zero-explicit": "node src/bin/start.js 'node test/zero.mjs' http://0.0.0.0:8000 'echo server with 0.0.0.0 working'"
+    "demo-zero-explicit": "node src/bin/start.js 'node test/zero.mjs' http://0.0.0.0:8000 'echo server with 0.0.0.0 working'",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/node": "^18.19.130",
     "chai": "4.2.0",
     "cross-env": "7.0.2",
     "got": "9.6.0",
+    "husky": "9.1.7",
     "json-server": "^0.17.4",
     "minimist": "1.2.8",
     "mocha": "7.1.1",
-    "pre-git": "3.17.1",
     "prettier": "^3.8.1",
-    "simple-commit-message": "4.0.13",
     "sinon": "9.0.2",
     "sinon-chai": "3.5.0",
     "snap-shot-it": "7.9.10"
@@ -117,16 +107,5 @@
     "lazy-ass": "1.6.0",
     "ps-tree": "1.2.0",
     "wait-on": "9.0.4"
-  },
-  "release": {
-    "analyzeCommits": {
-      "preset": "angular",
-      "releaseRules": [
-        {
-          "type": "break",
-          "release": "major"
-        }
-      ]
-    }
   }
 }
