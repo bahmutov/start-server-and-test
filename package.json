@@ -113,7 +113,7 @@
     "simple-commit-message": "4.0.13",
     "sinon": "9.0.2",
     "sinon-chai": "3.5.0",
-    "snap-shot-it": "6.3.5"
+    "snap-shot-it": "7.9.10"
   },
   "dependencies": {
     "arg": "^5.0.2",
