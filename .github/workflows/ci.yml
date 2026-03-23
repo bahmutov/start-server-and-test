@@ -7,11 +7,15 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@v6
 
-      - name: Node version 🖨️
-        run: node -v
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: NPM install
-        uses: bahmutov/npm-install@v1
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run tests 🧪
         run: npm test
@@ -43,12 +47,15 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@v6
 
-      - name: Node version 🖨️
-        run: node -v
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: NPM install
-        uses: bahmutov/npm-install@v1
-      # hmm why are some demos skipped?
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run demo 11 📊
         run: npm run demo11
@@ -85,15 +92,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v6
+      - name: Install Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: Node version
-        run: node -v
-
-      - name: npm install
-        uses: bahmutov/npm-install@v1
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run json-server test
         run: npm run demo-json-server
@@ -127,15 +134,13 @@ jobs:
       # that this workflow is trusted
       id-token: write
     steps:
-      # important: the default Node version is v20
-      # which gives us an auth error trying to release
-      # so install v24 explicitly
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Checkout 🛎
+      - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
 
       - name: Semantic Release 🚀
         # https://github.com/cycjimmy/semantic-release-action
