@@ -85,7 +85,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@types/node": "^18.19.130",
+    "@types/node": "^25.5.0",
     "chai": "4.5.0",
     "cross-env": "7.0.3",
     "got": "9.6.0",
