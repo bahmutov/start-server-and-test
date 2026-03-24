@@ -10,7 +10,7 @@
     "start-test": "src/bin/start.js"
   },
   "engines": {
-    "node": ">=16"
+    "node": "^22 || >=24"
   },
   "files": [
     "src/**/*.js",
