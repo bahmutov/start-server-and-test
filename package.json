@@ -86,16 +86,16 @@
   },
   "devDependencies": {
     "@types/node": "^18.19.130",
-    "chai": "4.2.0",
-    "cross-env": "7.0.2",
+    "chai": "4.5.0",
+    "cross-env": "7.0.3",
     "got": "9.6.0",
     "husky": "9.1.7",
     "json-server": "^0.17.4",
     "minimist": "1.2.8",
-    "mocha": "7.1.1",
+    "mocha": "7.2.0",
     "prettier": "^3.8.1",
-    "sinon": "9.0.2",
-    "sinon-chai": "3.5.0",
+    "sinon": "9.2.4",
+    "sinon-chai": "3.7.0",
     "snap-shot-it": "7.9.10"
   },
   "dependencies": {
