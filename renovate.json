@@ -13,6 +13,10 @@
     {
       "matchDepTypes": ["devDependencies"],
       "enabled": false
+    },
+    {
+      "matchPackageNames": ["execa"],
+      "allowedVersions": "<6"
     }
   ]
 }
