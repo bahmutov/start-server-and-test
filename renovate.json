@@ -17,6 +17,10 @@
     {
       "matchPackageNames": ["execa"],
       "allowedVersions": "<6"
+    },
+    {
+      "matchPackageNames": ["lazy-ass"],
+      "allowedVersions": "<2"
     }
   ]
 }
