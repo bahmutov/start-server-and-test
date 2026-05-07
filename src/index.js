@@ -62,7 +62,23 @@ function waitAndRun({ start, url, runFn, namedArguments }) {
       return Promise.fromNode((cb) =>
         kill(server.pid, 'SIGINT', cb),
       ).catch((err) => {
-        if (err && err.code !== 'ESRCH') {
+        const message = `${err?.message || ''}\n${err?.stdout || ''}\n${err?.stderr || ''}`
+
+        const alreadyExited =
+          // Unix system returns ESRCH when the process is already gone
+          err?.code === 'ESRCH' ||
+          // Windows: "ERROR: The process "<pid>" not found."
+          /ERROR:\s*The process\s+.+\s+not found\./i.test(message) ||
+          // Windows: "Reason: There is no running instance of the task."
+          /Reason:\s*There is no running instance of the task\./i.test(
+            message,
+          ) ||
+          // Windows: "FEHLER: Der Prozess "<pid>" wurde nicht gefunden."
+          /FEHLER:\s*Der Prozess\s+.+\s+wurde nicht gefunden\./i.test(
+            message,
+          )
+
+        if (!alreadyExited) {
           throw err
         }
         debug('process already exited')
