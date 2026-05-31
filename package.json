@@ -88,7 +88,6 @@
     "@types/node": "^25.5.0",
     "chai": "4.5.0",
     "cross-env": "^10.1.0",
-    "got": "9.6.0",
     "husky": "9.1.7",
     "json-server": "^0.17.4",
     "minimist": "1.2.8",

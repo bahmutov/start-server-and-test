@@ -5,13 +5,13 @@ const argv = require('minimist')(process.argv.slice(2), {
   }
 })
 const port = argv.port || 9000
-const got = require('got')
+const http = require('node:http')
 const url = `http://localhost:${port}`
-got(url)
-  .then(() => {
+http
+  .get(url, () => {
     console.log('url %s has responded 👍', url)
   })
-  .catch(e => {
+  .on('error', e => {
     console.error(e.message)
     process.exit(1)
   })
