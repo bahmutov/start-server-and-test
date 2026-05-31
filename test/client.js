@@ -1,10 +1,15 @@
 // little test client to ping server at a given port
-const argv = require('minimist')(process.argv.slice(2), {
-  alias: {
-    port: 'p',
+const { parseArgs } = require('node:util')
+
+const { values } = parseArgs({
+  options: {
+    port: {
+      type: 'string',
+      short: 'p',
+    },
   },
 })
-const port = argv.port || 9000
+const port = Number(values.port) || 9000
 const url = `http://localhost:${port}`
 
 fetch(url, { signal: AbortSignal.timeout(10_000) })
