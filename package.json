@@ -88,14 +88,14 @@
   "devDependencies": {
     "@types/node": "^25.5.0",
     "chai": "4.5.0",
-    "cross-env": "7.0.3",
+    "cross-env": "^10.1.0",
     "got": "9.6.0",
     "husky": "9.1.7",
     "json-server": "^0.17.4",
     "minimist": "1.2.8",
-    "mocha": "7.2.0",
+    "mocha": "^11.7.6",
     "prettier": "^3.8.1",
-    "sinon": "9.2.4",
+    "sinon": "22.0.0",
     "sinon-chai": "3.7.0",
     "snap-shot-it": "7.9.10"
   },
