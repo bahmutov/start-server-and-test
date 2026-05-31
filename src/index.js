@@ -59,7 +59,9 @@ function waitAndRun({ start, url, runFn, namedArguments }) {
     if (!serverStopped) {
       serverStopped = true
       return new Promise((resolve, reject) =>
-        kill(server.pid, 'SIGINT', (err) => (err ? reject(err) : resolve())),
+        kill(server.pid, 'SIGINT', (err) =>
+          err ? reject(err) : resolve(),
+        ),
       ).catch((err) => {
         const message = `${err?.message || ''}\n${err?.stdout || ''}\n${err?.stderr || ''}`
 
