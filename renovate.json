@@ -9,6 +9,7 @@
   "schedule": ["before 2am"],
   "updateNotScheduled": false,
   "timezone": "America/New_York",
+  "minimumReleaseAge": "7 days",
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
