@@ -14,17 +14,13 @@ const debug = require('debug')('start-server-and-test')
 const fiveMinutes = 5 * 60 * 1000
 const twoSeconds = 2000
 
-const waitOnTimeout = process.env.WAIT_ON_TIMEOUT
-  ? Number(process.env.WAIT_ON_TIMEOUT)
-  : fiveMinutes
-
-const waitOnInterval = process.env.WAIT_ON_INTERVAL
-  ? Number(process.env.WAIT_ON_INTERVAL)
-  : twoSeconds
+const waitOnTimeout =
+  Number(process.env.WAIT_ON_TIMEOUT) || fiveMinutes
+const waitOnInterval =
+  Number(process.env.WAIT_ON_INTERVAL) || twoSeconds
 
 const isDebug = () =>
-  process.env.DEBUG &&
-  process.env.DEBUG.indexOf('start-server-and-test') !== -1
+  process.env.DEBUG?.includes('start-server-and-test')
 
 const isInsecure = () => process.env.START_SERVER_AND_TEST_INSECURE
 
