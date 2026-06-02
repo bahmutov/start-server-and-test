@@ -1,4 +1,3 @@
-// @ts-check
 'use strict'
 
 const { lazyAss: la } = require('lazy-ass')
