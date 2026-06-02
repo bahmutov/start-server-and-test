@@ -4,8 +4,8 @@
 const { startAndTest } = require('.')
 
 describe('start-server-and-test', () => {
-  it('write this test', () => {
-    console.assert(startAndTest, 'should export something')
+  it('is a function', () => {
+    expect(startAndTest).to.be.a('function')
   })
 
   // Tests the case where the server process exits on its own before stopServer() is called.
