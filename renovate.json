@@ -5,6 +5,7 @@
   "major": {
     "automerge": false
   },
+  "minimumReleaseAge": "7 days",
   "dependencyDashboard": true,
   "schedule": ["before 2am"],
   "updateNotScheduled": false,
