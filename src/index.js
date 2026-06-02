@@ -5,7 +5,6 @@ const la = require('lazy-ass')
 const is = require('check-more-types')
 const execa = require('execa')
 const waitOn = require('wait-on')
-const Promise = require('bluebird')
 const kill = require('tree-kill')
 const debug = require('debug')('start-server-and-test')
 
@@ -59,8 +58,10 @@ function waitAndRun({ start, url, runFn, namedArguments }) {
     debug('stopping server and child processes')
     if (!serverStopped) {
       serverStopped = true
-      return Promise.fromNode((cb) =>
-        kill(server.pid, 'SIGINT', cb),
+      return new Promise((resolve, reject) =>
+        kill(server.pid, 'SIGINT', (err) =>
+          err ? reject(err) : resolve(),
+        ),
       ).catch((err) => {
         const message = `${err?.message || ''}\n${err?.stdout || ''}\n${err?.stderr || ''}`
 
@@ -146,7 +147,7 @@ function waitAndRun({ start, url, runFn, namedArguments }) {
     })
   })
 
-  return waited.tapCatch(stopServer).then(runFn).finally(stopServer)
+  return waited.then(runFn).finally(stopServer)
 }
 
 const runTheTests = (testCommand) => () => {
