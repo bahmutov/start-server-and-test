@@ -1,3 +1,4 @@
+const http = require('node:http')
 const { parseArgs } = require('node:util')
 
 const { values } = parseArgs({
@@ -8,7 +9,8 @@ const { values } = parseArgs({
     },
   },
 })
-const http = require('http')
+const port = Number(values.port) || 9000
+
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' || req.method === 'HEAD') {
     console.log('%s returning 403', req.method)
@@ -17,9 +19,10 @@ const server = http.createServer((req, res) => {
     res.end()
   }
 })
-const port = Number(values.port) || 9000
+
 setTimeout(() => {
   server.listen(port)
   console.log('listening at port %d, responding with 403', port)
 }, 5000)
+
 console.log('sleeping for 5 seconds before starting')

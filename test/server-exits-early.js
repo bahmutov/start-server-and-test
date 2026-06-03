@@ -4,7 +4,7 @@
  * A server that starts listening immediately, then exits on its own after a short delay.
  * Used by the alreadyExited E2E test: the server is gone before stopServer() is called, which should NOT cause startAndTest to reject.
  */
-const http = require('http')
+const http = require('node:http')
 
 const PORT = process.env.SERVER_EXITS_EARLY_PORT || 19877
 
