@@ -179,6 +179,9 @@ const isPackageScriptName = (command) => {
 
 const isWaitOnUrl = (s) => /^https?-(?:get|head|options)/.test(s)
 
+// only digits, and a valid port
+const isNumericPort = (s) => /^\d+$/.test(s) && is.port(Number(s))
+
 const isUrlOrPort = (input) => {
   const str = is.string(input) ? input.split('|') : [input]
 
@@ -200,9 +203,9 @@ const isUrlOrPort = (input) => {
     }
     if (s[0] === ':') {
       const withoutColon = s.substr(1)
-      return is.port(parseInt(withoutColon))
+      return isNumericPort(withoutColon)
     }
-    return is.port(parseInt(s))
+    return isNumericPort(s)
   })
 }
 
@@ -239,7 +242,7 @@ const normalizeUrl = (input) => {
       return `http://${s}`
     }
 
-    if (is.port(parseInt(s))) {
+    if (isNumericPort(s)) {
       return `http://${defaultHost}:${s}`
     }
 
