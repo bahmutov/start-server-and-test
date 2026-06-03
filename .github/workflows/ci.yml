@@ -1,6 +1,28 @@
 name: ci
 on: [push, pull_request]
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting
+        run: npm run lint
+
   tests1:
     strategy:
       fail-fast: false
@@ -131,7 +153,7 @@ jobs:
         run: npm run demo-zero
 
   release:
-    needs: ['tests1', 'tests2', 'tests-node-matrix']
+    needs: ['lint', 'tests1', 'tests2', 'tests-node-matrix']
     # only release from the master branch
     # in parent repository, not in a fork
     if: (github.ref == 'refs/heads/master') &&
