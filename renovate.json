@@ -12,12 +12,16 @@
   "minimumReleaseAge": "7 days",
   "packageRules": [
     {
-      "matchDepTypes": ["devDependencies"],
-      "enabled": false
-    },
-    {
       "matchPackageNames": ["execa"],
       "allowedVersions": "<6"
+    },
+    {
+      "matchPackageNames": ["chai"],
+      "allowedVersions": "<5"
+    },
+    {
+      "matchPackageNames": ["sinon-chai"],
+      "allowedVersions": "<4"
     }
   ]
 }
