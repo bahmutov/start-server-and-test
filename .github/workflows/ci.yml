@@ -86,6 +86,9 @@ jobs:
       - name: Run demo expect 403 code 📊
         run: npm run demo-expect-403
 
+      - name: Run demo expected 403 code 📊
+        run: npm run demo-expected-403
+
   tests-node-matrix:
     runs-on: ${{ matrix.os }}
     strategy:
