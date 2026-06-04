@@ -1,7 +1,7 @@
 // @ts-check
 'use strict'
 
-const la = require('lazy-ass')
+const { lazyAss: la } = require('lazy-ass')
 const is = require('check-more-types')
 const execa = require('execa')
 const waitOn = require('wait-on')
