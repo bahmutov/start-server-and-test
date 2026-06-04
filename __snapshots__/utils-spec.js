@@ -1,16 +1,16 @@
-exports['utils crossArguments concates arguments if wrapped by " 1'] = [
+exports['utils crossArguments concatenates arguments if wrapped by " 1'] = [
   "start",
   "8080",
   "test argument --option"
 ]
 
-exports['utils crossArguments concates arguments if wrapped by \' 1'] = [
+exports['utils crossArguments concatenates arguments if wrapped by \' 1'] = [
   "start",
   "8080",
   "test argument --option"
 ]
 
-exports['utils crossArguments concates arguments if wrapped by ` 1'] = [
+exports['utils crossArguments concatenates arguments if wrapped by ` 1'] = [
   "start",
   "8080",
   "test argument --option"

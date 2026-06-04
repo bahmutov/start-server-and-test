@@ -31,7 +31,7 @@ describe('utils', () => {
   context('crossArguments', () => {
     const crossArguments = utils.crossArguments
     ;['"', "'", '`'].forEach((char) => {
-      it(`concates arguments if wrapped by ${char}`, () => {
+      it(`concatenates arguments if wrapped by ${char}`, () => {
         snapshot(
           crossArguments([
             'start',
@@ -187,7 +187,7 @@ describe('utils', () => {
     })
 
     it('allows url with https-options', () => {
-      la(isUrlOrPort('https-head://foo'))
+      la(isUrlOrPort('https-options://foo'))
     })
 
     it('allows port number or string', () => {
@@ -261,10 +261,13 @@ describe('utils', () => {
     })
 
     it('returns original argument if does not know what to do', () => {
-      la(arrayEq(normalizeUrl('foo'), ['foo']), normalizeUrl('foo'))
+      la(
+        arrayEq(normalizeUrl('foo'), ['foo']),
+        'normalizeUrl("foo") should return ["foo"]',
+      )
       la(
         arrayEq(normalizeUrl(808000), [808000]),
-        normalizeUrl(808000),
+        'normalizeUrl(808000) should return [808000]',
       )
     })
 
