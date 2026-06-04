@@ -229,7 +229,7 @@ Starting up http-server, serving .
 ...
 ```
 
-Similarly, you can use [yarn](https://classic.yarnpkg.com/en/) to call locally installed tools
+Similarly, you can use [yarn](https://yarnpkg.com/) to call locally installed tools
 
 ```console
 $ yarn start-test "http-server -c-1 ." 8080 "cypress run"
