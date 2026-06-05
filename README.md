@@ -202,7 +202,7 @@ You can have requests to the resolved URL be passed through a proxy server. To d
 $ start-test --proxy-host localhost --proxy-port 8000 start :9000 test:e2e
 ```
 
-Authentication is also supported, as well as custom protocol for the proxy (e.g. `socks5` or `https`), through the `--proxy-user`, `--proxy-password`, and `--proxy-protocol` options.
+Authentication is also supported, as well as custom protocol for the proxy (e.g. `socks5` or `https`), through the `--proxy-user`, `--proxy-password`, and `--proxy-protocol` options. For backwards compatibility, `--proxy-pass` is accepted as an alias for `--proxy-password`.
 
 ## `npx` and `yarn`
 

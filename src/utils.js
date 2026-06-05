@@ -13,6 +13,7 @@ const namedArguments = {
   '--proxy-port': Number,
   '--proxy-user': String,
   '--proxy-password': String,
+  '--proxy-pass': '--proxy-password',
 }
 
 /**
