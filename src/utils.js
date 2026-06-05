@@ -83,7 +83,7 @@ const getNamedArguments = (cliArgs) => {
 
 /**
  * Returns parsed command line arguments.
- * If start command is NPM script name defined in the package.json
+ * If start command is npm script name defined in the package.json
  * file in the current working directory, returns 'npm run start' command.
  */
 const getArguments = (cliArgs) => {
@@ -128,7 +128,7 @@ const getArguments = (cliArgs) => {
   } else {
     la(
       cliArgs.length === 3,
-      'expected <NPM script name that starts server> <url or port> <NPM script name that runs tests>\n',
+      'expected <npm script name that starts server> <url or port> <npm script name that runs tests>\n',
       'example: start-test start 8080 test\n',
       'see https://github.com/bahmutov/start-server-and-test#use\n',
     )
