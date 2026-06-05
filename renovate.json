@@ -12,6 +12,10 @@
   "minimumReleaseAge": "7 days",
   "packageRules": [
     {
+      "matchDepTypes": ["devDependencies"],
+      "schedule": ["on the first day of the month"]
+    },
+    {
       "matchPackageNames": ["execa"],
       "allowedVersions": "<6"
     },
