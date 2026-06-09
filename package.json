@@ -3,7 +3,9 @@
   "description": "Starts server, waits for URL, then runs test command; when the tests end, shuts down server",
   "version": "0.0.0-development",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
-  "bugs": "https://github.com/bahmutov/start-server-and-test/issues",
+  "bugs": {
+    "url": "https://github.com/bahmutov/start-server-and-test/issues"
+  },
   "bin": {
     "start-server-and-test": "src/bin/start.js",
     "server-test": "src/bin/start.js",
@@ -28,6 +30,7 @@
   ],
   "license": "MIT",
   "main": "src/",
+  "type": "commonjs",
   "private": false,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
