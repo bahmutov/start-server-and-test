@@ -1,17 +1,26 @@
 // little test client to ping server at a given port
 const argv = require('minimist')(process.argv.slice(2), {
   alias: {
-    port: 'p'
-  }
+    port: 'p',
+  },
 })
 const port = argv.port || 9000
-const got = require('got')
 const url = `http://localhost:${port}`
-got(url)
-  .then(() => {
+
+fetch(url, { signal: AbortSignal.timeout(10_000) })
+  .then((res) => {
+    if (!res.ok) {
+      console.error(
+        'url %s responded with status %d',
+        url,
+        res.status,
+      )
+      process.exit(1)
+    }
     console.log('url %s has responded 👍', url)
+    process.exit(0)
   })
-  .catch(e => {
+  .catch((e) => {
     console.error(e.message)
     process.exit(1)
   })
