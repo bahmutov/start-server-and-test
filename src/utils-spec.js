@@ -67,6 +67,44 @@ describe('utils', () => {
     })
   })
 
+  context('getNamedArguments', () => {
+    const getNamedArguments = utils.getNamedArguments
+
+    it('reads the proxy password from --proxy-password', () => {
+      const named = getNamedArguments([
+        '--proxy-host',
+        'h',
+        '--proxy-port',
+        '1',
+        '--proxy-user',
+        'u',
+        '--proxy-password',
+        'p',
+      ])
+      la(named.proxyHost === 'h', 'proxyHost', named)
+      la(named.proxyPort === 1, 'proxyPort', named)
+      la(named.proxyUser === 'u', 'proxyUser', named)
+      la(named.proxyPassword === 'p', 'proxyPassword', named)
+    })
+
+    it('reads the proxy password from --proxy-pass alias', () => {
+      const named = getNamedArguments([
+        '--proxy-host',
+        'h',
+        '--proxy-port',
+        '1',
+        '--proxy-user',
+        'u',
+        '--proxy-pass',
+        'p',
+      ])
+      la(named.proxyHost === 'h', 'proxyHost', named)
+      la(named.proxyPort === 1, 'proxyPort', named)
+      la(named.proxyUser === 'u', 'proxyUser', named)
+      la(named.proxyPassword === 'p', 'proxyPassword', named)
+    })
+  })
+
   context('getArguments', () => {
     const getArguments = utils.getArguments
 
