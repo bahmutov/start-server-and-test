@@ -117,7 +117,7 @@ describe('utils', () => {
       snapshot({ args, parsed })
     })
 
-    it('determines NPM script for each command', () => {
+    it('determines npm script for each command', () => {
       sandbox.stub(utils, 'isPackageScriptName').returns(true)
       const args = ['startA', '6000', 'startB', '6010', 'testC']
       const parsed = getArguments(args)

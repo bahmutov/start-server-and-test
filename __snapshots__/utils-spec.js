@@ -67,7 +67,7 @@ exports['utils getArguments allows 5 arguments 1'] = {
   }
 }
 
-exports['utils getArguments determines NPM script for each command 1'] = {
+exports['utils getArguments determines npm script for each command 1'] = {
   "args": [
     "startA",
     "6000",
