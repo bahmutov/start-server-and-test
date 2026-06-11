@@ -70,6 +70,32 @@ describe('utils', () => {
   context('getNamedArguments', () => {
     const getNamedArguments = utils.getNamedArguments
 
+    it('reads --expect', () => {
+      la(getNamedArguments(['--expect', '403']).expect === 403)
+    })
+
+    it('reads --expected as an alias of --expect', () => {
+      la(getNamedArguments(['--expected', '403']).expect === 403)
+    })
+
+    it('does not leak named arguments into the positional list', () => {
+      const cli = ['--expected', '403', 'start', ':9000', 'test']
+      la(
+        arrayEq(utils.crossArguments(cli), [
+          'start',
+          ':9000',
+          'test',
+        ]),
+        'named flag and its value should be stripped from positionals',
+      )
+      const parsed = utils.getArguments(utils.crossArguments(cli))
+      la(parsed.services.length === 1, 'single service', parsed)
+    })
+  })
+
+  context('getNamedArguments', () => {
+    const getNamedArguments = utils.getNamedArguments
+
     it('reads the proxy password from --proxy-password', () => {
       const named = getNamedArguments([
         '--proxy-host',
