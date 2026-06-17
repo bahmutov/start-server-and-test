@@ -1,7 +1,12 @@
-const argv = require('minimist')(process.argv.slice(2), {
-  alias: {
-    port: 'p'
-  }
+const { parseArgs } = require('node:util')
+
+const { values } = parseArgs({
+  options: {
+    port: {
+      type: 'string',
+      short: 'p',
+    },
+  },
 })
 const http = require('http')
 const server = http.createServer((req, res) => {
@@ -12,7 +17,7 @@ const server = http.createServer((req, res) => {
     res.end()
   }
 })
-const port = argv.port || 9000
+const port = Number(values.port) || 9000
 setTimeout(() => {
   server.listen(port)
   console.log('listening at port %d', port)
