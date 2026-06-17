@@ -1,6 +1,6 @@
 {
   "configMigration": true,
-  "extends": ["config:recommended"],
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "automerge": true,
   "major": {
     "automerge": false
@@ -13,11 +13,19 @@
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
-      "enabled": false
+      "schedule": ["on the first day of the month"]
     },
     {
       "matchPackageNames": ["execa"],
       "allowedVersions": "<6"
+    },
+    {
+      "matchPackageNames": ["chai"],
+      "allowedVersions": "<5"
+    },
+    {
+      "matchPackageNames": ["sinon-chai"],
+      "allowedVersions": "<4"
     }
   ]
 }
