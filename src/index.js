@@ -52,17 +52,19 @@ function waitAndRun({ start, url, runFn, namedArguments }) {
     shell: true,
     stdio: ['ignore', 'inherit', 'inherit'],
   })
-  let serverStopped
+
+  let serverStopped = false
 
   function stopServer() {
     debug('stopping server and child processes')
     if (!serverStopped) {
       serverStopped = true
-      return new Promise((resolve, reject) =>
-        kill(server.pid, 'SIGINT', (err) =>
-          err ? reject(err) : resolve(),
-        ),
-      ).catch((err) => {
+      const pid = server.pid
+      if (pid === undefined) return Promise.resolve()
+
+      return new Promise((resolve, reject) => {
+        kill(pid, 'SIGINT', (err) => (err ? reject(err) : resolve()))
+      }).catch((err) => {
         const message = `${err?.message || ''}\n${err?.stdout || ''}\n${err?.stderr || ''}`
 
         const alreadyExited =
