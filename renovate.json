@@ -11,6 +11,9 @@
   "timezone": "America/New_York",
   "minimumReleaseAge": "7 days",
   "rangeStrategy": "bump",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
