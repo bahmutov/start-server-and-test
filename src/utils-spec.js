@@ -270,6 +270,11 @@ describe('utils', () => {
     it('detects invalid resource when using multiple', () => {
       la(!isUrlOrPort('http://localhost|http://foo.com|_+9'))
     })
+
+    it('rejects port strings with trailing non-digits', () => {
+      la(!isUrlOrPort('8080garbage'))
+      la(!isUrlOrPort(':8080abc'))
+    })
   })
 
   context('normalizeUrl', () => {
