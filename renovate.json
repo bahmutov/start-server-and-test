@@ -10,6 +10,7 @@
   "updateNotScheduled": false,
   "timezone": "America/New_York",
   "minimumReleaseAge": "7 days",
+  "rangeStrategy": "bump",
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
