@@ -4,6 +4,7 @@
 const { lazyAss: la } = require('lazy-ass')
 const snapshot = require('snap-shot-it')
 const debug = require('debug')('test')
+const utils = require('./utils.js')
 
 function arrayEq(a, b) {
   return (
@@ -12,8 +13,6 @@ function arrayEq(a, b) {
 }
 
 describe('utils', () => {
-  const utils = require('./utils')
-
   context('isPackageScriptName', () => {
     const isPackageScriptName = utils.isPackageScriptName
 

@@ -1,7 +1,7 @@
 'use strict'
 
 /* eslint-env mocha */
-const { startAndTest } = require('.')
+const { startAndTest } = require('./index.js')
 
 describe('start-server-and-test', () => {
   it('is a function', () => {

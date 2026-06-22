@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 const debug = require('debug')('start-server-and-test')
-
-const startAndTest = require('..').startAndTest
-const utils = require('../utils')
+const { startAndTest } = require('../index.js')
+const utils = require('../utils.js')
 
 const namedArguments = utils.getNamedArguments(process.argv.slice(2))
 debug('named arguments: %o', namedArguments)

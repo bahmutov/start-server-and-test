@@ -1,7 +1,7 @@
+const path = require('node:path')
+const { existsSync } = require('node:fs')
 const { lazyAss: la } = require('lazy-ass')
 const is = require('check-more-types')
-const { join } = require('path')
-const { existsSync } = require('fs')
 const arg = require('arg')
 const debug = require('debug')('start-server-and-test')
 
@@ -166,7 +166,7 @@ const isPackageScriptName = (command) => {
     command,
   )
 
-  const packageFilename = join(process.cwd(), 'package.json')
+  const packageFilename = path.join(process.cwd(), 'package.json')
   if (!existsSync(packageFilename)) {
     return false
   }

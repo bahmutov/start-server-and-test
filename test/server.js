@@ -1,3 +1,4 @@
+const http = require('node:http')
 const { parseArgs } = require('node:util')
 
 const { values } = parseArgs({
@@ -8,7 +9,8 @@ const { values } = parseArgs({
     },
   },
 })
-const http = require('http')
+const port = Number(values.port) || 9000
+
 const server = http.createServer((req, res) => {
   console.log(req.method)
   if (req.method === 'GET') {
@@ -17,9 +19,10 @@ const server = http.createServer((req, res) => {
     res.end()
   }
 })
-const port = Number(values.port) || 9000
+
 setTimeout(() => {
   server.listen(port)
   console.log('listening at port %d', port)
 }, 5000)
+
 console.log('sleeping for 5 seconds before starting')
