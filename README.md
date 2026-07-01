@@ -16,6 +16,12 @@ Requires [Node.js](https://nodejs.org/en/) version 22, 24 or above.
 npm install --save-dev start-server-and-test
 ```
 
+If you are running on Linux, ensure that `ps` is available.
+Minimal Docker images, such as `node:slim`, may not include this by default.
+On Debian, `ps` is included in the `procps` package, which may need to be installed additionally.
+Detailed requirements are listed in the dependency documentation
+[tree-kill > Methods](https://github.com/pkrumins/node-tree-kill#methods).
+
 ## Upgrade
 
 ### v1 to v2
