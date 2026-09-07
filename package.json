@@ -97,8 +97,7 @@
     "mocha": "^12.0.0",
     "prettier": "^3.9.6",
     "sinon": "22.1.0",
-    "sinon-chai": "3.7.0",
-    "snap-shot-it": "7.9.10"
+    "sinon-chai": "3.7.0"
   },
   "dependencies": {
     "arg": "5.0.2",

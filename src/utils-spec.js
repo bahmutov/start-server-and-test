@@ -2,7 +2,6 @@
 
 /* eslint-env mocha */
 const { lazyAss: la } = require('lazy-ass')
-const snapshot = require('snap-shot-it')
 const debug = require('debug')('test')
 
 function arrayEq(a, b) {
@@ -32,7 +31,7 @@ describe('utils', () => {
     const crossArguments = utils.crossArguments
     ;['"', "'", '`'].forEach((char) => {
       it(`concatenates arguments if wrapped by ${char}`, () => {
-        snapshot(
+        expect(
           crossArguments([
             'start',
             '8080',
@@ -40,10 +39,10 @@ describe('utils', () => {
             'argument',
             `--option${char}`,
           ]),
-        )
+        ).to.deep.equal(['start', '8080', 'test argument --option'])
       })
       it(`ignores end char (${char}) if not at the end of an argument`, () => {
-        snapshot(
+        expect(
           crossArguments([
             'start',
             '8080',
@@ -51,11 +50,15 @@ describe('utils', () => {
             `argu${char}ment`,
             `--option${char}`,
           ]),
-        )
+        ).to.deep.equal([
+          'start',
+          '8080',
+          `test argu${char}ment --option`,
+        ])
       })
     })
     it(`ignores end chars that are != the startChar of an argument`, () => {
-      snapshot(
+      expect(
         crossArguments([
           'start',
           '8080',
@@ -63,7 +66,7 @@ describe('utils', () => {
           `argument'`,
           `--option"`,
         ]),
-      )
+      ).to.deep.equal(['start', '8080', "test argument' --option"])
     })
   })
 
@@ -140,7 +143,22 @@ describe('utils', () => {
       debug('from %o', args)
       debug('parsed %o', parsed)
       debug('services %o', parsed.services)
-      snapshot({ args, parsed })
+      expect({ args, parsed }).to.deep.equal({
+        args,
+        parsed: {
+          services: [
+            {
+              start: 'npm run start',
+              url: ['http://127.0.0.1:6000'],
+            },
+            {
+              start: 'start:web',
+              url: ['http://127.0.0.1:6010'],
+            },
+          ],
+          test: 'npm run test',
+        },
+      })
     })
 
     it('determines npm script for each command', () => {
@@ -150,47 +168,133 @@ describe('utils', () => {
       debug('from %o', args)
       debug('parsed %o', parsed)
       debug('services %o', parsed.services)
-      snapshot({ args, parsed })
+      expect({ args, parsed }).to.deep.equal({
+        args,
+        parsed: {
+          services: [
+            {
+              start: 'npm run startA',
+              url: ['http://127.0.0.1:6000'],
+            },
+            {
+              start: 'npm run startB',
+              url: ['http://127.0.0.1:6010'],
+            },
+          ],
+          test: 'npm run testC',
+        },
+      })
     })
 
     it('returns 3 arguments', () => {
       const args = ['start', '8080', 'test']
       const parsed = getArguments(args)
-      snapshot({ args, parsed })
+      expect({ args, parsed }).to.deep.equal({
+        args,
+        parsed: {
+          services: [
+            {
+              start: 'npm run start',
+              url: ['http://127.0.0.1:8080'],
+            },
+          ],
+          test: 'npm run test',
+        },
+      })
     })
 
     it('returns 3 arguments with url', () => {
-      snapshot(
+      expect(
         getArguments(['start', 'http://localhost:8080', 'test']),
-      )
+      ).to.deep.equal({
+        services: [
+          {
+            start: 'npm run start',
+            url: ['http://localhost:8080'],
+          },
+        ],
+        test: 'npm run test',
+      })
     })
 
     it('handles 3 arguments with http-get url', () => {
-      snapshot(
+      expect(
         getArguments(['start', 'http-get://localhost:8080', 'test']),
-      )
+      ).to.deep.equal({
+        services: [
+          {
+            start: 'npm run start',
+            url: ['http-get://localhost:8080'],
+          },
+        ],
+        test: 'npm run test',
+      })
     })
 
     it('understands url plus test', () => {
-      snapshot(getArguments(['6000', 'test']))
+      expect(getArguments(['6000', 'test'])).to.deep.equal({
+        services: [
+          {
+            start: 'npm run start',
+            url: ['http://127.0.0.1:6000'],
+          },
+        ],
+        test: 'npm run test',
+      })
     })
 
     it('understands start plus url', () => {
       // note that this script "start-server" does not exist
       // thus it is left as is - without "npm run" part
-      snapshot(getArguments(['start-server', '6000']))
+      expect(getArguments(['start-server', '6000'])).to.deep.equal({
+        services: [
+          {
+            start: 'start-server',
+            url: ['http://127.0.0.1:6000'],
+          },
+        ],
+        test: 'npm run test',
+      })
     })
 
     it('understands single :port', () => {
-      snapshot(getArguments([':3000']))
+      expect(getArguments([':3000'])).to.deep.equal({
+        services: [
+          {
+            start: 'npm run start',
+            url: ['http://127.0.0.1:3000'],
+          },
+        ],
+        test: 'npm run test',
+      })
     })
 
     it('understands single port', () => {
-      snapshot(getArguments(['3000']))
+      expect(getArguments(['3000'])).to.deep.equal({
+        services: [
+          {
+            start: 'npm run start',
+            url: ['http://127.0.0.1:3000'],
+          },
+        ],
+        test: 'npm run test',
+      })
     })
 
     it('understands several ports', () => {
-      snapshot(getArguments(['3000|4000|5000']))
+      expect(getArguments(['3000|4000|5000'])).to.deep.equal({
+        services: [
+          {
+            start: 'npm run start',
+            url: [
+              'http://127.0.0.1:3000',
+              'http://127.0.0.1:4000',
+              'http://127.0.0.1:5000',
+            ],
+          },
+        ],
+        test: 'npm run test',
+      })
     })
 
     it('asks if command is a script name', () => {
@@ -218,13 +322,21 @@ describe('utils', () => {
     it('understands custom commands', () => {
       // these commands are NOT script names in the package.json
       // thus they will be run as is
-      snapshot(
+      expect(
         getArguments([
           'custom-command --with argument',
           '3000',
           'test-command --x=1',
         ]),
-      )
+      ).to.deep.equal({
+        services: [
+          {
+            start: 'custom-command --with argument',
+            url: ['http://127.0.0.1:3000'],
+          },
+        ],
+        test: 'test-command --x=1',
+      })
     })
   })
 
