@@ -165,6 +165,6 @@ jobs:
         uses: cycjimmy/semantic-release-action@b12c8f6015dc215fe37bc154d4ad456dd3833c90 # v6.0.0
         with:
           # https://github.com/semantic-release/semantic-release
-          semantic_version: 25.0.3
+          semantic_version: 25.0.9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
