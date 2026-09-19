@@ -20,6 +20,10 @@
       "schedule": ["on the first day of the month"]
     },
     {
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "minimumReleaseAge": null
+    },
+    {
       "matchPackageNames": ["execa"],
       "allowedVersions": "<6"
     },
