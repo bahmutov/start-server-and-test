@@ -5,6 +5,10 @@
   "major": {
     "automerge": false
   },
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],  
   "dependencyDashboard": true,
   "schedule": ["before 2am"],
   "updateNotScheduled": false,
