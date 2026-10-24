@@ -162,7 +162,7 @@ jobs:
 
       - name: Semantic Release 🚀
         # https://github.com/cycjimmy/semantic-release-action
-        uses: cycjimmy/semantic-release-action@b12c8f6015dc215fe37bc154d4ad456dd3833c90 # v6.0.0
+        uses: cycjimmy/semantic-release-action@03595b5eaf44910cf239ff20904cc52d410f97d4 # v8.1.2
         with:
           # https://github.com/semantic-release/semantic-release
           semantic_version: 25.0.9
