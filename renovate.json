@@ -5,11 +5,10 @@
   "major": {
     "automerge": false
   },
-  "labels": [
-    "dependencies",
-    "renovate"
-  ],  
-  "dependencyDashboard": true,
+  "labels": ["dependencies", "renovate"],
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "schedule": ["before 2am"],
   "updateNotScheduled": false,
   "timezone": "America/New_York",
