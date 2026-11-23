@@ -37,6 +37,10 @@
     {
       "matchPackageNames": ["sinon-chai"],
       "allowedVersions": "<4"
+    },
+    {
+      "matchPackageNames": ["semantic-release"],
+      "allowedVersions": "<26"
     }
   ]
 }
